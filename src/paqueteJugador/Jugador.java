@@ -1,5 +1,7 @@
 package paqueteJugador;
 
+import javax.swing.JLabel;
+
 public class Jugador {
 	public String nombreJugador= null;
 	public int posicionJugador;
@@ -9,10 +11,11 @@ public class Jugador {
 	private boolean direcionAuxiliar= false;
 	private boolean direccionTeletransporte= false;
 	private boolean comprarEstrella= false;
-	
-	public Jugador () {
-		//No se usará pues se instancian los hijos
-	}
+	protected int correccionCoordenadaX, correccionCoordenadaY;
+	protected JLabel etiquetaImagen;
+
+	//private Casilla casillaActual = tablero.primeraCasilla; 
+
 	
 	public void moverJugador( int casilla, int numeroDados) {
 		

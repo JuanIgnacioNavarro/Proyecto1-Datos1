@@ -14,10 +14,14 @@ public class Partida extends JFrame{
 		configuracionJFrame(); 
 //		 ______
 //______/ Instanciar los respectivos jugadores
-		Jugador jugador1= new JugadorUno();
-		Jugador jugador2= new JugadorDos();
-		System.out.println(jugador1.nombreJugador);
-		System.out.println(jugador2.nombreJugador);
+		
+		Jugador jugador1= new ConstructorJugador(1);
+		//jugador1= new Jugador(1);
+		Jugador jugador2= new ConstructorJugador(2);
+		Jugador jugador3= new ConstructorJugador(3);
+		Jugador jugador4= new ConstructorJugador(4);
+
+		panel.repaint();
 		
 	}
 	
