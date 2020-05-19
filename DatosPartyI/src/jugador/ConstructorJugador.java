@@ -13,24 +13,44 @@ public class ConstructorJugador extends Jugador{
 	public ConstructorJugador(int numeroJugador, Casilla casillaInicial) {
 		casillaActual=casillaInicial;
 		this.numeroJugador=numeroJugador;
+<<<<<<< HEAD
 		if (numeroJugador==1) {
+			imagenJugador= new ImageIcon("Imagenes/Token1.png");
+=======
+		if (numeroJugador == 0) {
 			imagenJugador= new ImageIcon("Images/Token1.png");
+>>>>>>> 4c0e06c35b359d0da4c6e398862223c4389d04aa
 			correccionCoordenadaX=0;
 			correccionCoordenadaY=0;
 			
 		}
+<<<<<<< HEAD
 		else if (numeroJugador==2) {
-			imagenJugador= new ImageIcon("Images/Token2.png");
+			imagenJugador= new ImageIcon("Imagenes/Token2.png");
 			correccionCoordenadaX=30;
 			correccionCoordenadaY=30;
 		}
 		else if (numeroJugador==3) {
-			imagenJugador=new ImageIcon("Images/Token3.png");
+			imagenJugador=new ImageIcon("Imagenes/Token3.png");
 			correccionCoordenadaX=60;
 			correccionCoordenadaY=60;
 		}
 		else if (numeroJugador==4) {
+			imagenJugador= new ImageIcon("Imagenes/Token4.png");
+=======
+		else if (numeroJugador == 1) {
+			imagenJugador= new ImageIcon("Images/Token2.png");
+			correccionCoordenadaX=30;
+			correccionCoordenadaY=30;
+		}
+		else if (numeroJugador == 2) {
+			imagenJugador=new ImageIcon("Images/Token3.png");
+			correccionCoordenadaX=60;
+			correccionCoordenadaY=60;
+		}
+		else if (numeroJugador == 3) {
 			imagenJugador= new ImageIcon("Images/Token4.png");
+>>>>>>> 4c0e06c35b359d0da4c6e398862223c4389d04aa
 			correccionCoordenadaX=90;
 			correccionCoordenadaY=90;
 		}
