@@ -12,11 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import jugador.Jugador;
-import tablero.Tablero;
+
+import jugador.*;
+import tablero.*;
 
 public class Partida extends JFrame implements MouseListener {
-	public JPanel panelPartida;
+	public static JPanel panelPartida;
 	private ImageIcon imagenDados = new ImageIcon("Imagenes/Dados.png");
 	private ImageIcon imagenTienda = new ImageIcon("Imagenes/tiendaEstrella.png");
 	private JLabel etiquetaDados;
@@ -28,7 +29,7 @@ public class Partida extends JFrame implements MouseListener {
 	public static boolean eventoActivado = false;
 	private boolean minijuegoActivado = false;
 	private int cantidadRondas = Inicio.cantidadRondas;
-	private Jugador listaJugadores[] = new Jugador[Inicio.cantidadJugadores];
+	private Jugador listaJugadores[] = new ConstructorJugador[Inicio.cantidadJugadores];
 	public Jugador jugadorActual;
 	private Tablero tablero;
 
@@ -55,14 +56,14 @@ public class Partida extends JFrame implements MouseListener {
 		agregarDados();
 		agregarTienda();
 		
-		panelPartida.repaint();
+		Partida.panelPartida.repaint();
 	}
 
 	private void agregarPanel() {
-		panelPartida = new JPanel();
+		Partida.panelPartida = new JPanel();
 		this.getContentPane().add(panelPartida);
-		panelPartida.setLayout(null);
-		panelPartida.setBackground(Bienvenida.colorVentana);
+		Partida.panelPartida.setLayout(null);
+		Partida.panelPartida.setBackground(Bienvenida.colorVentana);
 	}
 
 	private void agregarTablero() {
@@ -71,7 +72,7 @@ public class Partida extends JFrame implements MouseListener {
 
 	private void agregarJugadores() {
 		for (int i = 0; i < Inicio.cantidadJugadores; i++) {
-			listaJugadores[i] = new Jugador(i);
+			listaJugadores[i] = new ConstructorJugador(i, tablero.primeraCasilla);
 		}
 
 		jugadorActual = listaJugadores[0];
@@ -155,12 +156,12 @@ public class Partida extends JFrame implements MouseListener {
 			}
 			
 			else {
-				if (jugadorActual.numeroMonedas < 500) {
+				if (jugadorActual.monedasJugador < 500) {
 					JOptionPane.showMessageDialog(null, "No tienes suficiente dinero", "ERROR", JOptionPane.WARNING_MESSAGE);
 				}
 				
 				else {
-					jugadorActual.numeroEstrellas += 1;
+					jugadorActual.monedasJugador += 1;
 					JOptionPane.showMessageDialog(null, "Has comprado una estrella!", "NUEVA ESTRELLA", JOptionPane.INFORMATION_MESSAGE);
 
 				}
@@ -186,7 +187,7 @@ public class Partida extends JFrame implements MouseListener {
 		}
 		else if (e.getSource() == etiquetaTienda) {
 			etiquetaTienda.setOpaque(true);
-			if (jugadorActual.comprarEstrella == false || jugadorActual.numeroMonedas < 500) {
+			if (jugadorActual.comprarEstrella == false || jugadorActual.monedasJugador < 500) {
 				etiquetaTienda.setBackground(colorNegativo);
 			}
 			else {
