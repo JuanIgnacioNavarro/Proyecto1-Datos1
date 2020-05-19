@@ -5,14 +5,14 @@ import javax.swing.JLabel;
 import tablero.Casilla;
 
 public class Jugador {
-	public String nombreJugador= null;
-	public int monedasJugador =100;
+	public String nombreJugador = "Jugador 1";
+	public int monedasJugador = 100;
 	public int estrellasJugador = 0;
 	public int numeroJugador;
-	private boolean direccionInversa= false;
-	private boolean direccionAuxiliar= false;
-	private boolean direccionTeletransporte= false;
-	public boolean comprarEstrella= false;
+	private boolean direccionInversa;
+	private boolean direccionAuxiliar;
+	private boolean direccionTeletransporte;
+	public boolean comprarEstrella;
 	public JLabel etiquetaImagen;
 	protected int correccionCoordenadaX, correccionCoordenadaY;
 	protected Casilla casillaActual; 

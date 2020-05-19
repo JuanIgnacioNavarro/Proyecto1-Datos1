@@ -1,5 +1,5 @@
 package evento;
 
-public enum Evento {
+public class Evento {
 
 }
