@@ -2,14 +2,13 @@ package paqueteJugador;
 
 public class Jugador {
 	public String nombreJugador= null;
-	public int posicionJugador;
 	public int monedasJugador =100;
 	public int estrellasJugador = 0;
 	private boolean direccionInversa= false;
 	private boolean direccionAuxiliar= false;
 	private boolean direccionTeletransporte= false;
 	private boolean comprarEstrella= false;
-	private Casilla casillaActual; 
+	protected Casilla casillaActual; 
 
 	public void verificarDireccion() {
 		if (casillaActual.tipoCasilla.equals("Morada")) {
@@ -68,7 +67,8 @@ import javax.swing.JLabel;
 public class ConstructorJugador extends Jugador{
 	private ImageIcon imagenJugador;
 
-	public ConstructorJugador(int numeroJugador) {
+	public ConstructorJugador(int numeroJugador, Casilla casillaInicial) {
+		casillaActual=casillaInicial;
 		if (numeroJugador==1) {
 			imagenJugador= new ImageIcon("Images/Token1.png");
 			correccionCoordenadaX=0;
