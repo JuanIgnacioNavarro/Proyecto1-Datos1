@@ -6,8 +6,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import jugador.Jugador;
@@ -16,8 +18,13 @@ import tablero.Tablero;
 public class Partida extends JFrame implements MouseListener {
 	public JPanel panelPartida;
 	private ImageIcon imagenDados = new ImageIcon("Imagenes/Dados.png");
+	private ImageIcon imagenTienda = new ImageIcon("Imagenes/tiendaEstrella.png");
 	private JLabel etiquetaDados;
+	private JLabel etiquetaTienda;
 	
+	public Color colorResalte = new Color(145, 145, 145);
+	private Color colorNegativo = new Color(230, 100, 100);
+	private Color colorPositivo = new Color(180, 225, 120);
 	public static boolean eventoActivado = false;
 	private boolean minijuegoActivado = false;
 	private int cantidadRondas = Inicio.cantidadRondas;
@@ -80,6 +87,11 @@ public class Partida extends JFrame implements MouseListener {
 	}
 
 	private void agregarTienda() {
+		etiquetaTienda = new JLabel();
+		etiquetaTienda.setBounds(1060, 25, 100, 100);
+		etiquetaTienda.setIcon(new ImageIcon(imagenTienda.getImage().getScaledInstance(etiquetaTienda.getWidth(), etiquetaTienda.getHeight(), Image.SCALE_SMOOTH)));
+		etiquetaTienda.addMouseListener(this);
+		panelPartida.add(etiquetaTienda);
 
 	}
 
@@ -91,16 +103,13 @@ public class Partida extends JFrame implements MouseListener {
 
 	}
 	
-	private void tirarDados() {
-		System.out.print(jugadorActual.numeroJugador);	
-		
+	private void tirarDados() {		
 		siguienteTurno();
 	}
 	
 	private void siguienteTurno() {
 		if (cantidadRondas == 0) {
 			finPartida();
-			System.out.print("Termino el juego");	
 		}
 		
 		else {
@@ -134,15 +143,29 @@ public class Partida extends JFrame implements MouseListener {
 
 	}
 
-	public static void main(String[] args) {
-		Partida p = new Partida();
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == etiquetaDados) {
 			tirarDados();
-		}		
+		}
+		
+		else if (e.getSource() == etiquetaTienda) {
+			if (jugadorActual.comprarEstrella == false) {
+				JOptionPane.showMessageDialog(null, "No has pasado por una casilla con estrella", "ERROR", JOptionPane.WARNING_MESSAGE);
+			}
+			
+			else {
+				if (jugadorActual.numeroMonedas < 500) {
+					JOptionPane.showMessageDialog(null, "No tienes suficiente dinero", "ERROR", JOptionPane.WARNING_MESSAGE);
+				}
+				
+				else {
+					jugadorActual.numeroEstrellas += 1;
+					JOptionPane.showMessageDialog(null, "Has comprado una estrella!", "NUEVA ESTRELLA", JOptionPane.INFORMATION_MESSAGE);
+
+				}
+			}
+		}
 	}
 
 	@Override
@@ -159,14 +182,31 @@ public class Partida extends JFrame implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource() == etiquetaDados) {
 			etiquetaDados.setOpaque(true);
-			etiquetaDados.setBackground(Bienvenida.colorResalte);
-		}			
+			etiquetaDados.setBackground(colorResalte);
+		}
+		else if (e.getSource() == etiquetaTienda) {
+			etiquetaTienda.setOpaque(true);
+			if (jugadorActual.comprarEstrella == false || jugadorActual.numeroMonedas < 500) {
+				etiquetaTienda.setBackground(colorNegativo);
+			}
+			else {
+				etiquetaTienda.setBackground(colorPositivo);
+			}
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == etiquetaDados) {
 			etiquetaDados.setBackground(Bienvenida.colorVentana);
-		}		
+		}	
+		
+		else if (e.getSource() == etiquetaTienda) {
+			etiquetaTienda.setBackground(Bienvenida.colorVentana);
+		}
+	}
+	
+	public static void main(String[] args) {
+		Partida p = new Partida();
 	}
 }
