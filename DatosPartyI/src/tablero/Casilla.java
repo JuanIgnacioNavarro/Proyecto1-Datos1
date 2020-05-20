@@ -13,7 +13,6 @@ public class Casilla {
 	private JLabel etiquetaEstrella;
 
 	public String tipoCasilla;
-	public Casilla casillaAnterior;
 	public int numeroCasilla;
 	public Casilla siguienteCasilla;
 	public Casilla siguienteCasillaAux;
@@ -21,9 +20,6 @@ public class Casilla {
 	public Casilla teletransporteCasilla;
 	public int coordenadaCasillaX;
 	public int coordenadaCasillaY;
-	public Casilla casillaSiguienteAux;
-	public Casilla casillaSiguiente;
-	public static Casilla casillaTeletransporte;
 	private int correcionCoordenadaEX = 38, correcionCoordenadaEY = 7;
 	public boolean estrellaCasilla;
 	
@@ -38,10 +34,7 @@ public class Casilla {
 		crearEstrella();
 		crearCasilla(tipoCasilla);
 
-	}
-	
-	public Casilla getCasilllaSiguienteAux() {
-		return this.casillaSiguienteAux;
+	}	
 	public void crearCasilla(String tipoCasilla) {
 		etiquetaCasilla = new JLabel();
 		etiquetaCasilla.setLocation(coordenadaCasillaX, coordenadaCasillaY);
@@ -55,8 +48,6 @@ public class Casilla {
 		Partida.panelPartida.add(etiquetaCasilla);	
 	}
 	
-	public Casilla getCasillaSiguiente() {
-		return this.getCasillaSiguiente();
 	public void crearEstrella() {
 		etiquetaEstrella = new JLabel();
 		etiquetaEstrella.setIcon(imagenEstrella);
