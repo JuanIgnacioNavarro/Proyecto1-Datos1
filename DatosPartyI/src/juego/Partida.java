@@ -34,8 +34,6 @@ public class Partida extends JFrame implements MouseListener {
 	private JLabel etiquetaMonedasJugadorActual;
 	private JLabel etiquetaEstrellasJugadorActual;
 	
-	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 24);
-	private Font fuenteTexto = new Font("Comic Sans MS", 1, 18);
 	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 20);
 	private Font fuenteTexto = new Font("Comic Sans MS", 1, 16);
 	private Color colorResalte = new Color(145, 145, 145);
@@ -215,15 +213,6 @@ public class Partida extends JFrame implements MouseListener {
 		
 	}
 	
-	private void siguienteTurno() {
-		if (cantidadRondas == 0) {
-			finPartida();
-		}
-		
-		else {
-			if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
-				jugadorActual = listaJugadores[0];
-				cantidadRondas -= 1;
 	private void siguienteTurno() {	
 		if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
 			jugadorActual = listaJugadores[0];
@@ -235,10 +224,6 @@ public class Partida extends JFrame implements MouseListener {
 				activarMinijuego();
 				agregarEstrella();
 			} 
-			
-			else {
-				jugadorActual = listaJugadores[jugadorActual.numeroJugador + 1];
-			}
 		} 
 			
 		else {

@@ -1,7 +1,6 @@
 package tablero;
 
 public class Tablero {
-	public Casilla primeraCasilla = null;
 	public Casilla primeraCasilla;
 	public Casilla ultimaCasilla;
 	public static int cantidadCasillas = 0;
