@@ -3,8 +3,8 @@ package tablero;
 public class Casilla {
 	public String tipoCasilla;
 	public Casilla casillaAnterior;
-	public int coordenadaCasillaX;
-	public int coordenadaCasillaY;
+	public int coordenadaCasillaX =200;
+	public int coordenadaCasillaY =200;
 	public Casilla casillaSiguienteAux;
 	public Casilla casillaSiguiente;
 	public static Casilla casillaTeletransporte;

@@ -1,6 +1,7 @@
 package juego;
 
 import java.awt.Color;
+import evento.*;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -43,7 +44,7 @@ public class Partida extends JFrame implements MouseListener {
 	private Jugador listaJugadores[] = new ConstructorJugador[Inicio.cantidadJugadores];
 	public Jugador jugadorActual;
 	private Tablero tablero;
-	private Evento evento = new Evento();
+	//private Evento evento = new Evento();
 
 	public Partida() {
 		setTitle("Datos Party I");
@@ -69,6 +70,8 @@ public class Partida extends JFrame implements MouseListener {
 		agregarDados();
 		agregarTienda();
 		actualizarInfoJugadorActual();
+
+		
 		
 		panelPartida.repaint();
 	}
@@ -86,7 +89,7 @@ public class Partida extends JFrame implements MouseListener {
 
 	private void agregarJugadores() {
 		for (int i = 0; i < Inicio.cantidadJugadores; i++) {
-			listaJugadores[i] = new ConstructorJugador(i+1, tablero.primeraCasilla);
+			listaJugadores[i] = new ConstructorJugador(i, tablero.primeraCasilla);
 		}
 
 		jugadorActual = listaJugadores[0];

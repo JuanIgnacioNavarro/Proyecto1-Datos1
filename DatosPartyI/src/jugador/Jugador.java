@@ -10,7 +10,7 @@ public class Jugador {
 
 //    __Atributos de las características más importantes de cada jugador
 //___/
-	public String nombreJugador= "Jugador 1";
+	public String nombreJugador;
 	public int monedasJugador =100;
 	public int estrellasJugador = 0;
 	public int numeroJugador;
@@ -50,10 +50,14 @@ public class Jugador {
 			direccionAuxiliar= false;
 			direccionInversa= true;
 		}
-		else if (casillaActual.tipoCasilla.equals("Azul") || casillaActual.tipoCasilla.equals("Amarilla")) {
+		else if (casillaActual.tipoCasilla.equals("Azul")) {
 			direccionTeletransporte= false;
 			direccionAuxiliar=false;
 			direccionInversa=false;
+		}
+		else if (casillaActual.tipoCasilla.equals("Amarilla")) {
+			direccionTeletransporte= false;
+			direccionAuxiliar= false;
 		}
 	}
 	/**
@@ -70,41 +74,59 @@ public class Jugador {
 	 * @param numeroDados indica cuántas posiciones se va a mover
 	 */
 	public void moverJugador(int numeroDados) {
-		
+		verificarDireccion();
 		while(numeroDados!=0) {
-			verificarDireccion();
+			if (casillaActual.casillaSiguiente==null) {
+				direccionInversa=true; //Este es el caso en el cual se encuentra en la última casilla del teletransporte
+			}
 			if (direccionInversa==true) {
 				casillaActual= casillaActual.casillaAnterior;
+				if (casillaActual.tipoCasilla.equals("Verde")){
+					direccionInversa=false;
+				}
 			}
 			else if (direccionAuxiliar==true) {
 				casillaActual.getCasilllaSiguienteAux();
+				direccionAuxiliar=false; //pues luego de pasar por ese nodo el siguiente no tiene casilla auxiliar
 			}
 			else if (direccionTeletransporte==true) {
 				casillaActual= Casilla.casillaTeletransporte;
+				direccionTeletransporte=false; //pues luego de pasar por este nodo el siguiente no tienecasilla auxiliar
 			}
 			else {
+				
 				casillaActual= casillaActual.getCasillaSiguiente();
 			}
+			
+			etiquetaImagen.setLocation(casillaActual.coordenadaCasillaX+ this.correccionCoordenadaX, casillaActual.coordenadaCasillaY+this.correccionCoordenadaY);
+			numeroDados-=1;	
+			verificarEstrella();
 			try {
 				TimeUnit.SECONDS.sleep(1);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				
 			}
-			etiquetaImagen.setLocation(casillaActual.coordenadaCasillaX+ this.correccionCoordenadaX, casillaActual.coordenadaCasillaY+this.correccionCoordenadaY);
-			numeroDados-=1;	
-			verificarTipoCasilla();
+			
 		}
+		verificarTipoCasilla();
 	}
-	
-	public boolean verificarEstrella () {
+	/**
+	 * Este método verifica si hay una estrella en cada casilla que recorre
+	 */
+	public void verificarEstrella() {
 		if (casillaActual.estrellaEncima==true) {
-			return true;
-		}else {
-			return false;
+			this.comprarEstrella= true;
 		}
 	}
-	
+	/**
+	 * Al finalizar el movimiento el jugador debe analizar la casilla en la 
+	 * que se encuentra y aplicar la respectiva instrucción de la casilla
+	 * Verdes: te dan monedas
+	 * Rojas: te quitan monedas
+	 * Azules y moradas: no se ejecuta nada
+	 * morada: no se ejecuta nada, solo cambia de mapa
+	 */
 	public void verificarTipoCasilla() {
 		if (casillaActual.tipoCasilla.equals("Verde")) {
 			this.monedasJugador+= 300;
@@ -115,6 +137,7 @@ public class Jugador {
 		else if (casillaActual.tipoCasilla.equals("Amarilla")) {
 			
 		}
+		
 	}
 
 }
