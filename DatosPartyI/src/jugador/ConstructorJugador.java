@@ -40,8 +40,9 @@ public class ConstructorJugador extends Jugador{
 		}
 
 		etiquetaImagen= new JLabel();
-		etiquetaImagen.setBounds(casillaActual.coordenadaCasillaX + correccionCoordenadaX, casillaActual.coordenadaCasillaY + correccionCoordenadaY, 20, 20);
+		etiquetaImagen.setBounds(correccionCoordenadaX, correccionCoordenadaY, 20, 20);
+		
 		etiquetaImagen.setIcon(new ImageIcon (imagenJugador.getImage().getScaledInstance(etiquetaImagen.getWidth(), etiquetaImagen.getHeight(), Image.SCALE_SMOOTH)));
-		Partida.panelPartida.add(etiquetaImagen);
+		casillaActual.etiquetaCasilla.add(etiquetaImagen);
 	}
 }

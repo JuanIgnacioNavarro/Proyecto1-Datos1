@@ -9,8 +9,9 @@ import juego.Partida;
 public class Casilla {
 	private ImageIcon imagenCasilla;
 	private ImageIcon imagenEstrella = new ImageIcon("Imagenes/Estrella.png");
-	private JLabel etiquetaCasilla;
-	private JLabel etiquetaEstrella;
+
+	public JLabel etiquetaCasilla;
+	public JLabel etiquetaEstrella;
 
 	public String tipoCasilla;
 	public int numeroCasilla;

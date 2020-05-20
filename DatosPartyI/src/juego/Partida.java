@@ -188,7 +188,7 @@ public class Partida extends JFrame implements MouseListener {
 			}
 		}
 	}
-	private void tirarDados() {	
+	private void tirarDados() throws InterruptedException {	
 		if (partidaIniciada == false) {
 			partidaIniciada = true;
 		}
@@ -230,7 +230,12 @@ public class Partida extends JFrame implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == etiquetaDados) {
-			tirarDados();
+			try {
+				tirarDados();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 		else if (e.getSource() == etiquetaTienda) {
@@ -290,7 +295,7 @@ public class Partida extends JFrame implements MouseListener {
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		Partida p = new Partida();
 	}
 }

@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JLabel;
 
+import juego.Partida;
 import tablero.Casilla;
 
 public class Jugador {
@@ -67,13 +68,14 @@ public class Jugador {
 	 *  posición por la cuál se empiece a mover.
 	 *  
 	 * @param numeroDados indica cuántas posiciones se va a mover
+	 * @throws InterruptedException 
 	 */
-	public void moverJugador(int numeroDados, int numeroCasillas) {
+	public void moverJugador(int numeroDados, int numeroCasillas) throws InterruptedException {
 		verificarDireccion();
 		while (numeroDados != 0) {
 			if (direccionInversa == true) {
 				casillaActual = casillaActual.anteriorCasilla;
-				etiquetaImagen.setLocation(casillaActual.coordenadaCasillaX + correccionCoordenadaX, casillaActual.coordenadaCasillaY + correccionCoordenadaY);
+				cambiarPosicionJugador();
 				numeroDados -= 1;
 				verificarDireccion();
 				if (direccionAuxiliar == true) {
@@ -89,19 +91,19 @@ public class Jugador {
 				else {
 					casillaActual = casillaActual.siguienteCasilla;
 				}
-				
-				etiquetaImagen.setLocation(casillaActual.coordenadaCasillaX + correccionCoordenadaX, casillaActual.coordenadaCasillaY + correccionCoordenadaY);
+				cambiarPosicionJugador();	
 				numeroDados -= 1;
 				if (casillaActual.numeroCasilla == numeroCasillas) {
 					verificarDireccion();
 				}
 			}
+
 		}
 		
 		verificarDireccion();
 		if (direccionTeletransporte == true) {
 			casillaActual = casillaActual.teletransporteCasilla;
-			etiquetaImagen.setLocation(casillaActual.coordenadaCasillaX+ correccionCoordenadaX, casillaActual.coordenadaCasillaY + correccionCoordenadaY);
+			cambiarPosicionJugador();
 		}
 		
 		verificarTipoCasilla();
@@ -134,6 +136,14 @@ public class Jugador {
 			
 		}
 		
+	}
+	private void cambiarPosicionJugador() throws InterruptedException {
+		
+		etiquetaImagen.setBounds(correccionCoordenadaX, correccionCoordenadaY, 20, 20);		
+		casillaActual.etiquetaCasilla.add(etiquetaImagen);
+		casillaActual.etiquetaCasilla.repaint();
+		Partida.panelPartida.repaint();
+		Thread.sleep(500);
 	}
 
 }
