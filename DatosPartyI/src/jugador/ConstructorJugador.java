@@ -15,22 +15,26 @@ public class ConstructorJugador extends Jugador{
 		this.numeroJugador=numeroJugador;
 		if (numeroJugador == 0) {
 			imagenJugador= new ImageIcon("Images/Token1.png");
+			nombreJugador = "Jugador 1";
 			correccionCoordenadaX=0;
 			correccionCoordenadaY=0;
 			
 		}
 		else if (numeroJugador == 1) {
 			imagenJugador= new ImageIcon("Images/Token2.png");
+			nombreJugador = "Jugador 2";
 			correccionCoordenadaX=30;
 			correccionCoordenadaY=30;
 		}
 		else if (numeroJugador == 2) {
 			imagenJugador=new ImageIcon("Images/Token3.png");
+			nombreJugador = "Jugador 3";
 			correccionCoordenadaX=60;
 			correccionCoordenadaY=60;
 		}
 		else if (numeroJugador == 3) {
 			imagenJugador= new ImageIcon("Images/Token4.png");
+			nombreJugador = "Jugador 4";
 			correccionCoordenadaX=90;
 			correccionCoordenadaY=90;
 		}
