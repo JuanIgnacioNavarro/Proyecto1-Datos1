@@ -15,7 +15,7 @@ public class ConstructorJugador extends Jugador{
 		this.numeroJugador=numeroJugador;
 		
 		if (numeroJugador == 0) {
-			imagenJugador= new ImageIcon("Images/Token1.png");
+			imagenJugador= new ImageIcon("Imagenes/Token1.png");
 			correccionCoordenadaX=0;
 			correccionCoordenadaY=0;
 		}

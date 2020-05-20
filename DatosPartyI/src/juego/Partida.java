@@ -153,14 +153,10 @@ public class Partida extends JFrame implements MouseListener {
 		etiquetaNombreJugadorActual.setText(jugadorActual.nombreJugador);
 		etiquetaMonedasJugadorActual.setText(": " + String.valueOf(jugadorActual.monedasJugador));
 		etiquetaEstrellasJugadorActual.setText(": " + String.valueOf(jugadorActual.estrellasJugador));
-
-		
-		
-
 	}
 	
 	private void agregarEstrella() {
-
+	
 	}
 	
 	private void activarMinijuego() {

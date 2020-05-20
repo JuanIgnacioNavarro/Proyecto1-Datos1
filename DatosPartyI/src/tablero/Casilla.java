@@ -8,6 +8,7 @@ public class Casilla {
 	public Casilla casillaSiguienteAux;
 	public Casilla casillaSiguiente;
 	public static Casilla casillaTeletransporte;
+	public boolean estrellaEncima;
 	
 	public Casilla getCasilllaSiguienteAux() {
 		return this.casillaSiguienteAux;

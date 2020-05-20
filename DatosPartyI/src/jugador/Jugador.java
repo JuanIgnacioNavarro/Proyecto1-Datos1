@@ -50,7 +50,7 @@ public class Jugador {
 			direccionAuxiliar= false;
 			direccionInversa= true;
 		}
-		else if (casillaActual.tipoCasilla.equals("Azul")) {
+		else if (casillaActual.tipoCasilla.equals("Azul") || casillaActual.tipoCasilla.equals("Amarilla")) {
 			direccionTeletransporte= false;
 			direccionAuxiliar=false;
 			direccionInversa=false;
@@ -89,19 +89,32 @@ public class Jugador {
 				TimeUnit.SECONDS.sleep(1);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-				System.out.println("I´m not stopping the program");
+				
 			}
 			etiquetaImagen.setLocation(casillaActual.coordenadaCasillaX+ this.correccionCoordenadaX, casillaActual.coordenadaCasillaY+this.correccionCoordenadaY);
 			numeroDados-=1;	
+			verificarTipoCasilla();
 		}
 	}
 	
-	public void verificarEstrella (int casilla) {
-		
+	public boolean verificarEstrella () {
+		if (casillaActual.estrellaEncima==true) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	public void verificarTipoCasilla() {
-		
+		if (casillaActual.tipoCasilla.equals("Verde")) {
+			this.monedasJugador+= 300;
+		}
+		else if (casillaActual.tipoCasilla.equals("Roja")) {
+			this.monedasJugador-= 300;
+		}
+		else if (casillaActual.tipoCasilla.equals("Amarilla")) {
+			
+		}
 	}
 
 }
