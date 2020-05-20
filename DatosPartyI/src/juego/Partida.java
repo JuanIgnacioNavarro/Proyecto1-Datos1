@@ -1,7 +1,6 @@
 package juego;
 
 import java.awt.Color;
-import evento.*;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -16,7 +15,6 @@ import javax.swing.JPanel;
 import evento.Evento;
 import jugador.ConstructorJugador;
 import jugador.Jugador;
-import tablero.Casilla;
 import tablero.Tablero;
 
 public class Partida extends JFrame implements MouseListener {
@@ -45,7 +43,7 @@ public class Partida extends JFrame implements MouseListener {
 	private Jugador listaJugadores[] = new ConstructorJugador[Inicio.cantidadJugadores];
 	public Jugador jugadorActual;
 	private Tablero tablero;
-	//private Evento evento = new Evento();
+	private Evento evento;
 
 	public Partida() {
 		setTitle("Datos Party I");
@@ -58,10 +56,8 @@ public class Partida extends JFrame implements MouseListener {
 
 		componentesVentana();
 		componentesPartida();
-
 	}
 
-	
 	private void componentesVentana() {
 		agregarPanel();
 	}
@@ -72,8 +68,6 @@ public class Partida extends JFrame implements MouseListener {
 		agregarDados();
 		agregarTienda();
 		actualizarInfoJugadorActual();
-
-		
 		
 		panelPartida.repaint();
 	}
@@ -91,7 +85,7 @@ public class Partida extends JFrame implements MouseListener {
 
 	private void agregarJugadores() {
 		for (int i = 0; i < Inicio.cantidadJugadores; i++) {
-			listaJugadores[i] = new ConstructorJugador(i, tablero.primeraCasilla);
+			listaJugadores[i] = new ConstructorJugador(i, tablero.caminoPrincipal.primeraCasilla);
 		}
 
 		jugadorActual = listaJugadores[0];
@@ -187,11 +181,9 @@ public class Partida extends JFrame implements MouseListener {
 	private void comprobarEventoDuelo() {
 		for (int i = 0; i < listaJugadores.length - 1; i++) {
 			for (int j = i + 1; j < listaJugadores.length; j++) {
-//				if (listaJugadores[i].casillaJugador.numeroCasilla == listaJugadores[j].casillaJugador.numeroCasilla) {
 				if (listaJugadores[i].casillaActual.numeroCasilla == listaJugadores[j].casillaActual.numeroCasilla) {
 //					evento.eventoDuelo(listaJugadores[i], listaJugadores[j]);
 					break;
-//				}
 				}
 			}
 		}
@@ -200,13 +192,12 @@ public class Partida extends JFrame implements MouseListener {
 		if (partidaIniciada == false) {
 			partidaIniciada = true;
 		}
-
 		else {
 			siguienteTurno();
 			actualizarInfoJugadorActual();
 		}
 //		Dados.mezclarDados();
-//		jugadorActual.moverjugador(Dados.numeroDados);
+		jugadorActual.moverJugador(5, Tablero.cantidadCasillas);
 //		comprobarEvento();
 //		comprobarEventoDuelo();
 		actualizarInfoJugadorActual();
@@ -225,14 +216,9 @@ public class Partida extends JFrame implements MouseListener {
 				agregarEstrella();
 			} 
 		} 
-			
 		else {
 			jugadorActual = listaJugadores[jugadorActual.numeroJugador + 1];
 		}
-	}
-
-	private void comprarEstrella() {
-
 	}
 
 	private void finPartida() {

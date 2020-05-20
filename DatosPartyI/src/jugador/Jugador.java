@@ -90,7 +90,7 @@ public class Jugador {
 					casillaActual = casillaActual.siguienteCasilla;
 				}
 				
-				etiquetaImagen.setLocation(casillaActual.coordenadaCasillaX+ correccionCoordenadaX, casillaActual.coordenadaCasillaY + correccionCoordenadaY);
+				etiquetaImagen.setLocation(casillaActual.coordenadaCasillaX + correccionCoordenadaX, casillaActual.coordenadaCasillaY + correccionCoordenadaY);
 				numeroDados -= 1;
 				if (casillaActual.numeroCasilla == numeroCasillas) {
 					verificarDireccion();
@@ -125,10 +125,10 @@ public class Jugador {
 	 */
 	public void verificarTipoCasilla() {
 		if (casillaActual.tipoCasilla.equals("Verde")) {
-			this.monedasJugador+= 300;
+			this.monedasJugador += 300;
 		}
 		else if (casillaActual.tipoCasilla.equals("Roja")) {
-			this.monedasJugador-= 300;
+			this.monedasJugador -= 300;
 		}
 		else if (casillaActual.tipoCasilla.equals("Amarilla")) {
 			

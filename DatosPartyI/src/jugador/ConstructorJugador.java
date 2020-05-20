@@ -12,7 +12,7 @@ public class ConstructorJugador extends Jugador{
 	
 	public ConstructorJugador(int numeroJugador, Casilla casillaInicial) {
 		casillaActual = casillaInicial;
-		this.numeroJugador=numeroJugador;
+		this.numeroJugador = numeroJugador;
 		
 		if (numeroJugador == 0) {
 			imagenJugador= new ImageIcon("Imagenes/Token1.png");
@@ -40,9 +40,7 @@ public class ConstructorJugador extends Jugador{
 		}
 
 		etiquetaImagen= new JLabel();
-	//El comentario de abajo es lo que debe ir cuando el tablero esté terminado
-		//etiquetaImagen.setBounds(casillaActual.coordenadaCasillaX+correccionCoordenadaX, casillaActual.coordenadaCasillaY+correccionCoordenadaY, 50, 50 );
-		etiquetaImagen.setBounds(30+correccionCoordenadaX, 30+correccionCoordenadaY, 50, 50 );
+		etiquetaImagen.setBounds(casillaActual.coordenadaCasillaX + correccionCoordenadaX, casillaActual.coordenadaCasillaY + correccionCoordenadaY, 20, 20);
 		etiquetaImagen.setIcon(new ImageIcon (imagenJugador.getImage().getScaledInstance(etiquetaImagen.getWidth(), etiquetaImagen.getHeight(), Image.SCALE_SMOOTH)));
 		Partida.panelPartida.add(etiquetaImagen);
 	}
