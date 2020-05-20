@@ -7,33 +7,24 @@ import javax.swing.JLabel;
 import tablero.Casilla;
 
 public class Jugador {
-<<<<<<< HEAD
+
 //    __Atributos de las características más importantes de cada jugador
 //___/
-	public String nombreJugador= null;
+	public String nombreJugador= "Jugador 1";
 	public int monedasJugador =100;
 	public int estrellasJugador = 0;
 	public int numeroJugador;
 	
 //	  __Atributos que controlan los movimientos que debe realizar el jugador depesndiendo de su ubicación actual
 //___/
-	private boolean direccionInversa= false;
-	private boolean direccionAuxiliar= false;
-	private boolean direccionTeletransporte= false;
-	public boolean comprarEstrella= false;
-	
-//     __ Atributos que contralan la posicion del jugador en la interfaz (Se colocan en el panel estático de Partida)
-//____/
-=======
-	public String nombreJugador = "Jugador 1";
-	public int monedasJugador = 100;
-	public int estrellasJugador = 0;
-	public int numeroJugador;
 	private boolean direccionInversa;
 	private boolean direccionAuxiliar;
 	private boolean direccionTeletransporte;
 	public boolean comprarEstrella;
->>>>>>> 4c0e06c35b359d0da4c6e398862223c4389d04aa
+	
+//     __ Atributos que contralan la posicion del jugador en la interfaz (Se colocan en el panel estático de Partida)
+//____/
+
 	public JLabel etiquetaImagen;
 	protected int correccionCoordenadaX, correccionCoordenadaY;
 	protected Casilla casillaActual; 
