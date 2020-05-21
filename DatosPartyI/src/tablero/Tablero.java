@@ -243,7 +243,7 @@ public class Tablero {
 		direccionCasilla(NE);
 		nuevaCasilla("Amarilla", posicionCasillaX,posicionCasillaY);
 		direccionCasilla(NE);
-		nuevaCasilla("Roja", posicionCasillaX,posicionCasillaY);
+		nuevaCasilla("Amarilla", posicionCasillaX,posicionCasillaY);
 	}
 	
 	private void ensamblarCaminos() {
@@ -273,7 +273,8 @@ public class Tablero {
 		casilla50.teletransporteCasilla = subCaminoCuatro.primeraCasilla;
 		subCaminoCuatro.primeraCasilla.teletransporteCasilla = casilla50;
 		
-		
+		Casilla casilla68 = encontrarCasilla(68);
+		subCaminoCuatro.ultimaCasilla.anteriorCasilla = casilla68;	
 		
 	}
 	

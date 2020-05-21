@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import juego.Dados;
 import juego.Partida;
 import tablero.Casilla;
 
@@ -96,6 +97,9 @@ public class Jugador {
 			direccionAuxiliar=false;
 			direccionInversa=false;
 		}
+		else if (casillaActual.tipoCasilla.equals("Amarilla")) {
+			direccionTeletransporte= false;
+		}
 	}
 	
 	/**
@@ -112,7 +116,7 @@ public class Jugador {
 	 * @param numeroDados indica cuántas posiciones se va a mover
 	 * @throws InterruptedException 
 	 */
-	public void moverJugador(int numeroDados, int numeroCasillas) {
+	public void moverJugador(int numeroDados) {
 		verificarDireccion();
 		while (numeroDados != 0) {
 			if (direccionInversa == true) {
@@ -131,13 +135,16 @@ public class Jugador {
 				}
 
 				else {
-					casillaActual = casillaActual.siguienteCasilla;
+					if (casillaActual.siguienteCasilla == null) {
+						casillaActual = casillaActual.anteriorCasilla;
+						direccionInversa = true;
+					}
+					else {
+						casillaActual = casillaActual.siguienteCasilla;
+					}
 				}
 				cambiarPosicionJugador();
 				numeroDados -= 1;
-				if (casillaActual.numeroCasilla == numeroCasillas) {
-					verificarDireccion();
-				}
 			}
 
 		}
@@ -185,7 +192,7 @@ public class Jugador {
 		casillaActual.etiquetaCasilla.repaint();
 		Partida.panelPartida.repaint();
 		try {
-			Thread.sleep(750);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
