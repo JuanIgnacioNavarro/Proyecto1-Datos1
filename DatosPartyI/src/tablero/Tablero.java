@@ -256,7 +256,7 @@ public class Tablero {
 		Casilla casilla7 = encontrarCasilla(7);
 		subCaminoUno.ultimaCasilla.siguienteCasilla = casilla7;
 		casilla7.anteriorCasilla = subCaminoUno.ultimaCasilla;
-		
+					
 		casilla12.siguienteCasillaAux = subCaminoDos.primeraCasilla;
 		
 		Casilla casilla30 = encontrarCasilla(30);
@@ -272,6 +272,8 @@ public class Tablero {
 		Casilla casilla50 = encontrarCasilla(50);
 		casilla50.teletransporteCasilla = subCaminoCuatro.primeraCasilla;
 		subCaminoCuatro.primeraCasilla.teletransporteCasilla = casilla50;
+		
+		
 		
 	}
 	

@@ -1,5 +1,6 @@
 package tablero;
 
+import java.awt.Color;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;

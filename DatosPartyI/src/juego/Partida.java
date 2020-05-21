@@ -13,11 +13,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import evento.Evento;
-import jugador.ConstructorJugador;
 import jugador.Jugador;
 import tablero.Tablero;
 
-public class Partida extends JFrame implements MouseListener {
+public class Partida extends JFrame implements MouseListener, Runnable {
 	public static JPanel panelPartida;
 	private ImageIcon imagenDados = new ImageIcon("Imagenes/Dados.png");
 	private ImageIcon imagenTienda = new ImageIcon("Imagenes/TiendaEstrella.png");
@@ -40,7 +39,7 @@ public class Partida extends JFrame implements MouseListener {
 	public static boolean eventoActivado = false;
 	private boolean partidaIniciada;
 	private int cantidadRondas = Inicio.cantidadRondas;
-	private Jugador listaJugadores[] = new ConstructorJugador[Inicio.cantidadJugadores];
+	private Jugador listaJugadores[] = new Jugador[Inicio.cantidadJugadores];
 	public Jugador jugadorActual;
 	private Tablero tablero;
 	private Evento evento;
@@ -85,7 +84,7 @@ public class Partida extends JFrame implements MouseListener {
 
 	private void agregarJugadores() {
 		for (int i = 0; i < Inicio.cantidadJugadores; i++) {
-			listaJugadores[i] = new ConstructorJugador(i, tablero.caminoPrincipal.primeraCasilla);
+			listaJugadores[i] = new Jugador(i, tablero.caminoPrincipal.primeraCasilla);
 		}
 
 		jugadorActual = listaJugadores[0];
@@ -196,12 +195,17 @@ public class Partida extends JFrame implements MouseListener {
 			siguienteTurno();
 			actualizarInfoJugadorActual();
 		}
-//		Dados.mezclarDados();
-		jugadorActual.moverJugador(5, Tablero.cantidadCasillas);
+//		Dados.mezclarDados();		
+	    new Thread(this).start();
 //		comprobarEvento();
 //		comprobarEventoDuelo();
 		actualizarInfoJugadorActual();
 		
+	}
+	
+	@Override
+	public void run() {
+		jugadorActual.moverJugador(Dados.numeroDados, Tablero.cantidadCasillas);
 	}
 	
 	private void siguienteTurno() {	
