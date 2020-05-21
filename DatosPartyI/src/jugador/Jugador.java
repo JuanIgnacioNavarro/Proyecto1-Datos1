@@ -175,7 +175,7 @@ public class Jugador {
 			this.monedasJugador -= 300;
 		}
 		else if (casillaActual.tipoCasilla.equals("Amarilla")) {
-			
+			Partida.eventoActivado=true;
 		}
 		
 	}

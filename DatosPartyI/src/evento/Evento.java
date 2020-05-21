@@ -24,31 +24,31 @@ public class Evento {
 	 */
 	public void ejecutarEvento() {
 		if (tipoEvento==1) {
-
+			System.out.println("Se ejecuta evento: "+ tipoEvento);
 		}
 		else if (tipoEvento==2){
-			
+			System.out.println("Se ejecuta evento: "+ tipoEvento);
 		}
 		else if (tipoEvento==3){
-			
+			System.out.println("Se ejecuta evento: "+ tipoEvento);
 		}
 		else if (tipoEvento==4){
-			
+			System.out.println("Se ejecuta evento: "+ tipoEvento);
 		}
 		else if (tipoEvento==5){
-			
+			System.out.println("Se ejecuta evento: "+ tipoEvento);
 		}
 		else if (tipoEvento==6){
-			
+			System.out.println("Se ejecuta evento: "+ tipoEvento);
 		}
 		else if (tipoEvento==7){
-			
+			System.out.println("Se ejecuta evento: "+ tipoEvento);
 		}
 		else if (tipoEvento==8){
-			
+			System.out.println("Se ejecuta evento: "+ tipoEvento);
 		}
 		else if (tipoEvento==9){
-			
+			System.out.println("Se ejecuta evento: "+ tipoEvento);
 		}
 	}
 }

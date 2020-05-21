@@ -1,6 +1,7 @@
 package evento;
 
 import java.util.Random;
+import jugador.*;
 
 public class PilaEventos {
 	public Evento eventoHead= null;
@@ -50,7 +51,7 @@ public class PilaEventos {
 	/**
 	 * Este método permite usar uno de los métodos de la clase evento
 	 */
-	public void seek() {
+	public void seek(Jugador jugadorActual, Jugador[] listaJugadores) {
 		eventoHead.ejecutarEvento();
 	}
 	
