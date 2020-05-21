@@ -27,6 +27,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private ImageIcon imagenMoneda = new ImageIcon("Imagenes/Moneda.png");
 	private ImageIcon imagenEstrella = new ImageIcon("Imagenes/Estrella.png");
 	private JLabel etiquetaDados;
+	private JLabel etiquetaNumeroDados;
 	private JLabel etiquetaTienda;
 	private JLabel etiquetaMoneda;
 	private JLabel etiquetaEstrella;
@@ -35,7 +36,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private JLabel etiquetaMonedasJugadorActual;
 	private JLabel etiquetaEstrellasJugadorActual;
 
-	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 20);
+	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 25);
 	private Font fuenteTexto = new Font("Comic Sans MS", 1, 16);
 	private Color colorResalte = new Color(66, 66, 66);
 	private Color colorNegativo = new Color(222, 66, 80);
@@ -102,10 +103,18 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private void agregarDados() {
 		etiquetaDados = new JLabel();
 		etiquetaDados.setSize(120, 120);
-		etiquetaDados.setLocation(panelPartida.getWidth() - etiquetaDados.getWidth() - 20, panelPartida.getHeight() - etiquetaDados.getHeight() - 20);
+		etiquetaDados.setLocation(20, panelPartida.getHeight() - etiquetaDados.getHeight() - 20);
 		etiquetaDados.setIcon(new ImageIcon(imagenDados.getImage().getScaledInstance(etiquetaDados.getWidth(), etiquetaDados.getHeight(), Image.SCALE_SMOOTH)));
 		etiquetaDados.addMouseListener(this);
 		panelPartida.add(etiquetaDados);
+		
+		etiquetaNumeroDados = new JLabel("sffsf");
+		etiquetaNumeroDados.setSize(etiquetaDados.getWidth(), 50);
+		etiquetaNumeroDados.setLocation(etiquetaDados.getX(), etiquetaDados.getY() - 50);
+		etiquetaNumeroDados.setHorizontalAlignment(SwingConstants.CENTER);
+		etiquetaNumeroDados.setFont(fuenteTitulo);
+		etiquetaNumeroDados.setForeground(Color.WHITE);
+		panelPartida.add(etiquetaNumeroDados);
 
 	}
 
