@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import juego.Dados;
+import juego.Bienvenida;
 import juego.Partida;
 import tablero.Casilla;
 
@@ -119,6 +119,7 @@ public class Jugador {
 	public void moverJugador(int numeroDados) {
 		verificarDireccion();
 		while (numeroDados != 0) {
+			verificarEstrella();
 			if (direccionInversa == true) {
 				casillaActual = casillaActual.anteriorCasilla;
 				cambiarPosicionJugador();
@@ -156,14 +157,17 @@ public class Jugador {
 		}
 		
 		verificarTipoCasilla();
+		Partida.movimientoJugador = false;
+		Partida.etiquetaDados.setBackground(Bienvenida.colorVentana);
 	}
 		
 	/**
 	 * Este método verifica si hay una estrella en cada casilla que recorre
 	 */
 	public void verificarEstrella() {
-		if (casillaActual.estrellaCasilla == true) {
-			this.comprarEstrella= true;
+		if (casillaActual.estrellaEncima == true) {
+			comprarEstrella = true;
+			casillaActual.eliminarEstrella();
 		}
 	}
 	/**
