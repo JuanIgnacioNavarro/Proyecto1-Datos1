@@ -1,6 +1,7 @@
 package juego;
 
 import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -13,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import evento.Evento;
 import jugador.Jugador;
 import tablero.Casilla;
 import tablero.Tablero;
@@ -45,10 +45,12 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private Jugador listaJugadores[] = new Jugador[Inicio.cantidadJugadores];
 	public Jugador jugadorActual;
 	private Tablero tablero;
-	private Evento evento;
+//	private Evento evento;
 	private int numeroDadoUno, numeroDadoDos, numeroDados;
 	private int numeroCasillaAlazar;
 	private Casilla casillaAlazar;
+	//private Evento evento;
+//	public PilaEventos pilaEventos= new PilaEventos();
 
 	public Partida() {
 		setTitle("Datos Party I");
@@ -183,8 +185,12 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	
 	private void comprobarEvento() {
 		if (eventoActivado == true) {
+			System.out.println("Ya se realizó el seek()");
 			eventoActivado = false;
-//			evento.activarEvento(jugadorActual, listaJugadores);
+//			pilaEventos.imprimirPila();
+//			pilaEventos.seek(jugadorActual, listaJugadores);
+			System.out.println("Ya se realizó el seek()");
+			
 		}
 
 	}
@@ -245,6 +251,8 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	@Override
 	public void run() {
 		jugadorActual.moverJugador(numeroDados);
+		comprobarEvento();
+		actualizarInfoJugadorActual();
 	}
 	
 	@Override
