@@ -1,7 +1,6 @@
 package juego;
 
 import java.awt.Color;
-
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -108,12 +107,13 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		etiquetaDados.addMouseListener(this);
 		panelPartida.add(etiquetaDados);
 		
-		etiquetaNumeroDados = new JLabel("sffsf");
+		etiquetaNumeroDados = new JLabel();
 		etiquetaNumeroDados.setSize(etiquetaDados.getWidth(), 50);
 		etiquetaNumeroDados.setLocation(etiquetaDados.getX(), etiquetaDados.getY() - 50);
 		etiquetaNumeroDados.setHorizontalAlignment(SwingConstants.CENTER);
 		etiquetaNumeroDados.setFont(fuenteTitulo);
 		etiquetaNumeroDados.setForeground(Color.WHITE);
+		etiquetaNumeroDados.setVisible(false);
 		panelPartida.add(etiquetaNumeroDados);
 
 	}
@@ -226,6 +226,8 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		etiquetaDados.setBackground(colorNegativo);
 		
 		mezclarDados();
+		etiquetaNumeroDados.setText(String.valueOf(numeroDados));
+		etiquetaNumeroDados.setVisible(true);
 	    new Thread(this).start();
 
 	    comprobarEventoDuelo();		
@@ -264,6 +266,8 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		
 		movimientoJugador = false;
 		etiquetaDados.setBackground(Bienvenida.colorVentana);
+		etiquetaNumeroDados.setVisible(false);
+
 	}
 	
 	@Override
