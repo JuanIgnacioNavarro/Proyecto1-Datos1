@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -171,12 +172,10 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	
 	private void comprobarEvento() {
 		if (eventoActivado == true) {
-			System.out.println("Ya se realizó el seek()");
 			eventoActivado = false;
-			pilaEventos.imprimirPila();
-			pilaEventos.seek(jugadorActual, listaJugadores);
-			System.out.println("Ya se realizó el seek()");
-			
+			pilaEventos.seek(jugadorActual, listaJugadores);	
+			pilaEventos.pop();
+
 		}
 
 	}
@@ -209,13 +208,11 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	
 	@Override
 	public void run() {
-<<<<<<< HEAD
-		jugadorActual.moverJugador(Dados.numeroDados, Tablero.cantidadCasillas);
+		jugadorActual.moverJugador(Dados.numeroDados);
 		comprobarEvento();
 		actualizarInfoJugadorActual();
-=======
-		jugadorActual.moverJugador(Dados.numeroDados);
->>>>>>> d3fd8651dd71a4b128e98a8e4eaf31fc32e65d6d
+
+
 	}
 	
 	private void siguienteTurno() {	

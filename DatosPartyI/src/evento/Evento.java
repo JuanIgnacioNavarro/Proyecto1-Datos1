@@ -1,5 +1,12 @@
 package evento;
 
+import java.util.Random;
+
+import javax.swing.JOptionPane;
+
+import juego.Inicio;
+import jugador.Jugador;
+
 public class Evento {
 	public Evento next;
 	public int tipoEvento;
@@ -22,27 +29,54 @@ public class Evento {
 	 *8) Teletransporte
 	 *9)Cambio de lugares:
 	 */
-	public void ejecutarEvento() {
+	public void ejecutarEvento(Jugador jugadorActual, Jugador[] listaJugadores) {
 		if (tipoEvento==1) {
-			System.out.println("Se ejecuta evento: "+ tipoEvento);
+			//Minijuego.activarMinijuego(); //Añadir el relleno de este tipo de Evento una vez que se añadan los minijuegos
+			System.out.println("Se ejecuta evento (Minijuego 1 vs 1): "+ tipoEvento);
 		}
 		else if (tipoEvento==2){
-			System.out.println("Se ejecuta evento: "+ tipoEvento);
+			int randomInt;
+			while (true) {
+				Random random= new Random();
+				randomInt= random.nextInt(Inicio.cantidadJugadores);
+				if (jugadorActual.numeroJugador!=randomInt) {
+					break;
+				}
+			}
+			robarMonedas(jugadorActual, listaJugadores[randomInt]);
 		}
 		else if (tipoEvento==3){
-			System.out.println("Se ejecuta evento: "+ tipoEvento);
+			regalarMonedas(jugadorActual, listaJugadores);
 		}
 		else if (tipoEvento==4){
-			System.out.println("Se ejecuta evento: "+ tipoEvento);
+			int randomInt;
+			while (true) {
+				Random random= new Random();
+				randomInt= random.nextInt(Inicio.cantidadJugadores);
+				if (jugadorActual.numeroJugador!=randomInt) {
+					break;
+				}
+			}
+			pierdeEstrella(jugadorActual, listaJugadores[randomInt]);
 		}
 		else if (tipoEvento==5){
-			System.out.println("Se ejecuta evento: "+ tipoEvento);
+			jugadorActual.estrellasJugador+=2;
+			JOptionPane.showMessageDialog(null, "¡Wow! El "+jugadorActual.nombreJugador+ " se ha ganado 2 estrellas en el evento", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (tipoEvento==6){
-			System.out.println("Se ejecuta evento: "+ tipoEvento);
+			jugadorActual.estrellasJugador+=5;
+			JOptionPane.showMessageDialog(null, "¡¡Mega Wow!! El "+jugadorActual.nombreJugador+ " se ha ganado 5 estrellas en el evento", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (tipoEvento==7){
-			System.out.println("Se ejecuta evento: "+ tipoEvento);
+			int randomInt;
+			while (true) {
+				Random random= new Random();
+				randomInt= random.nextInt(Inicio.cantidadJugadores);
+				if (jugadorActual.numeroJugador!=randomInt) {
+					break;
+				}
+			}
+			robarEstrella(jugadorActual, listaJugadores[randomInt]);
 		}
 		else if (tipoEvento==8){
 			System.out.println("Se ejecuta evento: "+ tipoEvento);
@@ -50,5 +84,55 @@ public class Evento {
 		else if (tipoEvento==9){
 			System.out.println("Se ejecuta evento: "+ tipoEvento);
 		}
+	}
+	
+	private void robarMonedas(Jugador jugadorActual, Jugador jugadorRandom) {
+		int cantidadMonedas;
+		int cantidadMaxMonedas;
+		Random random= new Random();
+		cantidadMaxMonedas= jugadorRandom.monedasJugador;
+		cantidadMonedas= random.nextInt(cantidadMaxMonedas)+1;
+		jugadorRandom.monedasJugador-= cantidadMonedas;
+		jugadorActual.monedasJugador+=cantidadMonedas;
+		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " le ha robado "+cantidadMonedas+ " de monedas a "+ jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+	}
+	private void regalarMonedas(Jugador jugadorActual, Jugador[] listaJugadores) {
+		int cantidadJugadores= Inicio.cantidadJugadores-1;
+		System.out.println("La cantidad de jugadores a regalar son: "+cantidadJugadores);
+		int cantidadMaxMonedas= (int)jugadorActual.monedasJugador/cantidadJugadores;
+		System.out.println("La cantidad de monedas másximaa regalar son"+ cantidadMaxMonedas);
+		Random random= new Random();
+		int cantidadARegalar=random.nextInt(cantidadMaxMonedas)+1;
+		System.out.println("La cantidad de monedas a regalar son"+ cantidadARegalar);
+		jugadorActual.monedasJugador-=cantidadJugadores*cantidadARegalar;
+		int i= Inicio.cantidadJugadores-1;
+		while (i!=-1) {
+			if (jugadorActual.numeroJugador==listaJugadores[i].numeroJugador) {
+			}
+			else {
+			listaJugadores[i].monedasJugador+= cantidadARegalar;}
+			i-=1;
+			}
+		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+" le ha regalado "+cantidadARegalar+" monedas a todos los jugadores", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+	}
+	private void pierdeEstrella(Jugador jugadorActual, Jugador jugadorRandom) {
+		if (jugadorActual.estrellasJugador>0) {
+		jugadorActual.estrellasJugador-=1;
+		jugadorRandom.estrellasJugador+=1;
+		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " le ha regalado 1 estrella a "+ jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "El "+jugadorActual.nombreJugador+ " activó el evento de regalar estrellas, pero no tiene estrellas", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	private void robarEstrella(Jugador jugadorActual, Jugador jugadorRandom) {
+		if (jugadorRandom.estrellasJugador>0) {
+		jugadorActual.estrellasJugador+=1;
+		jugadorRandom.estrellasJugador-=1;
+		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " le ha robado una estrella al "+ jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+		}else {
+			JOptionPane.showMessageDialog(null, "El "+jugadorActual.nombreJugador+ " activó el evento de robar una estrella, pero el "+jugadorRandom.nombreJugador+" no tiene estrellas", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
 	}
 }
