@@ -14,8 +14,8 @@ public class Jugador {
 //    __Atributos de las características más importantes de cada jugador
 //___/
 	public String nombreJugador;
-	public int monedasJugador = 100;
-	public int estrellasJugador = 0;
+	public int monedasJugador = 400;
+	public int estrellasJugador = 2;
 	public int numeroJugador;
 	int guardadoCorreccionX, guardadoCorreccionY;
 	
@@ -193,7 +193,9 @@ public class Jugador {
 			this.monedasJugador += 300;
 		}
 		else if (casillaActual.tipoCasilla.equals("Roja")) {
-			this.monedasJugador -= 300;
+			if (this.monedasJugador>300) {
+				this.monedasJugador -= 300;
+			}
 		}
 		else if (casillaActual.tipoCasilla.equals("Amarilla")) {
 			Partida.eventoActivado=true;

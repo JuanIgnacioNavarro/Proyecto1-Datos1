@@ -7,8 +7,8 @@ public class PilaEventos {
 	public Evento eventoHead= null;
 //    __ Se hizo un array con todos los números de los eventos dela pila
 //___/
-	public int[] arrayTiposEventos= {1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,4,4,4,5,5,5,6,7,7,7,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9};
-	
+	//public int[] arrayTiposEventos= {1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,4,4,4,5,5,5,6,7,7,7,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9};
+	public int[] arrayTiposEventos= {2,3,4,5};
 	
 	public PilaEventos() {
 		barajarArray(arrayTiposEventos);
@@ -52,7 +52,7 @@ public class PilaEventos {
 	 * Este método permite usar uno de los métodos de la clase evento
 	 */
 	public void seek(Jugador jugadorActual, Jugador[] listaJugadores) {
-		eventoHead.ejecutarEvento();
+		eventoHead.ejecutarEvento(jugadorActual, listaJugadores);
 	}
 	
 	public void imprimirPila () {
