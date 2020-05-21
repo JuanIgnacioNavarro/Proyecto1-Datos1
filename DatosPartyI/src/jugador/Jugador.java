@@ -17,6 +17,7 @@ public class Jugador {
 	public int monedasJugador = 100;
 	public int estrellasJugador = 0;
 	public int numeroJugador;
+	int guardadoCorreccionX, guardadoCorreccionY;
 	
 //	  __Atributos que controlan los movimientos que debe realizar el jugador depesndiendo de su ubicación actual
 //___/
@@ -65,6 +66,8 @@ public class Jugador {
 			correccionCoordenadaY = (casillaActual.etiquetaCasilla.getHeight() / 2);
 			nombreJugador = "Jugador 4";
 		}
+		guardadoCorreccionX = correccionCoordenadaX;
+		guardadoCorreccionY = correccionCoordenadaY;
 
 		etiquetaImagen.setLocation(correccionCoordenadaX, correccionCoordenadaY);
 		etiquetaImagen.setIcon(new ImageIcon (imagenJugador.getImage().getScaledInstance(etiquetaImagen.getWidth(), etiquetaImagen.getHeight(), Image.SCALE_SMOOTH)));
@@ -122,8 +125,6 @@ public class Jugador {
 			verificarEstrella();
 			if (direccionInversa == true) {
 				casillaActual = casillaActual.anteriorCasilla;
-				cambiarPosicionJugador();
-				numeroDados -= 1;
 				verificarDireccion();
 				if (direccionAuxiliar == true) {
 					direccionAuxiliar = false;
@@ -144,21 +145,30 @@ public class Jugador {
 						casillaActual = casillaActual.siguienteCasilla;
 					}
 				}
-				cambiarPosicionJugador();
-				numeroDados -= 1;
 			}
+			
+			if (casillaActual.tipoCasilla.equals("Morada")) {
+				correccionCoordenadaX = (casillaActual.etiquetaCasilla.getWidth() / 2) - (etiquetaImagen.getWidth() / 2);
+				correccionCoordenadaY = (casillaActual.etiquetaCasilla.getHeight() / 2) - (etiquetaImagen.getHeight() / 2);
+
+			}
+			cambiarPosicionJugador();
+			numeroDados -= 1;
 
 		}
 		
+		verificarEstrella();
 		verificarDireccion();
 		if (direccionTeletransporte == true) {
 			casillaActual = casillaActual.teletransporteCasilla;
+			
+			correccionCoordenadaX = (casillaActual.etiquetaCasilla.getWidth() / 2) - (etiquetaImagen.getWidth() / 2);
+			correccionCoordenadaY = (casillaActual.etiquetaCasilla.getHeight() / 2) - (etiquetaImagen.getHeight() / 2);
+			
 			cambiarPosicionJugador();
 		}
 		
 		verificarTipoCasilla();
-		Partida.movimientoJugador = false;
-		Partida.etiquetaDados.setBackground(Bienvenida.colorVentana);
 	}
 		
 	/**
@@ -192,6 +202,10 @@ public class Jugador {
 	}
 	private void cambiarPosicionJugador()  {
 		etiquetaImagen.setLocation(correccionCoordenadaX, correccionCoordenadaY);
+		if (casillaActual.tipoCasilla.equals("Morada")) {
+			correccionCoordenadaX = guardadoCorreccionX;
+			correccionCoordenadaY = guardadoCorreccionY;
+		}
 		casillaActual.etiquetaCasilla.add(etiquetaImagen);
 		casillaActual.etiquetaCasilla.repaint();
 		Partida.panelPartida.repaint();

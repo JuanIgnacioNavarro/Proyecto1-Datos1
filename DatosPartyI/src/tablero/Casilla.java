@@ -22,7 +22,6 @@ public class Casilla {
 	public Casilla teletransporteCasilla;
 	public int coordenadaCasillaX;
 	public int coordenadaCasillaY;
-	private int correcionCoordenadaEX = 38, correcionCoordenadaEY = 7;
 	public boolean estrellaEncima;
 	
 	public Casilla(String tipoCasilla, int coordenadaCasillaX, int coordenadaCasillaY) {
@@ -33,8 +32,8 @@ public class Casilla {
 		String direccion = "Imagenes/Casilla" + tipoCasilla + ".png";
 		imagenCasilla = new ImageIcon(direccion);
 		
-		crearEstrella();
 		crearCasilla(tipoCasilla);
+		crearEstrella();
 
 	}	
 	public void crearCasilla(String tipoCasilla) {
@@ -53,10 +52,13 @@ public class Casilla {
 	public void crearEstrella() {
 		etiquetaEstrella = new JLabel();
 		etiquetaEstrella.setIcon(imagenEstrella);
-		etiquetaEstrella.setBounds(coordenadaCasillaX + correcionCoordenadaEX, coordenadaCasillaY + correcionCoordenadaEY, 25, 25);
+		etiquetaEstrella.setSize(18,18);
+		etiquetaEstrella.setLocation((etiquetaCasilla.getWidth() / 2) - (etiquetaEstrella.getWidth() / 2), (etiquetaCasilla.getHeight() / 2) - (etiquetaEstrella.getHeight() / 2));
 		etiquetaEstrella.setIcon(new ImageIcon(imagenEstrella.getImage().getScaledInstance(etiquetaEstrella.getWidth(), etiquetaEstrella.getHeight(), Image.SCALE_SMOOTH)));
 		etiquetaEstrella.setVisible(false);
-		Partida.panelPartida.add(etiquetaEstrella);
+		etiquetaCasilla.add(etiquetaEstrella);
+		
+		Partida.panelPartida.repaint();
 	}
 	
 	public void ponerEstrella() {

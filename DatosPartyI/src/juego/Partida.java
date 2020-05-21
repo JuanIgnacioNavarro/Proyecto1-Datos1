@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import evento.Evento;
+import evento.PilaEventos;
 import jugador.Jugador;
 import tablero.Casilla;
 import tablero.Tablero;
@@ -21,7 +23,7 @@ import tablero.Tablero;
 public class Partida extends JFrame implements MouseListener, Runnable {
 	public static JPanel panelPartida;
 	private ImageIcon imagenDados = new ImageIcon("Imagenes/Dados.png");
-	private ImageIcon imagenTienda = new ImageIcon("Imagenes/TiendaEstrella.png");
+	private ImageIcon imagenTienda = new ImageIcon("Imagenes/EstrellaExtra.png");
 	private ImageIcon imagenMoneda = new ImageIcon("Imagenes/Moneda.png");
 	private ImageIcon imagenEstrella = new ImageIcon("Imagenes/Estrella.png");
 	public static JLabel etiquetaDados;
@@ -45,12 +47,11 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private Jugador listaJugadores[] = new Jugador[Inicio.cantidadJugadores];
 	public Jugador jugadorActual;
 	private Tablero tablero;
-//	private Evento evento;
 	private int numeroDadoUno, numeroDadoDos, numeroDados;
 	private int numeroCasillaAlazar;
 	private Casilla casillaAlazar;
-	//private Evento evento;
-//	public PilaEventos pilaEventos= new PilaEventos();
+	private Evento evento;
+	public PilaEventos pilaEventos= new PilaEventos();
 
 	public Partida() {
 		setTitle("Datos Party I");
@@ -109,7 +110,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 
 	private void agregarTienda() {
 		etiquetaTienda = new JLabel();
-		etiquetaTienda.setSize(75, 75);
+		etiquetaTienda.setSize(100, 100);
 		etiquetaTienda.setLocation(panelPartida.getWidth() - etiquetaTienda.getWidth() - 20, 20);
 		etiquetaTienda.setIcon(new ImageIcon(imagenTienda.getImage().getScaledInstance(etiquetaTienda.getWidth(), etiquetaTienda.getHeight(), Image.SCALE_SMOOTH)));
 		etiquetaTienda.addMouseListener(this);
@@ -173,7 +174,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	}
 	
 	private void agregarEstrella() {
-		numeroCasillaAlazar = (int) Math.floor(Math.random()*69+1);
+		numeroCasillaAlazar = (int) Math.floor(Math.random()*69 + 3);
 		casillaAlazar = tablero.encontrarCasilla(numeroCasillaAlazar);
 		casillaAlazar.ponerEstrella();
 	
@@ -187,8 +188,8 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		if (eventoActivado == true) {
 			System.out.println("Ya se realizó el seek()");
 			eventoActivado = false;
-//			pilaEventos.imprimirPila();
-//			pilaEventos.seek(jugadorActual, listaJugadores);
+			pilaEventos.imprimirPila();
+			pilaEventos.seek(jugadorActual, listaJugadores);
 			System.out.println("Ya se realizó el seek()");
 			
 		}
@@ -215,14 +216,10 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		}
 		movimientoJugador = true;
 		etiquetaDados.setBackground(colorNegativo);
-		
 		mezclarDados();
 	    new Thread(this).start();
-	    
-		comprobarEvento();
-		comprobarEventoDuelo();
-		actualizarInfoJugadorActual();
-		
+
+	    comprobarEventoDuelo();		
 	}
 	
 	private void siguienteTurno() {	
@@ -251,8 +248,12 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	@Override
 	public void run() {
 		jugadorActual.moverJugador(numeroDados);
+		
 		comprobarEvento();
 		actualizarInfoJugadorActual();
+		
+		movimientoJugador = false;
+		etiquetaDados.setBackground(Bienvenida.colorVentana);
 	}
 	
 	@Override
@@ -281,6 +282,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 					jugadorActual.monedasJugador -= 500;
 					jugadorActual.estrellasJugador += 1;
 					jugadorActual.comprarEstrella = false;
+					actualizarInfoJugadorActual();
 					JOptionPane.showMessageDialog(null, "Has comprado una estrella!", "NUEVA ESTRELLA", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
