@@ -23,7 +23,7 @@ public class Casilla {
 	public int coordenadaCasillaX;
 	public int coordenadaCasillaY;
 	private int correcionCoordenadaEX = 38, correcionCoordenadaEY = 7;
-	public boolean estrellaCasilla;
+	public boolean estrellaEncima;
 	
 	public Casilla(String tipoCasilla, int coordenadaCasillaX, int coordenadaCasillaY) {
 		this.tipoCasilla = tipoCasilla;
@@ -61,13 +61,13 @@ public class Casilla {
 	
 	public void ponerEstrella() {
 		etiquetaEstrella.setVisible(true);
-		estrellaCasilla = true;
+		estrellaEncima = true;
 		
 	}
 	
 	public void eliminarEstrella() {
 		etiquetaEstrella.setVisible(false);
-		estrellaCasilla = false;
+		estrellaEncima = false;
 		
 	}
 }

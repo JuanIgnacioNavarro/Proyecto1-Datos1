@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import evento.Evento;
 import jugador.Jugador;
+import tablero.Casilla;
 import tablero.Tablero;
 
 public class Partida extends JFrame implements MouseListener, Runnable {
@@ -23,7 +24,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private ImageIcon imagenTienda = new ImageIcon("Imagenes/TiendaEstrella.png");
 	private ImageIcon imagenMoneda = new ImageIcon("Imagenes/Moneda.png");
 	private ImageIcon imagenEstrella = new ImageIcon("Imagenes/Estrella.png");
-	private JLabel etiquetaDados;
+	public static JLabel etiquetaDados;
 	private JLabel etiquetaTienda;
 	private JLabel etiquetaMoneda;
 	private JLabel etiquetaEstrella;
@@ -35,15 +36,19 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 20);
 	private Font fuenteTexto = new Font("Comic Sans MS", 1, 16);
 	private Color colorResalte = new Color(66, 66, 66);
-	private Color colorNegativo = new Color(255, 126, 121);
+	private Color colorNegativo = new Color(222, 66, 80);
 	private Color colorPositivo = new Color(180, 225, 120);
 	public static boolean eventoActivado = false;
 	private boolean partidaIniciada;
+	public static boolean movimientoJugador = false;
 	private int cantidadRondas = Inicio.cantidadRondas;
 	private Jugador listaJugadores[] = new Jugador[Inicio.cantidadJugadores];
 	public Jugador jugadorActual;
 	private Tablero tablero;
 	private Evento evento;
+	private int numeroDadoUno, numeroDadoDos, numeroDados;
+	private int numeroCasillaAlazar;
+	private Casilla casillaAlazar;
 
 	public Partida() {
 		setTitle("Datos Party I");
@@ -159,7 +164,16 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		etiquetaEstrellasJugadorActual.setText(": " + String.valueOf(jugadorActual.estrellasJugador));
 	}
 	
+	private void mezclarDados() {
+		numeroDadoUno = (int) Math.floor(Math.random()*6+1);
+		numeroDadoDos = (int) Math.floor(Math.random()*6+1);
+		numeroDados = numeroDadoUno + numeroDadoDos;
+	}
+	
 	private void agregarEstrella() {
+		numeroCasillaAlazar = (int) Math.floor(Math.random()*69+1);
+		casillaAlazar = tablero.encontrarCasilla(numeroCasillaAlazar);
+		casillaAlazar.ponerEstrella();
 	
 	}
 	
@@ -193,17 +207,16 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 			siguienteTurno();
 			actualizarInfoJugadorActual();
 		}
-//		Dados.mezclarDados();
+		movimientoJugador = true;
+		etiquetaDados.setBackground(colorNegativo);
+		
+		mezclarDados();
 	    new Thread(this).start();
-//		comprobarEvento();
-//		comprobarEventoDuelo();
+	    
+		comprobarEvento();
+		comprobarEventoDuelo();
 		actualizarInfoJugadorActual();
 		
-	}
-	
-	@Override
-	public void run() {
-		jugadorActual.moverJugador(Dados.numeroDados);
 	}
 	
 	private void siguienteTurno() {	
@@ -222,7 +235,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 			jugadorActual = listaJugadores[jugadorActual.numeroJugador + 1];
 		}
 	}
-
+	
 	private void finPartida() {
 		this.setVisible(false);
 		Final f = new Final(listaJugadores);
@@ -230,13 +243,19 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	}
 
 	@Override
+	public void run() {
+		jugadorActual.moverJugador(numeroDados);
+	}
+	
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == etiquetaDados) {
-			try {
-				tirarDados();
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			if (movimientoJugador == false) {
+				try {
+					tirarDados();
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 		
@@ -251,9 +270,10 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 				}
 				
 				else {
+					jugadorActual.monedasJugador -= 500;
 					jugadorActual.estrellasJugador += 1;
+					jugadorActual.comprarEstrella = false;
 					JOptionPane.showMessageDialog(null, "Has comprado una estrella!", "NUEVA ESTRELLA", JOptionPane.INFORMATION_MESSAGE);
-
 				}
 			}
 		}
@@ -273,7 +293,12 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource() == etiquetaDados) {
 			etiquetaDados.setOpaque(true);
-			etiquetaDados.setBackground(colorResalte);
+			if (movimientoJugador == false) {
+				etiquetaDados.setBackground(colorResalte);
+			}
+			else {
+				etiquetaDados.setBackground(colorNegativo);
+			}
 		}
 		else if (e.getSource() == etiquetaTienda) {
 			etiquetaTienda.setOpaque(true);

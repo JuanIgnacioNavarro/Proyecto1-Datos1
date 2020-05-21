@@ -273,9 +273,6 @@ public class Tablero {
 		casilla50.teletransporteCasilla = subCaminoCuatro.primeraCasilla;
 		subCaminoCuatro.primeraCasilla.teletransporteCasilla = casilla50;
 		
-		Casilla casilla68 = encontrarCasilla(68);
-		subCaminoCuatro.ultimaCasilla.anteriorCasilla = casilla68;	
-		
 	}
 	
 	public Casilla encontrarCasilla(int numeroCasilla){
