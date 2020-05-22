@@ -26,6 +26,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private ImageIcon imagenTienda = new ImageIcon("Imagenes/EstrellaExtra.png");
 	private ImageIcon imagenMoneda = new ImageIcon("Imagenes/Moneda.png");
 	private ImageIcon imagenEstrella = new ImageIcon("Imagenes/Estrella.png");
+	private ImageIcon imagenSilbato= new ImageIcon ("Imagenes/silbato.png");
 	private JLabel etiquetaDados;
 	private JLabel etiquetaNumeroDados;
 	private JLabel etiquetaTienda;
@@ -37,6 +38,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private JLabel etiquetaEstrellasJugadorActual;
 	private JLabel etiquetaRondas;
 	private JLabel etiquetaNarrador;
+	private JLabel etiquetaSilbato;
 	
 	private JLabel etiquetaFondoNarrador;
 
@@ -176,7 +178,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 			etiquetaFondoInfoJugadorActual.add(etiquetaEstrella);
 			
 			etiquetaFondoNarrador=new JLabel ();
-			etiquetaFondoNarrador.setBounds(735, 620, 250, 80);
+			etiquetaFondoNarrador.setBounds(735, 623, 250, 80);
 			etiquetaFondoNarrador.setOpaque(true);
 			etiquetaFondoNarrador.setBackground(colorResalte);
 			panelPartida.add(etiquetaFondoNarrador);
@@ -184,7 +186,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 			etiquetaRondas= new JLabel();
 			etiquetaRondas.setBounds(0, 0, etiquetaFondoNarrador.getWidth(), 35);
 			etiquetaRondas.setHorizontalAlignment(SwingConstants.CENTER);
-			etiquetaRondas.setFont(fuenteTexto);
+			etiquetaRondas.setFont(new Font ("Comic Sans MS", 1, 20));
 			etiquetaRondas.setForeground(Color.white);
 			etiquetaFondoNarrador.add(etiquetaRondas);
 			
@@ -194,10 +196,14 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 			etiquetaNarrador.setFont(new Font ("Comic Sans MS", 1, 14));
 			etiquetaNarrador.setForeground(Color.yellow);
 			etiquetaFondoNarrador.add(etiquetaNarrador);
-			etiquetaNarrador.setText("¡"+ jugadorActual.nombreJugador+"\n tirá los dados!");
-		}
-
-		
+			etiquetaNarrador.setText("¡"+ jugadorActual.nombreJugador+" tirá los dados!");
+			
+			etiquetaSilbato= new JLabel();
+			etiquetaSilbato.setBounds(10,etiquetaNarrador.getY()-20 , 40, 40);
+			etiquetaSilbato.setIcon(new ImageIcon(imagenSilbato.getImage().getScaledInstance(etiquetaSilbato.getWidth(), etiquetaSilbato.getHeight(), Image.SCALE_SMOOTH)));
+			etiquetaFondoNarrador.add(etiquetaSilbato);
+			
+		}	
 		etiquetaRondas.setText("Ronda "+rondasTerminadas+" de "+Inicio.cantidadRondas);
 		etiquetaNombreJugadorActual.setText(jugadorActual.nombreJugador);
 		etiquetaMonedasJugadorActual.setText(": " + String.valueOf(jugadorActual.monedasJugador));
@@ -242,6 +248,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 			}
 		}
 	}
+	
 	private void tirarDados() throws InterruptedException {
 		if (partidaIniciada == false) {
 			partidaIniciada = true;
@@ -258,6 +265,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		etiquetaNumeroDados.setText(String.valueOf(numeroDados));
 		etiquetaNumeroDados.setVisible(true);
 		etiquetaNarrador.setVisible(false);
+		etiquetaSilbato.setVisible(false);
 	    new Thread(this).start();
 
 	    comprobarEventoDuelo();		
@@ -299,6 +307,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		etiquetaDados.setBackground(Bienvenida.colorVentana);
 		etiquetaNumeroDados.setVisible(false);
 		etiquetaNarrador.setVisible(true);
+		etiquetaSilbato.setVisible(true);
 		if (jugadorActual.numeroJugador+2!=5) {
 	    	etiquetaNarrador.setText("¡Jugador "+(jugadorActual.numeroJugador+2)+" tirá los dados!");
 	    }

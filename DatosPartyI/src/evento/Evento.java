@@ -109,12 +109,9 @@ public class Evento {
 	}
 	private void regalarMonedas(Jugador jugadorActual, Jugador[] listaJugadores) {
 		int cantidadJugadores= Inicio.cantidadJugadores-1;
-		System.out.println("La cantidad de jugadores a regalar son: "+cantidadJugadores);
 		int cantidadMaxMonedas= (int)jugadorActual.monedasJugador/cantidadJugadores;
-		System.out.println("La cantidad de monedas másximaa regalar son"+ cantidadMaxMonedas);
 		Random random= new Random();
 		int cantidadARegalar=random.nextInt(cantidadMaxMonedas)+1;
-		System.out.println("La cantidad de monedas a regalar son"+ cantidadARegalar);
 		jugadorActual.monedasJugador-=cantidadJugadores*cantidadARegalar;
 		int i= Inicio.cantidadJugadores-1;
 		while (i!=-1) {
@@ -149,7 +146,6 @@ public class Evento {
 		int numeroCasillaRandom;
 		Random random= new Random();
 		numeroCasillaRandom= random.nextInt(67+1)+2;
-		System.out.println("El numeroCasillaRandom es "+ numeroCasillaRandom);
 		jugadorActual.casillaActual=tablero.encontrarCasilla(numeroCasillaRandom);
 		jugadorActual.casillaActual.etiquetaCasilla.add(jugadorActual.etiquetaImagen);
 		jugadorActual.casillaActual.etiquetaCasilla.repaint();
