@@ -178,6 +178,7 @@ public class Jugador {
 		if (casillaActual.estrellaEncima == true) {
 			comprarEstrella = true;
 			casillaActual.eliminarEstrella();
+			estrellasJugador+=1;
 		}
 	}
 	/**
