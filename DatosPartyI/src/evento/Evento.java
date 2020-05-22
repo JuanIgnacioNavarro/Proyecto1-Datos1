@@ -13,7 +13,7 @@ import jugador.Jugador;
 /**
  * Esta clase se usa como nodo de una pila, por eso uno de sus atributos 
  * es un Evento llamado next.
- * Además es capaz de ejecutar todos los eventos descritos en la descripción del proyecto
+ * Ademï¿½s es capaz de ejecutar todos los eventos descritos en la descripciï¿½n del proyecto
  * @author Juan Navarro
  */
 public class Evento {
@@ -27,13 +27,13 @@ public class Evento {
 		this.tipoEvento= tipoEvento;
 	}
 	/**
-	 * Corresponde al único método de los eventos, dado que en las instrucciones se
-	 * detallan varios eventos este método es capaz de ejecutar cualquiera 
-	 * dependiendo del tipo de evento que se definió al crear la pila
-	 * Este método llama a la respectiva acción de la pila 
-	 *No retorna ningpun objeto en específico, pero al usarse este método se
+	 * Corresponde al ï¿½nico mï¿½todo de los eventos, dado que en las instrucciones se
+	 * detallan varios eventos este mï¿½todo es capaz de ejecutar cualquiera 
+	 * dependiendo del tipo de evento que se definiï¿½ al crear la pila
+	 * Este mï¿½todo llama a la respectiva acciï¿½n de la pila 
+	 *No retorna ningpun objeto en especï¿½fico, pero al usarse este mï¿½todo se
 	 *va a ejecutar cualquiera de las siguientes acciones, cuando se crean los nodos se 
-	 *añade el tipo de evento
+	 *aï¿½ade el tipo de evento
 	 *1) Duelo: Se activa un minijuego, donde los jugadores son escogidos de manera aleatoria
 	 *se enfrentan en un minijuego 1 vs 1
 	 *2)Robar monedas: El jugador que obtiene el evento tiene derecho de robarle una cantidad 
@@ -48,7 +48,7 @@ public class Evento {
 	 */
 	public void ejecutarEvento(Jugador jugadorActual, Jugador[] listaJugadores, Tablero tablero) {
 		if (tipoEvento==1) {
-			JOptionPane.showMessageDialog(null, "Se ha activado el evento de minijuego, hay que añadir el contenido después", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Se ha activado el evento de minijuego, hay que aï¿½adir el contenido despuï¿½s", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (tipoEvento==2){
 			int randomInt;
@@ -77,11 +77,11 @@ public class Evento {
 		}
 		else if (tipoEvento==5){
 			jugadorActual.estrellasJugador+=2;
-			JOptionPane.showMessageDialog(null, "¡Wow! El "+jugadorActual.nombreJugador+ " se ha ganado 2 estrellas en el evento", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Wow!, " + jugadorActual.nombreJugador + " ha ganado 2 estrellas", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (tipoEvento==6){
 			jugadorActual.estrellasJugador+=5;
-			JOptionPane.showMessageDialog(null, "¡¡Mega Wow!! El "+jugadorActual.nombreJugador+ " se ha ganado 5 estrellas en el evento", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Mega Wow!!, "+jugadorActual.nombreJugador+ " ha ganado 5 estrellas", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (tipoEvento==7){
 			int randomInt;
@@ -110,8 +110,6 @@ public class Evento {
 		}
 	}
 	
-	
-	
 	private void robarMonedas(Jugador jugadorActual, Jugador jugadorRandom) {
 		int cantidadMonedas;
 		int cantidadMaxMonedas;
@@ -120,7 +118,7 @@ public class Evento {
 		cantidadMonedas= random.nextInt(cantidadMaxMonedas)+1;
 		jugadorRandom.monedasJugador-= cantidadMonedas;
 		jugadorActual.monedasJugador+=cantidadMonedas;
-		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " le ha robado "+cantidadMonedas+ " de monedas a "+ jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " ha robado " + cantidadMonedas + " monedas a " + jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 	}
 	private void regalarMonedas(Jugador jugadorActual, Jugador[] listaJugadores) {
 		int cantidadJugadores= Inicio.cantidadJugadores-1;
@@ -136,25 +134,25 @@ public class Evento {
 			listaJugadores[i].monedasJugador+= cantidadARegalar;}
 			i-=1;
 			}
-		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+" le ha regalado "+cantidadARegalar+" monedas a todos los jugadores", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador + " ha regalado " + cantidadARegalar + " monedas a todos los jugadores", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 	}
 	private void pierdeEstrella(Jugador jugadorActual, Jugador jugadorRandom) {
 		if (jugadorActual.estrellasJugador>0) {
 		jugadorActual.estrellasJugador-=1;
 		jugadorRandom.estrellasJugador+=1;
-		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " le ha regalado 1 estrella a "+ jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " ha regalado 1 estrella a " + jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "El "+jugadorActual.nombreJugador+ " activó el evento de regalar estrellas, pero no tiene estrellas", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador + " ha activado el evento de regalar estrellas, pero no tiene estrellas", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	private void robarEstrella(Jugador jugadorActual, Jugador jugadorRandom) {
 		if (jugadorRandom.estrellasJugador>0) {
 		jugadorActual.estrellasJugador+=1;
 		jugadorRandom.estrellasJugador-=1;
-		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " le ha robado una estrella al "+ jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " ha robado una estrella a " + jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 		}else {
-			JOptionPane.showMessageDialog(null, "El "+jugadorActual.nombreJugador+ " activó el evento de robar una estrella, pero el "+jugadorRandom.nombreJugador+" no tiene estrellas", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ "ha  activado el evento de robar una estrella, pero " + jugadorRandom.nombreJugador + " no tiene estrellas", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 		}	
 	}
 	private void teletransporte(Jugador jugadorActual, Tablero tablero) {
@@ -165,7 +163,7 @@ public class Evento {
 		jugadorActual.casillaActual.etiquetaCasilla.add(jugadorActual.etiquetaImagen);
 		jugadorActual.casillaActual.etiquetaCasilla.repaint();
 		Partida.panelPartida.repaint();
-		JOptionPane.showMessageDialog(null, "El "+jugadorActual.nombreJugador+ " ha sido teletransportado a otra casilla aleatoria", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " ha sido teletransportado a una casilla aleatoria", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 	
 	}
 	private void cambiarPosiciones(Jugador jugadorActual, Jugador jugadorRandom, Tablero tablero) {
@@ -181,6 +179,6 @@ public class Evento {
 		jugadorRandom.casillaActual.etiquetaCasilla.repaint();
 		
 		Partida.panelPartida.repaint();
-		JOptionPane.showMessageDialog(null, "El "+jugadorActual.nombreJugador+ " ha sido cambiado de lugar con el "+jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " ha cambiado de lugar con " + jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

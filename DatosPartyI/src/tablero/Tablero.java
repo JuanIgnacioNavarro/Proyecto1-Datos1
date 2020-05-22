@@ -83,7 +83,7 @@ public class Tablero {
 	}
 	
 	private void agregarCaminoPrincipal() {
-		posicionCasillaX = 240;
+		posicionCasillaX = 215;
 		posicionCasillaY = 635;
 		
 		nuevaCasilla("Azul", posicionCasillaX,posicionCasillaY);
