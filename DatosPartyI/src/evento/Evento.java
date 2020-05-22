@@ -1,10 +1,12 @@
 package evento;
 
 import java.util.Random;
+import tablero.Tablero;
 
 import javax.swing.JOptionPane;
 
 import juego.Inicio;
+import juego.Partida;
 import jugador.Jugador;
 
 public class Evento {
@@ -29,10 +31,9 @@ public class Evento {
 	 *8) Teletransporte
 	 *9)Cambio de lugares:
 	 */
-	public void ejecutarEvento(Jugador jugadorActual, Jugador[] listaJugadores) {
+	public void ejecutarEvento(Jugador jugadorActual, Jugador[] listaJugadores, Tablero tablero) {
 		if (tipoEvento==1) {
-			//Minijuego.activarMinijuego(); //Añadir el relleno de este tipo de Evento una vez que se añadan los minijuegos
-			System.out.println("Se ejecuta evento (Minijuego 1 vs 1): "+ tipoEvento);
+			JOptionPane.showMessageDialog(null, "Se ha activado el evento de minijuego, hay que añadir el contenido después", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (tipoEvento==2){
 			int randomInt;
@@ -79,12 +80,22 @@ public class Evento {
 			robarEstrella(jugadorActual, listaJugadores[randomInt]);
 		}
 		else if (tipoEvento==8){
-			System.out.println("Se ejecuta evento: "+ tipoEvento);
+			teletransporte(jugadorActual, tablero);
 		}
 		else if (tipoEvento==9){
-			System.out.println("Se ejecuta evento: "+ tipoEvento);
+			int randomInt;
+			while (true) {
+				Random random= new Random();
+				randomInt= random.nextInt(Inicio.cantidadJugadores);
+				if (jugadorActual.numeroJugador!=randomInt) {
+					break;
+				}
+			}
+			cambiarPosiciones(jugadorActual, listaJugadores[randomInt], tablero);
 		}
 	}
+	
+	
 	
 	private void robarMonedas(Jugador jugadorActual, Jugador jugadorRandom) {
 		int cantidadMonedas;
@@ -132,7 +143,33 @@ public class Evento {
 		JOptionPane.showMessageDialog(null, jugadorActual.nombreJugador+ " le ha robado una estrella al "+ jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 		}else {
 			JOptionPane.showMessageDialog(null, "El "+jugadorActual.nombreJugador+ " activó el evento de robar una estrella, pero el "+jugadorRandom.nombreJugador+" no tiene estrellas", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
-		}
+		}	
+	}
+	private void teletransporte(Jugador jugadorActual, Tablero tablero) {
+		int numeroCasillaRandom;
+		Random random= new Random();
+		numeroCasillaRandom= random.nextInt(67+1)+2;
+		System.out.println("El numeroCasillaRandom es "+ numeroCasillaRandom);
+		jugadorActual.casillaActual=tablero.encontrarCasilla(numeroCasillaRandom);
+		jugadorActual.casillaActual.etiquetaCasilla.add(jugadorActual.etiquetaImagen);
+		jugadorActual.casillaActual.etiquetaCasilla.repaint();
+		Partida.panelPartida.repaint();
+		JOptionPane.showMessageDialog(null, "El "+jugadorActual.nombreJugador+ " ha sido teletransportado a otra casilla aleatoria", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+	
+	}
+	private void cambiarPosiciones(Jugador jugadorActual, Jugador jugadorRandom, Tablero tablero) {
+		int numeroCasillaJugadorActual= jugadorActual.casillaActual.numeroCasilla;
+		int numeroCasillaJugadorRandom= jugadorRandom.casillaActual.numeroCasilla;
 		
+		jugadorActual.casillaActual= tablero.encontrarCasilla(numeroCasillaJugadorRandom);
+		jugadorActual.casillaActual.etiquetaCasilla.add(jugadorActual.etiquetaImagen);
+		jugadorActual.casillaActual.etiquetaCasilla.repaint();
+		
+		jugadorRandom.casillaActual= tablero.encontrarCasilla(numeroCasillaJugadorActual);
+		jugadorRandom.casillaActual.etiquetaCasilla.add(jugadorRandom.etiquetaImagen);
+		jugadorRandom.casillaActual.etiquetaCasilla.repaint();
+		
+		Partida.panelPartida.repaint();
+		JOptionPane.showMessageDialog(null, "El "+jugadorActual.nombreJugador+ " ha sido cambiado de lugar con el "+jugadorRandom.nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
 	}
 }

@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -52,7 +53,6 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private int numeroCasillaAlazar;
 	private Casilla casillaAlazar;
 	private Evento evento;
-	//private Evento evento;
 	public PilaEventos pilaEventos= new PilaEventos();
 	
 	public Partida() {
@@ -179,8 +179,10 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 
 	private void mezclarDados() {
 		numeroDadoUno = (int) Math.floor(Math.random()*6+1);
-		numeroDadoDos = (int) Math.floor(Math.random()*6+1);
+		numeroDadoDos = (int) Math.floor(Math.random()*6+1);     
 		numeroDados = numeroDadoUno + numeroDadoDos;
+		
+
 	}
 	
 	private void agregarEstrella() {
@@ -195,11 +197,10 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 
 	private void comprobarEvento() {
 		if (eventoActivado == true) {
-			System.out.println("Ya se realiz� el seek()");
 			eventoActivado = false;
 
 //			pilaEventos.imprimirPila();
-			pilaEventos.seek(jugadorActual, listaJugadores);
+			pilaEventos.seek(jugadorActual, listaJugadores, tablero);
 			pilaEventos.pop();
 		}
 	}
