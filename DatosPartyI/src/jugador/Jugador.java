@@ -9,7 +9,14 @@ import javax.swing.JLabel;
 import juego.Bienvenida;
 import juego.Partida;
 import tablero.Casilla;
-
+/**
+ * Esta clase hace objetos llamados jugadores que representan a cada uno de los 
+ * usuarios que deseen jugar el juego.
+ * Estos pueden almacenar la información relacionada a puntajes del juego y 
+ * controlar los movimeintos de cada jugador en el tablero.
+ * @author Juan Navarro
+ *
+ */
 public class Jugador {
 //    __Atributos de las características más importantes de cada jugador
 //___/
@@ -35,6 +42,11 @@ public class Jugador {
 	protected int correccionCoordenadaX, correccionCoordenadaY;
 	public Casilla casillaActual; 
 	
+	/**
+	 * Contructor de la clase, define sus atributos iniciales y coloca su imagen en la casilla inicial
+	 * @param numeroJugador : int corresponde a un identificador de cada jugador, así como el nombre de cada uno
+	 * @param casillaInicial: Casilla es la posición en la que inicia el juego así que entre como parámetro para que el jugador se pueda ubicar ahí
+	 */
 	public Jugador(int numeroJugador, Casilla casillaInicial) {
 		casillaActual = casillaInicial;
 		this.numeroJugador = numeroJugador;
@@ -108,10 +120,10 @@ public class Jugador {
 	/**
 	 * Este método permite que el jugador se mueva a lo largo del tablero dependiendo del 
 	 * número obtenido en los dados.
-	 * Para poder ubicar a el jugados en las casillas correspondientes hay un atributo del objeto
+	 * Para poder ubicar a el jugador en las casillas correspondientes hay un atributo del objeto
 	 * llamado casillaActual, el cual representa a la casilla en la cual se encuentra cada jugador
-	 * todas las casilla poseen el atributo de su posición entonces se copia y se le suma un poco
-	 * a la posición para eitar que los jugadores se superpongan.
+	 * en cada instante, todas las casilla poseen el atributo de su posición entonces se copia y se le suma un poco
+	 * a la posición para evitar que los jugadores se superpongan.
 	 * 
 	 *  Este método considera los distintos caminos que podría tomar el jugador dependiendo de la 
 	 *  posición por la cuál se empiece a mover.
@@ -173,6 +185,8 @@ public class Jugador {
 		
 	/**
 	 * Este método verifica si hay una estrella en cada casilla que recorre
+	 * para poder habilitar la tienda de estrellas por medio de una variable
+	 * estática llamada comprarEstrella
 	 */
 	public void verificarEstrella() {
 		if (casillaActual.estrellaEncima == true) {
@@ -186,7 +200,7 @@ public class Jugador {
 	 * Verdes: te dan monedas
 	 * Rojas: te quitan monedas
 	 * Azules y moradas: no se ejecuta nada
-	 * morada: no se ejecuta nada, solo cambia de mapa
+	 * morada: no se ejecuta nada, solo cambia de camino
 	 */
 	public void verificarTipoCasilla() {
 		if (casillaActual.tipoCasilla.equals("Verde")) {
@@ -202,6 +216,11 @@ public class Jugador {
 		}
 		
 	}
+	/**
+	 * Este método ayuda a refacatorizar el método de moverJugador()
+	 * en este se ejecuta un movmiento y se detiene el hilo actual
+	 * pare apreciar cómo se mueve el jugador.
+	 */
 	private void cambiarPosicionJugador()  {
 		etiquetaImagen.setLocation(correccionCoordenadaX, correccionCoordenadaY);
 		if (casillaActual.tipoCasilla.equals("Morada")) {

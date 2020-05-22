@@ -9,27 +9,42 @@ import juego.Inicio;
 import juego.Partida;
 import jugador.Jugador;
 
+
+/**
+ * Esta clase se usa como nodo de una pila, por eso uno de sus atributos 
+ * es un Evento llamado next.
+ * Además es capaz de ejecutar todos los eventos descritos en la descripción del proyecto
+ * @author Juan Navarro
+ */
 public class Evento {
 	public Evento next;
 	public int tipoEvento;
-	
+	/**
+	 * Constructor de la clase eventos, solo se usa para generar la pila
+	 * @param tipoEvento : Integer
+	 */
 	public Evento(int tipoEvento) {
 		this.tipoEvento= tipoEvento;
 	}
 	/**
+	 * Corresponde al único método de los eventos, dado que en las instrucciones se
+	 * detallan varios eventos este método es capaz de ejecutar cualquiera 
+	 * dependiendo del tipo de evento que se definió al crear la pila
 	 * Este método llama a la respectiva acción de la pila 
-	 *Las diferentes acicones según su número son: 
+	 *No retorna ningpun objeto en específico, pero al usarse este método se
+	 *va a ejecutar cualquiera de las siguientes acciones, cuando se crean los nodos se 
+	 *añade el tipo de evento
 	 *1) Duelo: Se activa un minijuego, donde los jugadores son escogidos de manera aleatoria
 	 *se enfrentan en un minijuego 1 vs 1
 	 *2)Robar monedas: El jugador que obtiene el evento tiene derecho de robarle una cantidad 
 	 *de monadas aleatorias a otro jugador que escoja
 	 *3) Regalar monedas: El jugador que activa el evento pierde una cantidad aleatoria de monedas, las cuales 
-	 *4) Perder una estrella
-	 *5)Ganar 2 estrellas: 
-	 *6) Ganar 5 estrellas:
-	 *7)Robar estrella:
-	 *8) Teletransporte
-	 *9)Cambio de lugares:
+	 *4) Perder una estrella: el jugador actual pierde una estrella
+	 *5)Ganar 2 estrellas: El jugador actual gana una estrella
+	 *6) Ganar 5 estrellas: El jugador actual gana 5 estrellas
+	 *7)Robar estrella: el jugador actual roba una estrella
+	 *8) Teletransporte: el jugador se va a teletransportar a culauquier otro lugar del tablero
+	 *9)Cambio de lugares:el jugador va a cambiar de lugar con otro jugador aleatorio
 	 */
 	public void ejecutarEvento(Jugador jugadorActual, Jugador[] listaJugadores, Tablero tablero) {
 		if (tipoEvento==1) {
