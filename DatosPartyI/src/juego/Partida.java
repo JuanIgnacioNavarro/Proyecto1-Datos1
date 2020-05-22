@@ -176,22 +176,22 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 			etiquetaFondoInfoJugadorActual.add(etiquetaEstrella);
 			
 			etiquetaFondoNarrador=new JLabel ();
-			etiquetaFondoNarrador.setBounds(760, 630, 210, 80);
+			etiquetaFondoNarrador.setBounds(735, 620, 250, 80);
 			etiquetaFondoNarrador.setOpaque(true);
 			etiquetaFondoNarrador.setBackground(colorResalte);
 			panelPartida.add(etiquetaFondoNarrador);
 			
 			etiquetaRondas= new JLabel();
-			etiquetaRondas.setBounds(0, 0, etiquetaFondoNarrador.getWidth(), 40);
+			etiquetaRondas.setBounds(0, 0, etiquetaFondoNarrador.getWidth(), 35);
 			etiquetaRondas.setHorizontalAlignment(SwingConstants.CENTER);
 			etiquetaRondas.setFont(fuenteTexto);
 			etiquetaRondas.setForeground(Color.white);
 			etiquetaFondoNarrador.add(etiquetaRondas);
 			
 			etiquetaNarrador= new JLabel ();
-			etiquetaNarrador.setBounds(0, 40, etiquetaFondoNarrador.getWidth(), 40);
+			etiquetaNarrador.setBounds(etiquetaFondoNarrador.getWidth()/4, 40, 3*etiquetaFondoNarrador.getWidth()/4, 35);
 			etiquetaNarrador.setHorizontalAlignment(SwingConstants.CENTER);
-			etiquetaNarrador.setFont(fuenteTexto);
+			etiquetaNarrador.setFont(new Font ("Comic Sans MS", 1, 14));
 			etiquetaNarrador.setForeground(Color.yellow);
 			etiquetaFondoNarrador.add(etiquetaNarrador);
 			etiquetaNarrador.setText("¡"+ jugadorActual.nombreJugador+"\n tirá los dados!");

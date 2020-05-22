@@ -176,12 +176,8 @@ public class Jugador {
 	 */
 	public void verificarEstrella() {
 		if (casillaActual.estrellaEncima == true) {
-			if (monedasJugador>500) {
 			comprarEstrella = true;
-			casillaActual.eliminarEstrella();
-			estrellasJugador+=1;
-			monedasJugador-=500;
-			}
+			casillaActual.eliminarEstrella();	
 		}
 	}
 	/**
