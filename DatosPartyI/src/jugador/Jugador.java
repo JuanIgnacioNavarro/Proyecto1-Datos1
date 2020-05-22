@@ -14,7 +14,7 @@ public class Jugador {
 //    __Atributos de las características más importantes de cada jugador
 //___/
 	public String nombreJugador;
-	public int monedasJugador = 400;
+	public int monedasJugador = 1000;
 	public int estrellasJugador = 2;
 	public int numeroJugador;
 	int guardadoCorreccionX, guardadoCorreccionY;
@@ -176,9 +176,12 @@ public class Jugador {
 	 */
 	public void verificarEstrella() {
 		if (casillaActual.estrellaEncima == true) {
+			if (monedasJugador>500) {
 			comprarEstrella = true;
 			casillaActual.eliminarEstrella();
 			estrellasJugador+=1;
+			monedasJugador-=500;
+			}
 		}
 	}
 	/**
