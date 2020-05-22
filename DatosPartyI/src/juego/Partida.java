@@ -223,7 +223,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	}
 	
 	private void agregarEstrella() {
-		numeroCasillaAlazar = (int) Math.floor(Math.random()*69 + 3);
+		numeroCasillaAlazar = (int) Math.floor(Math.random()*66 + 3);
 		casillaAlazar = tablero.encontrarCasilla(numeroCasillaAlazar);
 		casillaAlazar.ponerEstrella();
 	}
