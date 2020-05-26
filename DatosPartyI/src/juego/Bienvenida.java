@@ -7,47 +7,45 @@ import java.awt.event.*;
 public class Bienvenida extends JFrame {
 	public static Color colorVentana = new Color(94, 94, 94);
 	private JPanel panelBienvenida;
-	private JButton botonInicio;
-	private JLabel etiquetaBienvenida;
+	private JButton b1;
+	private JLabel l1;
 	public Bienvenida() {
-		setVisible(true);
 		setTitle("Bienvenido a Datos Party I");
-		setBounds(0,0, 800, 700);
+		setSize(646,700);
 		setLocationRelativeTo(null);
-		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		getContentPane().setBackground(colorVentana);
+		setVisible(true);
 
 		setLayout(new BorderLayout());
+		setContentPane(new JLabel(new ImageIcon("Imagenes/Fondo.jpg")));
 		setLayout(new FlowLayout());
-
+		
+		agregarPanel();
 		agregarEtiqueta();
 		agregarBoton();
-	}
 
+	}
+	
+	private void agregarPanel() {
+		panelBienvenida = new JPanel();
+		this.getContentPane().add(panelBienvenida);
+//		panelBienvenida.setLayout(null);
+		panelBienvenida.setBackground(colorVentana);
+		
+	}
 	private void agregarEtiqueta() {
-		etiquetaBienvenida = new JLabel("DATOS PARTY I");
-		getContentPane().add(etiquetaBienvenida);
-		etiquetaBienvenida.setBounds(0, 0, 500, 400);
-		etiquetaBienvenida.setFont(new Font("Comic Sans MS", 1, 25));
-		etiquetaBienvenida.setIcon(new ImageIcon("DatosPartyI/Imagenes/Estrella.png"));
+		l1 = new JLabel("Here is a button");
+		panelBienvenida.add(l1);
+		
 	}
-
 	private void agregarBoton() {
-		botonInicio = new JButton("PLAY");
-		getContentPane().add(botonInicio).setBounds(250, 300, 40, 20);
-		botonInicio.setFont(new Font("Comic Sans MS", 1, 25));
-		botonInicio.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-			}
-		});
-	}
+		b1 = new JButton("I am a button");
+		panelBienvenida.add(b1);
 
+	}
+	
 	public static void main(String[] args){
 		Bienvenida b = new Bienvenida();
 	}
-
-
+	
 }
