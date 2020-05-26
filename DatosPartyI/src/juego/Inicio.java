@@ -49,7 +49,7 @@ public class Inicio extends JFrame {
 		getContentPane().add(etiquetaDatos);
 		etiquetaDatos.setBounds(0, 200, 200, 100);
 		etiquetaDatos.setFont(new Font("Comic Sans MS", 1, 15));
-		
+
 		 */
 	}
 
@@ -73,9 +73,4 @@ public class Inicio extends JFrame {
 	public static void  main (String[] args){
 		Inicio inicio = new Inicio();
 	}
-
-
-
-
-
 }
