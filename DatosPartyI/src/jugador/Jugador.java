@@ -25,6 +25,7 @@ public class Jugador {
 	public int estrellasJugador = 2;
 	public int numeroJugador;
 	int guardadoCorreccionX, guardadoCorreccionY;
+	public int puntajeMinijuego;
 	
 //	  __Atributos que controlan los movimientos que debe realizar el jugador depesndiendo de su ubicación actual
 //___/

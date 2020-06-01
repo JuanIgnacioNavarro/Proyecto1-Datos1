@@ -28,7 +28,7 @@ public class Bienvenida extends JFrame {
 		getContentPane().add(etiquetaBienvenida);
 		etiquetaBienvenida.setBounds(0, 0, 500, 400);
 		etiquetaBienvenida.setFont(new Font("Comic Sans MS", 1, 25));
-		etiquetaBienvenida.setIcon(new ImageIcon("DatosPartyI/Imagenes/Estrella.png"));
+		etiquetaBienvenida.setIcon(new ImageIcon("Imagenes/Estrella.png"));
 	}
 	private void agregarBoton() {
 			botonInicio = new JButton("PLAY");

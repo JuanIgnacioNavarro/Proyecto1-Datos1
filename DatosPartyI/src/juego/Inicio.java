@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Inicio extends JFrame {
-	public static int cantidadJugadores;
+	public static int cantidadJugadores=4;
 	public static int cantidadRondas;
 	private JButton botonJugar;
 	private JLabel etiquetaCantidadJugadores;

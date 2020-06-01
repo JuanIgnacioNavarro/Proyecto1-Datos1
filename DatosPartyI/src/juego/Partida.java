@@ -1,6 +1,7 @@
 package juego;
 
 import java.awt.Color;
+import minijuego.*;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -229,14 +230,13 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	}
 
 	private void activarMinijuego() {
-
+		Minijuego minijuego= new Minijuego(listaJugadores);
 	}
 
 	private void comprobarEvento() {
 		if (eventoActivado == true) {
 			eventoActivado = false;
 
-//			pilaEventos.imprimirPila();
 			pilaEventos.seek(jugadorActual, listaJugadores, tablero);
 			pilaEventos.pop();
 		}
@@ -272,8 +272,6 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		etiquetaSilbato.setVisible(false);
 
 	    new Thread(this).start();
-
-	    comprobarEventoDuelo();		
 	    
 	}
 
@@ -286,7 +284,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 				finPartida();
 			}
 			else {
-				activarMinijuego();
+
 				agregarEstrella();
 			}
 		}
@@ -319,7 +317,13 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 			int numeroJugadorSiguiente = jugadorActual.numeroJugador + 2;
 			etiquetaNarrador.setText("Jugador " + numeroJugadorSiguiente + " tira los dados!");
 		}
-
+		
+		comprobarEventoDuelo();		
+	    if (jugadorActual.numeroJugador==Inicio.cantidadJugadores-1) {
+	    	activarMinijuego();
+	    }
+		
+		
 		etiquetaNarrador.setVisible(true);
 		etiquetaSilbato.setVisible(true);
 
@@ -327,6 +331,8 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		//Pruebas con el minijuego esta linea de abajo se debe borrar
+		activarMinijuego();
 		if (e.getSource() == etiquetaDados) {
 			if (movimientoJugador == false) {
 				try {
