@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import juego.Bienvenida;
@@ -25,10 +26,17 @@ public class Minijuego extends JFrame implements MouseListener{
 	protected JPanel panelMinijuegos;
 	protected JLabel listaEtiquetasInfo[];
 	protected JLabel listaEtiquetasPuntaje[];
+	protected JLabel etiquetaTituloMinijuego;
+	protected  JLabel tituloMinijuego;
+	protected JLabel descripcionMinijuego;
 	private Font fuenteTexto = new Font("Comic Sans MS", 0, 18);
+	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 30);
 	protected JLabel botonPlay;
 	protected JLabel narrador;
 	private ImageIcon imagenPlay= new ImageIcon("Imagenes/botonPlay.png");
+	protected boolean enJuego=false;
+	private Color colorNegativo=new Color(222,66,80);
+	private Color colorPositivo= new Color(180, 225, 120);
 	
 	public Minijuego(Jugador listaJugadores[]) {
 		this.listaJugadores= listaJugadores;
@@ -47,6 +55,7 @@ public class Minijuego extends JFrame implements MouseListener{
 		agregarMarcador();
 		this.jugadorActual=this.listaJugadores[0];
 		agregarBoton();
+		componentesVentenaHeredada();//componentes de inicio del juego
 	}
 	
 	private void agregarPanel () {
@@ -123,19 +132,54 @@ public class Minijuego extends JFrame implements MouseListener{
 			panelMinijuegos.repaint();
 		}
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+	
+	public void iniciarMinijuego() {
+		//Este método depende de la herencia entonces se dejará paracada minijuego
+	}
+	
+	protected void componentesVentenaHeredada() {
+		//en 283 y lohago de 500, alto 150 y que mida 400
+		etiquetaTituloMinijuego= new JLabel();
+		etiquetaTituloMinijuego.setBounds(283, 150, 500, 200);
+		etiquetaTituloMinijuego.setOpaque(true);
+		etiquetaTituloMinijuego.setBackground(new Color(66, 66, 66));
+		panelMinijuegos.add(etiquetaTituloMinijuego);
+		
+		tituloMinijuego= new JLabel();
+		tituloMinijuego.setSize(etiquetaTituloMinijuego.getWidth(), etiquetaTituloMinijuego.getHeight()/2);;
+		tituloMinijuego.setLocation(0, 0);
+		tituloMinijuego.setHorizontalAlignment(SwingConstants.CENTER);
+		tituloMinijuego.setForeground(Color.blue);
+		tituloMinijuego.setFont(fuenteTitulo);
+//		tituloMinijuego.setText("Titulo del minijuego");
+		etiquetaTituloMinijuego.add(tituloMinijuego);
+		
+		descripcionMinijuego= new JLabel();
+		descripcionMinijuego.setSize(etiquetaTituloMinijuego.getWidth(), etiquetaTituloMinijuego.getHeight()/3);
+		descripcionMinijuego.setLocation(0, etiquetaTituloMinijuego.getHeight()/2);
+		descripcionMinijuego.setHorizontalAlignment(SwingConstants.CENTER);
+		descripcionMinijuego.setForeground(Color.white);
+		descripcionMinijuego.setFont(fuenteTexto);
+//		descripcionMinijuego.setText("Esta es una muy buena descripcion del minijuego");
+		etiquetaTituloMinijuego.add(descripcionMinijuego);
 		
 	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource()==botonPlay) {
+			botonPlay.setVisible(false);
+			System.out.println("Iniciar Minijuego para "+jugadorActual.nombreJugador);
+		}
+		iniciarMinijuego();
+	}
+		
+	
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
-
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -144,8 +188,7 @@ public class Minijuego extends JFrame implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	
 	}
 
 	@Override

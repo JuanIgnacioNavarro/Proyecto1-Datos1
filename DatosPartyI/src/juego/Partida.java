@@ -230,7 +230,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	}
 
 	private void activarMinijuego() {
-		Minijuego minijuego= new Minijuego(listaJugadores);
+		Minijuego minijuego= new MinijuegoUno(listaJugadores);
 	}
 
 	private void comprobarEvento() {
