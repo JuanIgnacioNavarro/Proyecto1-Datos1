@@ -42,8 +42,8 @@ public class Minijuego extends JFrame implements MouseListener{
 	private ImageIcon imagenPlay= new ImageIcon("Imagenes/botonPlay.png");
 //    ____	
 //___/  Atributos de variables usadas varias veces en la interfaz gráficas
-	private Font fuenteTexto = new Font("Comic Sans MS", 0, 18);
-	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 30);
+	protected Font fuenteTexto = new Font("Comic Sans MS", 0, 18);
+	protected Font fuenteTitulo = new Font("Comic Sans MS", 1, 30);
 
 	/**
 	 * Correponde a un constructor que actúa como padre para todos los minijuegos del proyecto
@@ -166,7 +166,10 @@ public class Minijuego extends JFrame implements MouseListener{
 	 */
 	public void iniciarMinijuego() {
 		etiquetaTituloMinijuego.setVisible(false);
+		narrador.setVisible(false);
+		System.out.println("El narrador no se ve");
 		runMinijuego(jugadorActual);
+		
 		
 		try {
 		jugadorActual= listaJugadores[contadorRondas+1];
@@ -176,6 +179,11 @@ public class Minijuego extends JFrame implements MouseListener{
 			mostrarResultados();
 		}
 		else if (contadorRondas==listaJugadores.length+1) {
+			int i=0;
+			while (i<listaJugadores.length) {
+				listaJugadores[i].puntajeMinijuego=0;
+				i+=1;
+			}
 			this.setVisible(false);
 		}
 		contadorRondas+=1;
