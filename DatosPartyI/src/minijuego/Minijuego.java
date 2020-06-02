@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import juego.Partida;
 import java.awt.event.MouseListener;
+import jugador.Jugador;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -19,10 +20,13 @@ import jugador.Jugador;
 
 
 public class Minijuego extends JFrame implements MouseListener{
+//    ____
+//___/  Atributos de control de la clase minijuego e hijas
 	protected Jugador listaJugadores[]; 
 	protected Jugador jugadorActual;
 	protected int contadorRondas=0;
-//    _	
+	protected boolean enJuego=false;
+//    ____
 //___/  Atributos de la interfaz gráfica
 	protected JPanel panelMinijuegos;
 	protected JLabel listaEtiquetasInfo[];
@@ -33,15 +37,21 @@ public class Minijuego extends JFrame implements MouseListener{
 	protected JLabel etiquetaTituloMinijuego;
 	protected  JLabel tituloMinijuego;
 	protected JLabel descripcionMinijuego;
-	private Font fuenteTexto = new Font("Comic Sans MS", 0, 18);
-	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 30);
 	protected JLabel botonPlay;
 	protected JLabel narrador;
 	private ImageIcon imagenPlay= new ImageIcon("Imagenes/botonPlay.png");
-	protected boolean enJuego=false;
-	private Color colorNegativo=new Color(222,66,80);
-	private Color colorPositivo= new Color(180, 225, 120);
-	
+//    ____	
+//___/  Atributos de variables usadas varias veces en la interfaz gráficas
+	private Font fuenteTexto = new Font("Comic Sans MS", 0, 18);
+	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 30);
+
+	/**
+	 * Correponde a un constructor que actúa como padre para todos los minijuegos del proyecto
+	 * Se adapta a la cantidad de jugadores (de 2 a 4) y genera toda la interfaz gráfica, también controla
+	 * el orden de las instrucciones ya que cada jugador juega por separado.
+	 * 
+	 * @param listaJugadores: una lista de los jugadores que participan en este minijuego
+	 */
 	public Minijuego(Jugador listaJugadores[]) {
 		this.listaJugadores= listaJugadores;
 		setTitle("Minijuego");
@@ -49,17 +59,16 @@ public class Minijuego extends JFrame implements MouseListener{
 		setSize(900,700);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //Esta instrucción es para que el proyecto no se caiga
 		agregarComponentesVentana();
 	}
 	
-	private void agregarComponentesVentana() {
-		agregarPanel ();
-		System.out.println(this.listaJugadores[0].nombreJugador);
-		agregarMarcador();
+	private void agregarComponentesVentana() { //Este método llama a más métodos, esto con el objetivo de ordenar el código
+		agregarPanel ();//Panel de la interfaz
+		agregarMarcador();//Un marcador que lleva los puntajes del minijuego al tanto
 		this.jugadorActual=this.listaJugadores[0];
-		agregarBoton();
-		componentesVentenaHeredada();//componentes de inicio del juego
+		agregarBoton();//Este botón le permite empezar el juego a cada jugador cuando quiera
+		componentesVentenaHeredada();//Estos componentes se editan en cada clase hija
 	}
 	
 	private void agregarPanel () {
@@ -68,11 +77,15 @@ public class Minijuego extends JFrame implements MouseListener{
 		panelMinijuegos.setLayout(null);
 		panelMinijuegos.setBackground(Bienvenida.colorVentana);
 	}
+	
+	/**
+	 * Este método añade los marcadores de cada jugador, donde indica el nombre y el puntaje
+	 */
 	private void agregarMarcador() {
 		listaEtiquetasInfo= new JLabel[listaJugadores.length];
 		listaEtiquetasPuntaje= new JLabel[listaJugadores.length];
 		int i=0;
-		while (i<listaJugadores.length) {
+		while (i<listaJugadores.length) { //Como el minijuego se debe adaptar a la cantidad de jugadores se debe añadir cada marcador con un while
 			listaEtiquetasInfo[i]= new JLabel();
 			listaEtiquetasInfo[i].setBounds(15, 130*i+20, 150, 120);
 			listaEtiquetasInfo[i].setOpaque(true);
@@ -98,16 +111,13 @@ public class Minijuego extends JFrame implements MouseListener{
 			listaEtiquetasInfo[i].add(etiquetaNombreJugador);
 	
 			panelMinijuegos.repaint();
-			
-			//Prueba del repaint 
-//			listaJugadores[i].puntajeMinijuego+=2;
-//			listaEtiquetasPuntaje[i].setText("Puntaje: "+ listaJugadores[i].puntajeMinijuego);
-//			panelMinijuegos.repaint();
-			//Esto Funciona
-			
 			i+=1;
 		}
 	}
+	/**
+	 * Este método añade un botón que permite controlar los timepos del minijuego, también incluye un narrador
+	 * El narrador le indica a los usuarios loque deben de hacer
+	 */
 	private void agregarBoton() {
 		botonPlay= new JLabel();
 		botonPlay.setSize(80, 80);
@@ -128,6 +138,10 @@ public class Minijuego extends JFrame implements MouseListener{
 		
 	}
 	
+	/**
+	 * La información en los marcadores y en el narador está cambiando constantemente (depués de cada turno hay un puntaje
+	 * diferente para  el jugador del turno y el narrador muestra otra indicación)
+	 */
 	public void actualizarDatosMarcador() {
 		int i=0;
 		while (i<listaEtiquetasInfo.length) {
@@ -137,15 +151,22 @@ public class Minijuego extends JFrame implements MouseListener{
 		if (contadorRondas==listaJugadores.length-1) {
 			narrador.setText("Ver resultados");
 		}
+		else if (contadorRondas==listaJugadores.length) {
+			narrador.setText("Continuar");
+		}
 		else {
 			narrador.setText("Turno de "+ jugadorActual.nombreJugador);
 		}
 		panelMinijuegos.repaint();
 	}
-	
+	/**
+	 * Este método controla el turno de cada jugador, además se adapta con cada clase hija
+	 * actualiza los datos después de que cada jugador haya terminado su ronda y llama a 
+	 * mostrar los resultados si el juego terminó.
+	 */
 	public void iniciarMinijuego() {
 		etiquetaTituloMinijuego.setVisible(false);
-		//Aquí se realizan todas las acciones de solo una ronda del minijuego!
+		runMinijuego(jugadorActual);
 		
 		try {
 		jugadorActual= listaJugadores[contadorRondas+1];
@@ -154,10 +175,21 @@ public class Minijuego extends JFrame implements MouseListener{
 		if (contadorRondas==listaJugadores.length) {
 			mostrarResultados();
 		}
+		else if (contadorRondas==listaJugadores.length+1) {
+			this.setVisible(false);
+		}
 		contadorRondas+=1;
 		botonPlay.setVisible(true);
 	}
 	
+	public void runMinijuego(Jugador jugador) {
+		//Este es el método que perimte hacer el override de la herencia
+	}
+	
+	/**
+	 * Este método muestra con distintos JLabel los reusltados del minijuego, primero ordena la lista según 
+	 * el puntaje de cada jugador y luego añade los resultados a la interfaz
+	 */
 	public void mostrarResultados() {
 		tituloResultados= new JLabel();
 		tituloResultados.setBounds(283, 50, 500, 70);
@@ -167,11 +199,15 @@ public class Minijuego extends JFrame implements MouseListener{
 		tituloResultados.setText("Resultados");
 		panelMinijuegos.add(tituloResultados);
 		ordenarResultados();
-		//Escondiendo los JLabel de previa del juego
-		etiquetaTituloMinijuego.setVisible(false);
+		etiquetaTituloMinijuego.setVisible(false); //Escondiendo los JLabel de previa del juego
+		int cantidadEmpates=0;
 		int i=0;
 		listaEtiquetasResultados= new JLabel[listaJugadores.length];
 		informacionResultados= new JLabel[listaJugadores.length];
+		
+		//En este while se añaden los JLabel de los resultados, se define el texto de cada uno considerando empates 
+		//También se añade la cantidad de monedas que se ganan a cada juagdor
+		//Está un poco desordenado, funciona para todos los casos así que no le pongan tanta atención
 		while (i<listaJugadores.length) {
 			System.out.println("Añadiendo las etiquetas de resultados ");
 			listaEtiquetasResultados[i]= new JLabel();
@@ -186,7 +222,24 @@ public class Minijuego extends JFrame implements MouseListener{
 			informacionResultados[i].setFont(fuenteTexto);
 			informacionResultados[i].setForeground(Color.white);
 			informacionResultados[i].setHorizontalAlignment(SwingConstants.CENTER);
-			informacionResultados[i].setText((i+1)+") "+listaJugadores[listaJugadores.length-1-i].nombreJugador+" gana "+(listaJugadores.length+1-i)*100+" monedas!");
+			//En esta serie de condicionales considera los posibles empates de los jugadores y añade las monedas a cada uno
+			if (i==0) {
+				listaJugadores[listaJugadores.length-1-i].textoResultados= " gana "+(listaJugadores.length+1-i)*100+" monedas!";
+				informacionResultados[i].setText((i+1)+") "+listaJugadores[listaJugadores.length-1-i].nombreJugador.concat(listaJugadores[listaJugadores.length-1-i].textoResultados));
+				listaJugadores[listaJugadores.length-1-i].monedasJugador+=(listaJugadores.length+1-i)*100; //Añade monedas aljugador
+			}
+			else if (listaJugadores[listaJugadores.length-1-i].puntajeMinijuego==listaJugadores[listaJugadores.length-i].puntajeMinijuego){
+				listaJugadores[listaJugadores.length-1-i].textoResultados=listaJugadores[listaJugadores.length-i].textoResultados;
+				informacionResultados[i].setText((i+1)+") "+listaJugadores[listaJugadores.length-1-i].nombreJugador.concat(listaJugadores[listaJugadores.length-1-i].textoResultados));
+				cantidadEmpates+=1;
+				listaJugadores[listaJugadores.length-1-i].monedasJugador+=(listaJugadores.length+1-i+cantidadEmpates)*100;
+			}
+			else {
+				cantidadEmpates=0;
+				listaJugadores[listaJugadores.length-1-i].textoResultados= " gana "+(listaJugadores.length+1-i)*100+" monedas!";
+				informacionResultados[i].setText((i+1)+") "+listaJugadores[listaJugadores.length-1-i].nombreJugador.concat(listaJugadores[listaJugadores.length-1-i].textoResultados));
+				listaJugadores[listaJugadores.length-1-i].monedasJugador+=(listaJugadores.length+1-i)*100; //Añade monedas aljugador
+			}
 			listaEtiquetasResultados[i].add(informacionResultados[i]);
 			
 			panelMinijuegos.repaint();
@@ -194,7 +247,11 @@ public class Minijuego extends JFrame implements MouseListener{
 		}
 	}
 	
-	public void ordenarResultados() { //Se ordenan los resultados según el puntaje 
+	/**
+	 * Corresponde un Selction Sort que ordena la lista de jugadores según su puntaje
+	 * Esto facilita mostrar los resultados
+	 */
+	public void ordenarResultados() { 
 		int n= listaJugadores.length;
 		for (int i=0; i<n-1; i++) {
 			int minIndex=i;
@@ -210,7 +267,6 @@ public class Minijuego extends JFrame implements MouseListener{
 	}
 	
 	protected void componentesVentenaHeredada() {
-		//en 283 y lohago de 500, alto 150 y que mida 400
 		etiquetaTituloMinijuego= new JLabel();
 		etiquetaTituloMinijuego.setBounds(263, 150, 540, 200);
 		etiquetaTituloMinijuego.setOpaque(true);
@@ -223,7 +279,6 @@ public class Minijuego extends JFrame implements MouseListener{
 		tituloMinijuego.setHorizontalAlignment(SwingConstants.CENTER);
 		tituloMinijuego.setForeground(Color.blue);
 		tituloMinijuego.setFont(fuenteTitulo);
-//		tituloMinijuego.setText("Titulo del minijuego");
 		etiquetaTituloMinijuego.add(tituloMinijuego);
 		
 		descripcionMinijuego= new JLabel();
@@ -232,7 +287,6 @@ public class Minijuego extends JFrame implements MouseListener{
 		descripcionMinijuego.setHorizontalAlignment(SwingConstants.CENTER);
 		descripcionMinijuego.setForeground(Color.white);
 		descripcionMinijuego.setFont(fuenteTexto);
-//		descripcionMinijuego.setText("Esta es una muy buena descripcion del minijuego");
 		etiquetaTituloMinijuego.add(descripcionMinijuego);
 		
 	}
@@ -248,8 +302,10 @@ public class Minijuego extends JFrame implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -258,7 +314,8 @@ public class Minijuego extends JFrame implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-	
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

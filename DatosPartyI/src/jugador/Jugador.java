@@ -26,7 +26,7 @@ public class Jugador {
 	public int numeroJugador;
 	int guardadoCorreccionX, guardadoCorreccionY;
 	public int puntajeMinijuego;
-	
+	public String textoResultados;
 //	  __Atributos que controlan los movimientos que debe realizar el jugador depesndiendo de su ubicación actual
 //___/
 	private boolean direccionInversa;
