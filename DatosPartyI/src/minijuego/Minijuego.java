@@ -21,11 +21,15 @@ import jugador.Jugador;
 public class Minijuego extends JFrame implements MouseListener{
 	protected Jugador listaJugadores[]; 
 	protected Jugador jugadorActual;
+	protected int contadorRondas=0;
 //    _	
 //___/  Atributos de la interfaz gráfica
 	protected JPanel panelMinijuegos;
 	protected JLabel listaEtiquetasInfo[];
 	protected JLabel listaEtiquetasPuntaje[];
+	protected JLabel listaEtiquetasResultados[];
+	protected JLabel informacionResultados[];
+	protected JLabel tituloResultados;
 	protected JLabel etiquetaTituloMinijuego;
 	protected  JLabel tituloMinijuego;
 	protected JLabel descripcionMinijuego;
@@ -127,20 +131,88 @@ public class Minijuego extends JFrame implements MouseListener{
 	public void actualizarDatosMarcador() {
 		int i=0;
 		while (i<listaEtiquetasInfo.length) {
-			listaEtiquetasPuntaje[i].setText("Puntaje: "+ listaJugadores[i].puntajeMinijuego);
-			narrador.setText("Turno de "+ jugadorActual.nombreJugador);
-			panelMinijuegos.repaint();
+			listaEtiquetasPuntaje[i].setText("Puntaje: "+ listaJugadores[i].puntajeMinijuego);			
+			i+=1;
 		}
+		if (contadorRondas==listaJugadores.length-1) {
+			narrador.setText("Ver resultados");
+		}
+		else {
+			narrador.setText("Turno de "+ jugadorActual.nombreJugador);
+		}
+		panelMinijuegos.repaint();
 	}
 	
 	public void iniciarMinijuego() {
-		//Este método depende de la herencia entonces se dejará paracada minijuego
+		etiquetaTituloMinijuego.setVisible(false);
+		//Aquí se realizan todas las acciones de solo una ronda del minijuego!
+		
+		try {
+		jugadorActual= listaJugadores[contadorRondas+1];
+		}catch(Exception e) {}
+		actualizarDatosMarcador();
+		if (contadorRondas==listaJugadores.length) {
+			mostrarResultados();
+		}
+		contadorRondas+=1;
+		botonPlay.setVisible(true);
+	}
+	
+	public void mostrarResultados() {
+		tituloResultados= new JLabel();
+		tituloResultados.setBounds(283, 50, 500, 70);
+		tituloResultados.setHorizontalAlignment(SwingConstants.CENTER);
+		tituloResultados.setFont(fuenteTitulo);
+		tituloResultados.setForeground(Color.red);
+		tituloResultados.setText("Resultados");
+		panelMinijuegos.add(tituloResultados);
+		ordenarResultados();
+		//Escondiendo los JLabel de previa del juego
+		etiquetaTituloMinijuego.setVisible(false);
+		int i=0;
+		listaEtiquetasResultados= new JLabel[listaJugadores.length];
+		informacionResultados= new JLabel[listaJugadores.length];
+		while (i<listaJugadores.length) {
+			System.out.println("Añadiendo las etiquetas de resultados ");
+			listaEtiquetasResultados[i]= new JLabel();
+			listaEtiquetasResultados[i].setBounds(283, 130*i+130, 500, 100);
+			listaEtiquetasResultados[i].setOpaque(true);
+			listaEtiquetasResultados[i].setBackground(new Color(66, 66, 66));
+			panelMinijuegos.add(listaEtiquetasResultados[i]);
+			
+			informacionResultados[i]= new JLabel();
+			informacionResultados[i].setSize(listaEtiquetasResultados[i].getWidth(), listaEtiquetasResultados[i].getHeight());
+			informacionResultados[i].setLocation(0, 0);
+			informacionResultados[i].setFont(fuenteTexto);
+			informacionResultados[i].setForeground(Color.white);
+			informacionResultados[i].setHorizontalAlignment(SwingConstants.CENTER);
+			informacionResultados[i].setText((i+1)+") "+listaJugadores[listaJugadores.length-1-i].nombreJugador+" gana "+(listaJugadores.length+1-i)*100+" monedas!");
+			listaEtiquetasResultados[i].add(informacionResultados[i]);
+			
+			panelMinijuegos.repaint();
+			i+=1;
+		}
+	}
+	
+	public void ordenarResultados() { //Se ordenan los resultados según el puntaje 
+		int n= listaJugadores.length;
+		for (int i=0; i<n-1; i++) {
+			int minIndex=i;
+			for (int j=i+1; j<n;j++) {
+				if (listaJugadores[j].puntajeMinijuego<listaJugadores[minIndex].puntajeMinijuego) {
+					minIndex=j;
+				}
+			}
+		Jugador jugadorTemporal= listaJugadores[minIndex];
+		listaJugadores[minIndex]=listaJugadores[i];
+		listaJugadores[i]= jugadorTemporal;
+		}
 	}
 	
 	protected void componentesVentenaHeredada() {
 		//en 283 y lohago de 500, alto 150 y que mida 400
 		etiquetaTituloMinijuego= new JLabel();
-		etiquetaTituloMinijuego.setBounds(283, 150, 500, 200);
+		etiquetaTituloMinijuego.setBounds(263, 150, 540, 200);
 		etiquetaTituloMinijuego.setOpaque(true);
 		etiquetaTituloMinijuego.setBackground(new Color(66, 66, 66));
 		panelMinijuegos.add(etiquetaTituloMinijuego);
@@ -173,8 +245,6 @@ public class Minijuego extends JFrame implements MouseListener{
 		}
 		iniciarMinijuego();
 	}
-		
-	
 
 	@Override
 	public void mousePressed(MouseEvent e) {
