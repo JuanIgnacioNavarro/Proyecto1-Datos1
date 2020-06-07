@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Inicio extends JFrame {
-	public static int cantidadJugadores=4;
+	public static int cantidadJugadores = 4;
 	public static int cantidadRondas;
 	private JButton botonJugar;
 	private JLabel etiquetaCantidadJugadores;
@@ -17,10 +17,10 @@ public class Inicio extends JFrame {
 	private JComboBox<Integer> cajaCantidadJugadores = new JComboBox<>(numJugadores);
 	private JComboBox<Integer> cajaCantidadRondas = new JComboBox<>(numRondas);
 
-	public Inicio(){
+	public Inicio() {
 		setVisible(true);
 		setTitle("INICIAR PARTIDA");
-		setBounds(0,0, 400, 300);
+		setBounds(0, 0, 400, 300);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -58,19 +58,12 @@ public class Inicio extends JFrame {
 		getContentPane().add(botonJugar).setBounds(130, 190, 90, 40);
 		botonJugar.setFont(new Font("Comic Sans MS", 1, 12));
 		botonJugar.setLayout(null);
-		botonJugar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//String data = "Cantidad seleccionada:" + cajaCantidadJugadores.getItemAt(cajaCantidadJugadores.getSelectedIndex());
-				//etiquetaDatos.setText(data);
-				cantidadJugadores = cajaCantidadJugadores.getItemAt(cajaCantidadJugadores.getSelectedIndex());
-				cantidadRondas = cajaCantidadRondas.getItemAt(cajaCantidadRondas.getSelectedIndex());
-				System.out.print(cantidadJugadores + cantidadRondas);
-			}
+		botonJugar.addActionListener(e -> {
+			cantidadJugadores = cajaCantidadJugadores.getItemAt(cajaCantidadJugadores.getSelectedIndex());
+			cantidadRondas = cajaCantidadRondas.getItemAt(cajaCantidadRondas.getSelectedIndex());
+			Partida partida = new Partida();
+			partida.setVisible(true);
+			System.out.print(cantidadJugadores + cantidadRondas);
 		});
-	}
-
-	public static void  main (String[] args){
-		Inicio inicio = new Inicio();
 	}
 }

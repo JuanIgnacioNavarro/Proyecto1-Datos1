@@ -39,6 +39,8 @@ public class Bienvenida extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					setVisible(false);
+					Inicio juego = new Inicio();
+					juego.setVisible(true);
 				}
 			});
 		}
@@ -47,7 +49,5 @@ public class Bienvenida extends JFrame {
 		public static void main(String[] args){
 			Bienvenida b = new Bienvenida();
 		}
-
-
 
 	}
