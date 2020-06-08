@@ -45,7 +45,7 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
             etiquetaMinijuegoTres.setBackground(new Color(66, 66, 66));
             panelMinijuegos.add(etiquetaMinijuegoTres);
 
-            etiquetaPregunta = new JLabel("¿En qué país se encuentra el famoso monumento Taj Mahal?");
+            etiquetaPregunta = new JLabel("En que pais se encuentra el famoso monumento Taj Mahal?");
             etiquetaPregunta.setSize(etiquetaMinijuegoTres.getWidth(), etiquetaMinijuegoTres.getHeight()/4);
             etiquetaPregunta.setLocation(0, 0);
             etiquetaPregunta.setHorizontalAlignment(SwingConstants.CENTER);
@@ -53,7 +53,7 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
             etiquetaPregunta.setFont(fuenteTexto);
             etiquetaMinijuegoTres.add(etiquetaPregunta);
 
-            respuestaUno = "Arabia Saudita"; respuestaDos = "Qatar"; respuestaTres = "India"; respuestaCuatro = "Pakistán";
+            respuestaUno = "Arabia Saudita"; respuestaDos = "Qatar"; respuestaTres = "India"; respuestaCuatro = "Pakistan";
             cajaRespuestas = new JComboBox();
             cajaRespuestas.addItem(respuestaUno); cajaRespuestas.addItem(respuestaDos); cajaRespuestas.addItem(respuestaTres);
             cajaRespuestas.addItem(respuestaCuatro);
@@ -94,18 +94,18 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
                 if (jugadorActual.numeroJugador == 0){
                     comparaRespuesta(respuestaTres);
                     System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
-                    etiquetaPregunta.setText("¿Cuál es el océano más grande?");
+                    etiquetaPregunta.setText("Cual es el oceano mas grande?");
                     cajaRespuestas.removeAllItems();
-                    respuestaUno2 = "Atlántico"; respuestaDos2 = "Pacífico"; respuestaTres2 = "Índico"; respuestaCuatro2 = "Ártico";
+                    respuestaUno2 = "Atlantico"; respuestaDos2 = "Pacifico"; respuestaTres2 = "Indico"; respuestaCuatro2 = "Artico";
                     cajaRespuestas.addItem(respuestaUno2); cajaRespuestas.addItem(respuestaDos2); cajaRespuestas.addItem(respuestaTres2);
                     cajaRespuestas.addItem(respuestaCuatro2);
                     panelMinijuegos.repaint();
                 } else if(jugadorActual.numeroJugador == 1){
                     comparaRespuesta(respuestaDos2);
                     System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
-                    etiquetaPregunta.setText("¿Quién escribió La Odisea?");
+                    etiquetaPregunta.setText("Quien escribio La Odisea?");
                     cajaRespuestas.removeAllItems();
-                    respuestaUno3 = "Esquilo"; respuestaDos3 = "Sófocles"; respuestaTres3 = "Esopo"; respuestaCuatro3 = "Homero";
+                    respuestaUno3 = "Esquilo"; respuestaDos3 = "Sofocles"; respuestaTres3 = "Esopo"; respuestaCuatro3 = "Homero";
                     cajaRespuestas.addItem(respuestaUno3); cajaRespuestas.addItem(respuestaDos3); cajaRespuestas.addItem(respuestaTres3);
                     cajaRespuestas.addItem(respuestaCuatro3);
                     panelMinijuegos.repaint();
@@ -115,7 +115,7 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
                     comparaRespuesta(respuestaCuatro3);
 
                     System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
-                    etiquetaPregunta.setText("Si 50 es el 100%, ¿cuánto es el 90%?");
+                    etiquetaPregunta.setText("Si 50 es el 100 porciento, cuánto es el 90?");
                     cajaRespuestas.removeAllItems();
                     respuestaUno4 = "45"; respuestaDos4 = "47"; respuestaTres4 = "43"; respuestaCuatro4 = "40";
                     cajaRespuestas.addItem(respuestaUno4); cajaRespuestas.addItem(respuestaDos4); cajaRespuestas.addItem(respuestaTres4);
@@ -153,10 +153,10 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
 
     private void comparaRespuesta(String respuesta) {
         if (cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()) == respuesta){
-            iniciar.setText("Acertó!");
+            iniciar.setText("Acerto!");
             iniciar.setBackground(Color.green);
             puntaje = 10;
-        }else{iniciar.setText("Falló!"); iniciar.setBackground(Color.red); puntaje = 0;}
+        }else{iniciar.setText("Fallo!"); iniciar.setBackground(Color.red); puntaje = 0;}
     }
 
 

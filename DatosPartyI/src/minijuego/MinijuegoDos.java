@@ -24,7 +24,7 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
         super(listaJugadores);
         this.setTitle("Piensa del 1 al 100!");
         tituloMinijuego.setText("Piensa en un número del 1 al 100");
-        descripcionMinijuego.setText("Adivina el número, entre más cerca estés, mejor");
+        descripcionMinijuego.setText("Adivina el numero, entre mas cerca estes, mejor");
         descripcionMinijuego.setFont(fuenteTexto);
         panelMinijuegos.repaint();
         System.out.println("prueba");
@@ -51,7 +51,7 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
             etiquetaIngresa.setHorizontalAlignment(SwingConstants.CENTER);
             etiquetaIngresa.setBackground(Color.darkGray);
             etiquetaIngresa.setForeground(Color.white);
-            etiquetaIngresa.setText("Ingresa el número que estoy pensando");
+            etiquetaIngresa.setText("Ingresa el numero que estoy pensando");
             etiquetaIngresa.setFont(fuenteTexto);
             etiquetaMinijuegoDos.add(etiquetaIngresa);
 
@@ -95,15 +95,15 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
                 puntos = 100 - Math.abs(diferencia);
                 if (numero <= 100 && numero > 0){
                     if(numero != correcto){
-                        listo.setText("Falló, la diferencia fue por"+" "+ Math.abs(diferencia));
+                        listo.setText("Fallo, la diferencia fue por"+" "+ Math.abs(diferencia));
                     } else{
                         listo.setBackground(Color.green);
-                        listo.setText("Felicidades! Acertó");
+                        listo.setText("Felicidades! Acerto");
                     }
                     System.out.println(puntos);
                     jugadorActual.puntajeMinijuego = puntos;
                 }else{
-                    JOptionPane.showMessageDialog(null, "Ingresa un número permitido", "ERROR", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Ingresa un numero permitido", "ERROR", JOptionPane.WARNING_MESSAGE);
 
                 }
             }
