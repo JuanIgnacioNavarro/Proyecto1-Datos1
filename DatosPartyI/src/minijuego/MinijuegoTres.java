@@ -84,7 +84,7 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
             iniciar.setBackground(Color.green);
             panelMinijuegos.repaint();
         }
-
+        if (jugadorActual.numeroJugador==0) {
         this.addMouseListener(new MouseListener() {
 
 
@@ -149,6 +149,7 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
 
             }
         });
+        }
     }
 
     private void comparaRespuesta(String respuesta) {
