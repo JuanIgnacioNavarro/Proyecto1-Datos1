@@ -43,8 +43,8 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
             panelMinijuegos.add(etiquetaMinijuegoCuatro);
 
             etiquetaDados = new JLabel();
-            etiquetaDados.setSize(etiquetaMinijuegoCuatro.getWidth(), etiquetaMinijuegoCuatro.getHeight()/2);
-            etiquetaDados.setLocation(0, 0);
+            etiquetaDados.setSize(etiquetaMinijuegoCuatro.getWidth()/3, etiquetaMinijuegoCuatro.getHeight()/2-10);
+            etiquetaDados.setLocation(etiquetaMinijuegoCuatro.getWidth()/3, 0);
             etiquetaDados.setHorizontalAlignment(SwingConstants.CENTER);
             etiquetaDados.setBackground(Color.lightGray);
             etiquetaDados.setIcon((new ImageIcon(dados.getImage().getScaledInstance(etiquetaDados.getWidth(), etiquetaDados.getHeight(), Image.SCALE_SMOOTH))));
@@ -114,6 +114,7 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
 
     }
     private void resultados () {
+    	narrador.setVisible(true);
          if (jugadorActual.numeroJugador==listaJugadores.length-1) {
             etiquetaMinijuegoCuatro.setVisible(false);
         }
