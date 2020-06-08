@@ -52,7 +52,6 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 		tituloMinijuego.setText("Teclado rapido!");
 		descripcionMinijuego.setText("Presiona la tecla j la mayor cantidad de veces que puedas en 10s");
 		panelMinijuegos.repaint();
-		System.out.println("prueba");
 	}
 	private void actualizarTempo() {
 		String tiempo= s+ " : "+(cs<=9?"0":"")+cs;

@@ -230,7 +230,13 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	}
 
 	private void activarMinijuego() {
-		Minijuego minijuego= new MinijuegoTres(listaJugadores);
+		new MinijuegoCinco(listaJugadores);
+		System.out.println("El orden de la listade jugadores es el siguiente");
+		int i=0;
+		while (i<4) {
+			System.out.println(listaJugadores[i].nombreJugador);
+			i+=1;
+		}
 	}
 
 	private void comprobarEvento() {

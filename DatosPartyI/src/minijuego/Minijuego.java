@@ -167,7 +167,7 @@ public class Minijuego extends JFrame implements MouseListener{
 	public void iniciarMinijuego() {
 		etiquetaTituloMinijuego.setVisible(false);
 		narrador.setVisible(false);
-		System.out.println("El narrador no se ve");
+		System.out.println("Acabo de iniciar un minijuego run minijuego");
 		runMinijuego(jugadorActual);
 		
 		
@@ -253,8 +253,22 @@ public class Minijuego extends JFrame implements MouseListener{
 			panelMinijuegos.repaint();
 			i+=1;
 		}
+		ordenarResultadosNum();
 	}
-	
+	public void ordenarResultadosNum() {
+		int n= listaJugadores.length;
+		for (int i=0; i<n-1; i++) {
+			int minIndex=i;
+			for (int j=i+1; j<n;j++) {
+				if (listaJugadores[j].numeroJugador<listaJugadores[minIndex].numeroJugador) {
+					minIndex=j;
+				}
+			}
+		Jugador jugadorTemporal= listaJugadores[minIndex];
+		listaJugadores[minIndex]=listaJugadores[i];
+		listaJugadores[i]= jugadorTemporal;
+		}
+	}
 	/**
 	 * Corresponde un Selction Sort que ordena la lista de jugadores según su puntaje
 	 * Esto facilita mostrar los resultados
@@ -304,8 +318,9 @@ public class Minijuego extends JFrame implements MouseListener{
 		if (e.getSource()==botonPlay) {
 			botonPlay.setVisible(false);
 			System.out.println("Iniciar Minijuego para "+jugadorActual.nombreJugador);
+			iniciarMinijuego();
 		}
-		iniciarMinijuego();
+		
 	}
 
 	@Override

@@ -115,7 +115,7 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
                     comparaRespuesta(respuestaCuatro3);
 
                     System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
-                    etiquetaPregunta.setText("Si 50 es el 100 porciento, cuánto es el 90?");
+                    etiquetaPregunta.setText("Si 50 es el 100 porciento, cuanto es el 90?");
                     cajaRespuestas.removeAllItems();
                     respuestaUno4 = "45"; respuestaDos4 = "47"; respuestaTres4 = "43"; respuestaCuatro4 = "40";
                     cajaRespuestas.addItem(respuestaUno4); cajaRespuestas.addItem(respuestaDos4); cajaRespuestas.addItem(respuestaTres4);
