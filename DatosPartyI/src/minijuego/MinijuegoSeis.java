@@ -67,6 +67,7 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 	}
 	@Override
 	public void runMinijuego(Jugador jugador) {
+		running=true;
 		jugadorActual=jugador;
 		s=4;
 		cs=99;
@@ -99,7 +100,7 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 			lista.setVerticalAlignment(SwingConstants.CENTER);
 			lista.setBackground(Color.white);
 			lista.setFont(fuenteTexto);
-			lista.setForeground(Color.black);
+			lista.setForeground(Color.yellow);
 			anadirTextoLista(); //Este método añade el texto a la lista y crea la lista que se va a usar en el juego
 			etiquetaMinijuegoSeis.add(lista);
 			
@@ -227,6 +228,7 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 	}
 	
 	private void resultados(int numeroRespuesta) {
+		running=false;
 		responder.setFont(new Font("Comic Sans MS", 0, 14));
 		if (numeroRespuesta==listaJuego[elementoPregunta]) {
 			jugadorActual.puntajeMinijuego=10;
@@ -240,7 +242,19 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 		respuesta.setVisible(false);
 		temporizador.setVisible(false);
 		if (jugadorActual.numeroJugador==listaJugadores.length-1) {
-			etiquetaMinijuegoSeis.setVisible(false);
+			Thread t2= new Thread (()-> {
+				try {
+					actualizarDatosMarcador();
+					Thread.sleep(2000);
+					etiquetaMinijuegoSeis.setVisible(false);
+				} catch (InterruptedException e) {
+					System.out.println("Estoy en el catch del ultimo jugador");
+					e.printStackTrace();
+				}
+				
+			});
+			t2.start();
+			
 		}
 	}
 	
