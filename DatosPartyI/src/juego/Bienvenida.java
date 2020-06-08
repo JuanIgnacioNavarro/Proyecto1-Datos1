@@ -3,11 +3,21 @@ package juego;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
+/**
+ * Esta clase instancia la ventana de bienvenida al juego.
+ * @author Juan Pena
+ */
 public class Bienvenida extends JFrame {
 	public static Color colorVentana = new Color(94, 94, 94);
 	private JPanel panelBienvenida;
 	private JButton botonInicio;
 	private JLabel etiquetaBienvenida;
+
+	/**
+	 * Constructor de Bienvenida()
+	 * Agrega el botón de inicio para la siguiente ventana
+	 */
 	public Bienvenida() {
 		setVisible(true);
 		setTitle("Bienvenido a Datos Party I");

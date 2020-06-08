@@ -7,8 +7,13 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import static java.lang.Integer.parseInt;
-
+/**
+ * Clase MinijuegoTres que consiste en
+ * Responder una pregunta de cultura general
+ * Es una diferente para cada jugador
+ * Gana 10 puntos si acierta, 0 si falla
+ * @author Juan Pena
+ */
 public class MinijuegoTres extends Minijuego implements MouseListener {
     public Jugador jugadorActual;
     private JLabel etiquetaMinijuegoTres;
@@ -32,11 +37,22 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
         panelMinijuegos.repaint();
         System.out.println("prueba");
     }
-
+    /**
+     * Metodo heredado donde se corren los
+     * componentes actualizados a cada jugador para
+     * la ventana del minijuego
+     * @param jugador
+     */
     public void runMinijuego(Jugador jugador) {
         jugadorActual=jugador;
         definirComponentes();
     }
+    /**
+     * Metodo que definine los componentes de este minijuego:
+     * Etiquetas de: pregunta, caja de respuestas y el resgistro
+     * de dicha respuesta, en el cual también se muestra si
+     * respondió bien o mal
+     */
     private void definirComponentes() {
         if (jugadorActual.numeroJugador == 0) {
             etiquetaMinijuegoTres= new JLabel ();
@@ -84,71 +100,89 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
             iniciar.setBackground(Color.green);
             panelMinijuegos.repaint();
         }
-        if (jugadorActual.numeroJugador==0) {
-        this.addMouseListener(new MouseListener() {
+        if (jugadorActual.numeroJugador == 0) {
+            this.addMouseListener(new MouseListener() {
 
 
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                iniciar.setBackground(Color.red);
-                if (jugadorActual.numeroJugador == 0){
-                    comparaRespuesta(respuestaTres);
-                    System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
-                    etiquetaPregunta.setText("Cual es el oceano mas grande?");
-                    cajaRespuestas.removeAllItems();
-                    respuestaUno2 = "Atlantico"; respuestaDos2 = "Pacifico"; respuestaTres2 = "Indico"; respuestaCuatro2 = "Artico";
-                    cajaRespuestas.addItem(respuestaUno2); cajaRespuestas.addItem(respuestaDos2); cajaRespuestas.addItem(respuestaTres2);
-                    cajaRespuestas.addItem(respuestaCuatro2);
-                    panelMinijuegos.repaint();
-                } else if(jugadorActual.numeroJugador == 1){
-                    comparaRespuesta(respuestaDos2);
-                    System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
-                    etiquetaPregunta.setText("Quien escribio La Odisea?");
-                    cajaRespuestas.removeAllItems();
-                    respuestaUno3 = "Esquilo"; respuestaDos3 = "Sofocles"; respuestaTres3 = "Esopo"; respuestaCuatro3 = "Homero";
-                    cajaRespuestas.addItem(respuestaUno3); cajaRespuestas.addItem(respuestaDos3); cajaRespuestas.addItem(respuestaTres3);
-                    cajaRespuestas.addItem(respuestaCuatro3);
-                    panelMinijuegos.repaint();
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    iniciar.setBackground(Color.red);
+                    if (jugadorActual.numeroJugador == 0) {
+                        comparaRespuesta(respuestaTres);
+                        jugadorActual.puntajeMinijuego = puntaje;
+                        System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
+                        etiquetaPregunta.setText("Cual es el oceano mas grande?");
+                        cajaRespuestas.removeAllItems();
+                        respuestaUno2 = "Atlantico";
+                        respuestaDos2 = "Pacifico";
+                        respuestaTres2 = "Indico";
+                        respuestaCuatro2 = "Artico";
+                        cajaRespuestas.addItem(respuestaUno2);
+                        cajaRespuestas.addItem(respuestaDos2);
+                        cajaRespuestas.addItem(respuestaTres2);
+                        cajaRespuestas.addItem(respuestaCuatro2);
+                        panelMinijuegos.repaint();
+                    } else if (jugadorActual.numeroJugador == 1) {
+                        comparaRespuesta(respuestaDos2);
+                        jugadorActual.puntajeMinijuego = puntaje;
+                        System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
+                        etiquetaPregunta.setText("Quien escribio La Odisea?");
+                        cajaRespuestas.removeAllItems();
+                        respuestaUno3 = "Esquilo";
+                        respuestaDos3 = "Sofocles";
+                        respuestaTres3 = "Esopo";
+                        respuestaCuatro3 = "Homero";
+                        cajaRespuestas.addItem(respuestaUno3);
+                        cajaRespuestas.addItem(respuestaDos3);
+                        cajaRespuestas.addItem(respuestaTres3);
+                        cajaRespuestas.addItem(respuestaCuatro3);
+                        panelMinijuegos.repaint();
+                    } else if (jugadorActual.numeroJugador == 2) {
+
+                        comparaRespuesta(respuestaCuatro3);
+                        jugadorActual.puntajeMinijuego = puntaje;
+
+                        System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
+                        etiquetaPregunta.setText("Si 50 es el 100 porciento, cuanto es el 90?");
+                        cajaRespuestas.removeAllItems();
+                        respuestaUno4 = "45";
+                        respuestaDos4 = "47";
+                        respuestaTres4 = "43";
+                        respuestaCuatro4 = "40";
+                        cajaRespuestas.addItem(respuestaUno4);
+                        cajaRespuestas.addItem(respuestaDos4);
+                        cajaRespuestas.addItem(respuestaTres4);
+                        cajaRespuestas.addItem(respuestaCuatro4);
+                        panelMinijuegos.repaint();
+                    } else if (jugadorActual.numeroJugador == 3) {
+
+                        comparaRespuesta(respuestaUno4);
+                        jugadorActual.puntajeMinijuego = puntaje;
+                        System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
+                    }
+                    resultados();
                 }
-                else if(jugadorActual.numeroJugador == 2){
 
-                    comparaRespuesta(respuestaCuatro3);
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    // TODO Auto-generated method stub
 
-                    System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
-                    etiquetaPregunta.setText("Si 50 es el 100 porciento, cuanto es el 90?");
-                    cajaRespuestas.removeAllItems();
-                    respuestaUno4 = "45"; respuestaDos4 = "47"; respuestaTres4 = "43"; respuestaCuatro4 = "40";
-                    cajaRespuestas.addItem(respuestaUno4); cajaRespuestas.addItem(respuestaDos4); cajaRespuestas.addItem(respuestaTres4);
-                    cajaRespuestas.addItem(respuestaCuatro4);
-                    panelMinijuegos.repaint();
-                }else if(jugadorActual.numeroJugador == 3){
-
-                    comparaRespuesta(respuestaUno);
-                    System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
                 }
-                resultados();
-            }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-                // TODO Auto-generated method stub
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
 
-            }
+                @Override
+                public void mouseEntered(MouseEvent e) {
 
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
+                }
 
-            @Override
-            public void mouseEntered(MouseEvent e) {
+                @Override
+                public void mouseExited(MouseEvent e) {
 
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
+                }
+            });
         }
     }
 
@@ -162,13 +196,12 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
 
 
     private void resultados () {
-        jugadorActual.puntajeMinijuego = puntaje;
+
         iniciar.setText("Puntaje: "+jugadorActual.puntajeMinijuego);
         iniciar.removeMouseListener(null);
         etiquetaPregunta.setVisible(false);
         cajaRespuestas.setVisible(false);
         iniciar.removeMouseListener(null);
-        narrador.setVisible(true);
         narrador.setVisible(true);
         if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
             etiquetaMinijuegoTres.setVisible(false);

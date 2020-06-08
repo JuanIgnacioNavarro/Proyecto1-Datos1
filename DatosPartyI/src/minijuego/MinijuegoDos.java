@@ -8,6 +8,16 @@ import java.awt.event.*;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Clase MinijuegoDos:
+ * Consiste en que cada jugador debe ingresar un numero entre
+ * 1 y 100, con el objetivo de acertar o estar lo mas cerca posible
+ * del numero real.
+ * Su puntaje será determinado por la condicion de
+ * que tan cerca esta del numero
+ * donde 100 es el puntaje maximo
+ * @author Juan Pena
+ */
 public class MinijuegoDos extends Minijuego implements MouseListener {
     public Jugador jugadorActual;
     private JLabel etiquetaMinijuegoDos;
@@ -30,12 +40,24 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
         System.out.println("prueba");
     }
 
+    /**
+     * Metodo heredado donde se corren los
+     * componentes actualizados a cada jugador para
+     * la ventana del minijuego
+     * @param jugador
+     */
     public void runMinijuego(Jugador jugador) {
         jugadorActual=jugador;
         onGame=false;
         definirComponentes();
 
     }
+
+    /**
+     * Metodo que definine los componentes de este minijuego:
+     * Etiquetas de: instruccion, cuadro para ingresar el numero
+     * y la etiqueta para registrarlo
+     */
     private void definirComponentes() {
         if (jugadorActual.numeroJugador == 0) {
             etiquetaMinijuegoDos = new JLabel();
@@ -83,7 +105,12 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
         }
 
         this.addMouseListener(new MouseListener() {
-
+            /**
+             * En este MouseEvent se da la lógica que
+             * determina el puntaje del jugador luego
+             * de ingresar el número
+             * @param e
+             */
             @Override
             public void mouseClicked(MouseEvent e) {
                 listo.setBackground(Color.red);
@@ -130,6 +157,10 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
 
     }
 
+    /**
+     * Metodo para cerrar la ventana de minijuego
+     * cuando ya han los jugadores han terminado
+     */
     private void resultados () {
             listo.removeMouseListener(null);
             numero = 0;

@@ -5,6 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Clase Inicio que guarda los datos de la partida
+ * 1er dato: cantidad de jugadores
+ * 2do dato: cantidad de rondas
+ * @author Juan Pena
+ */
 public class Inicio extends JFrame {
 	public static int cantidadJugadores = 4;
 	public static int cantidadRondas;
@@ -17,6 +23,10 @@ public class Inicio extends JFrame {
 	private JComboBox<Integer> cajaCantidadJugadores = new JComboBox<>(numJugadores);
 	private JComboBox<Integer> cajaCantidadRondas = new JComboBox<>(numRondas);
 
+	/**
+	 * Constructor de la clase que ubica las cajas para elegir
+	 * la cantidad de jugadores y rondas
+	 */
 	public Inicio() {
 		setVisible(true);
 		setTitle("INICIAR PARTIDA");
@@ -44,13 +54,6 @@ public class Inicio extends JFrame {
 		getContentPane().add(cajaCantidadRondas);
 
 		agregarBoton();
-		/*
-		etiquetaDatos = new JLabel();
-		getContentPane().add(etiquetaDatos);
-		etiquetaDatos.setBounds(0, 200, 200, 100);
-		etiquetaDatos.setFont(new Font("Comic Sans MS", 1, 15));
-
-		 */
 	}
 
 	private void agregarBoton() {
@@ -63,7 +66,6 @@ public class Inicio extends JFrame {
 			cantidadRondas = cajaCantidadRondas.getItemAt(cajaCantidadRondas.getSelectedIndex());
 			Partida partida = new Partida();
 			partida.setVisible(true);
-			System.out.print(cantidadJugadores + cantidadRondas);
 		});
 	}
 }
