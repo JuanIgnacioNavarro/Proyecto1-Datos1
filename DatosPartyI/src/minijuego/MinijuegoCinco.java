@@ -89,7 +89,7 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
     		temporizador.setVisible(true);
     		temporizador.setText("10:00");
     		resultado.setVisible(true);
-    		resultado.setText("Intanta parar el reloj en 3s");
+    		resultado.setText("Intenta parar el reloj en 3s");
     		iniciar.setText("Empezar!");
     		panelMinijuegos.repaint();
     	}
