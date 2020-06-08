@@ -38,6 +38,7 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
     
     @Override
     public void runMinijuego (Jugador jugador) {
+    	running=true;
     	jugadorActual=jugador;
     	s=9;
     	cs=99;
@@ -86,10 +87,11 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
     		etiquetaMinijuegoCinco.add(iniciar);
     	}
     	else {
+    		iniciar.setBackground(Color.green);
     		temporizador.setVisible(true);
     		temporizador.setText("10:00");
     		resultado.setVisible(true);
-    		resultado.setText("Intanta parar el reloj en 3s");
+    		resultado.setText("Intenta parar el reloj en 3s");
     		iniciar.setText("Empezar!");
     		panelMinijuegos.repaint();
     	}
@@ -114,7 +116,6 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
 					else if (allowResults==true) {
 						t.stop();
 						temporizador.setVisible(true);
-						iniciar.setEnabled(false);
 						resultados ();
 					}
 				//}
@@ -133,7 +134,6 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
 							
 							temporizador.setVisible(true);
 							onGame=false;
-							iniciar.setEnabled(false);
 							resultados();
 							t.stop();
 						}
@@ -153,11 +153,16 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
 			}
 			
 			private void resultados() {
+				running=false;
 	    		System.out.println("Estoy en resultados");
 				int difSegundos;
 				int centesimasRestantes;
-				if (s>=3) {
+				if (s>3) {
 					difSegundos=s-4;
+					centesimasRestantes=cs;
+				}
+				else if(s==3)  {
+					difSegundos=0;
 					centesimasRestantes=cs;
 				}
 				else {
@@ -165,7 +170,7 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
 					centesimasRestantes=100-cs;
 				}
 				resultado.setText("La diferencia es de "+difSegundos+" : "+(centesimasRestantes<=9?"0":"")+centesimasRestantes);
-				int difMaxima= 699;
+				int difMaxima= 700;
 				int difEnCentesimas= difSegundos*100+centesimasRestantes;
 				int puntaje= (difMaxima-difEnCentesimas)/10;
 				jugadorActual.puntajeMinijuego=puntaje;
@@ -177,7 +182,19 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
 				//Ocultar para el mostrar resultados
 				narrador.setVisible(true);
 				if (jugadorActual.numeroJugador==listaJugadores.length-1) {
-					etiquetaMinijuegoCinco.setVisible(false);
+					Thread t2= new Thread (()-> {
+						try {
+							actualizarDatosMarcador();
+							Thread.sleep(2000);
+							etiquetaMinijuegoCinco.setVisible(false);
+						} catch (InterruptedException e) {
+							System.out.println("Estoy en el catch del ultimo jugador");
+							e.printStackTrace();
+						}
+						
+					});
+					t2.start();
+					
 				}
 				
 			}

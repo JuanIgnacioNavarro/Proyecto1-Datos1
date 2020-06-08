@@ -26,6 +26,7 @@ public class Minijuego extends JFrame implements MouseListener{
 	protected Jugador jugadorActual;
 	protected int contadorRondas=0;
 	protected boolean enJuego=false;
+	protected boolean running=false;
 //    ____
 //___/  Atributos de la interfaz gráfica
 	protected JPanel panelMinijuegos;
@@ -191,6 +192,8 @@ public class Minijuego extends JFrame implements MouseListener{
 	}
 	
 	public void runMinijuego(Jugador jugador) {
+		
+
 		//Este es el método que perimte hacer el override de la herencia
 	}
 	
@@ -316,9 +319,10 @@ public class Minijuego extends JFrame implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource()==botonPlay) {
-			botonPlay.setVisible(false);
+			if (running==false) {
 			System.out.println("Iniciar Minijuego para "+jugadorActual.nombreJugador);
 			iniciarMinijuego();
+			}
 		}
 		
 	}

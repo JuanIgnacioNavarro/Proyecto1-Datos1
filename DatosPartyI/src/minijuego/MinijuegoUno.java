@@ -66,6 +66,7 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 	
 	@Override
 	public void runMinijuego(Jugador jugador) {
+		running=true;
 		jugadorActual=jugador;
 		s=9;
 		cs=99;
@@ -121,7 +122,7 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 			panelMinijuegos.repaint();
 		}
 	
-
+	
 		this.addKeyListener(new KeyListener() {
 
 			@Override
@@ -137,6 +138,7 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
+				if (onGame==true) {
 				String j=String.valueOf(e.getKeyChar());
 				if ("j".equals(j)) {
 					if (jugadorActual.numeroJugador==0) {
@@ -154,10 +156,11 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 					
 				}
 				actualizarContador();
-				
+			}
 			}
 			
 		});
+		
 		
 		this.addMouseListener(new MouseListener() {
 
@@ -166,6 +169,7 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 				iniciar.setBackground(Color.red);
 				if (onGame==false) {
 					onGame=true;
+					iniciar.setVisible(false);
 					Thread t1= new Thread (()->{
 						t= new Timer(10, acciones);	
 						t.start();
@@ -201,14 +205,17 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 	}
 	
 	private void resultados () {
+		running=false;
+		iniciar.setVisible(true);
 		jugadorActual.puntajeMinijuego+= cantidadDeJ;
 		iniciar.setText("Puntaje: "+jugadorActual.puntajeMinijuego);
 		contador.setVisible(false);
 		temporizador.setVisible(false);
 		iniciar.removeMouseListener(null);
 		narrador.setVisible(true);
-
+		
 		if (jugadorActual.numeroJugador==listaJugadores.length-1) {
+			this.actualizarDatosMarcador();
 			etiquetaMinijuegoUno.setVisible(false);
 		}
 	}
