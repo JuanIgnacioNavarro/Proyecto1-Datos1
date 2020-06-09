@@ -113,6 +113,7 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
              */
             @Override
             public void mouseClicked(MouseEvent e) {
+                if(!onGame){
                 listo.setBackground(Color.red);
                 listo.setFont(fuenteTexto);
                 String guess = adivina.getText();
@@ -133,6 +134,8 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
                     JOptionPane.showMessageDialog(null, "Ingresa un numero permitido", "ERROR", JOptionPane.WARNING_MESSAGE);
 
                 }
+                onGame = true;
+            }
             }
 
             @Override
