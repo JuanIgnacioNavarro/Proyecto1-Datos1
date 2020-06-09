@@ -43,6 +43,7 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
     	running=true;
         jugadorActual = jugador;
         dado1 = 0; dado2 = 0; dado3 = 0;
+        onGame = false;
         definirComponentes();
     }
     /**
@@ -73,6 +74,7 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
             etiquetaResultado.setHorizontalAlignment(SwingConstants.CENTER);
             etiquetaResultado.setBackground(Color.green);
             etiquetaResultado.setForeground(Color.white);
+            etiquetaResultado.addMouseListener(this);
             etiquetaResultado.setText("Resultados:");
             etiquetaResultado.setFont(fuenteTitulo);
             etiquetaMinijuegoCuatro.add(etiquetaResultado);
@@ -82,18 +84,22 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
             etiquetaDados.setVisible(true);
             panelMinijuegos.repaint();
         }
-        if (jugadorActual.numeroJugador==0) {
+
             this.addMouseListener(new MouseListener() {
 
                 @Override
                 //Al hacer clic recibe los datos generados por los metodos mezclarDados() y resultadoDados()
 
                 public void mouseClicked(MouseEvent e) {
-                    etiquetaDados.setText("Tirando dados!");
-                    etiquetaDados.setFont(fuenteTitulo);
-                    mezclarDados();
-                    resultadoDados();
-                    jugadorActual.puntajeMinijuego = puntaje;
+                    if(!onGame) {
+                        etiquetaResultado.removeMouseListener(null);
+                        etiquetaDados.setText("Tirando dados!");
+                        etiquetaDados.setFont(fuenteTitulo);
+                        mezclarDados();
+                        resultadoDados();
+                        onGame = true;
+                        jugadorActual.puntajeMinijuego = puntaje;
+                    }
                 }
 
                 @Override
@@ -103,6 +109,7 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
+
                     resultados();
 
                 }
@@ -114,9 +121,10 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
 
                 @Override
                 public void mouseExited(MouseEvent e) {
+
                 }
             });
-        }
+
 
     }
 
@@ -150,7 +158,11 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
      * cuando ya han los jugadores han terminado
      */
     private void resultados () {
+<<<<<<< HEAD
     	running=false;
+=======
+        etiquetaDados.removeMouseListener(null);
+>>>>>>> 0ece44c250eee162a746fecd96818224ec4a48b4
         etiquetaDados.setVisible(false);
     	narrador.setVisible(true);
          if (jugadorActual.numeroJugador==listaJugadores.length-1) {
