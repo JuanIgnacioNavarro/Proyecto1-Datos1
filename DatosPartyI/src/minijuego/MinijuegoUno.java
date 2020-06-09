@@ -75,7 +75,7 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 		definirComponentes();
 	}
 	private void definirComponentes() {
-		if (jugadorActual.numeroJugador==0) {
+		if (jugadorActual.numeroJugadorMinijuego==0) {
 			etiquetaMinijuegoUno= new JLabel ();
 			etiquetaMinijuegoUno.setBounds(263, 150, 540, 200);
 			etiquetaMinijuegoUno.setOpaque(true);
@@ -118,6 +118,7 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 			temporizador.setText("10:00");
 			contador.setVisible(true);
 			contador.setText("Contador: "+cantidadDeJ);
+			iniciar.setBackground(Color.green);
 			iniciar.setText("Iniciar");
 			panelMinijuegos.repaint();
 		}
@@ -141,16 +142,16 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 				if (onGame==true) {
 				String j=String.valueOf(e.getKeyChar());
 				if ("j".equals(j)) {
-					if (jugadorActual.numeroJugador==0) {
+					if (jugadorActual.numeroJugadorMinijuego==0) {
 						cantidadDeJ+=1;
 					}
-					else if (jugadorActual.numeroJugador==1) {
+					else if (jugadorActual.numeroJugadorMinijuego==1) {
 						cantidadDeJ+=0.5;
 					}
-					else if (jugadorActual.numeroJugador==2) {
+					else if (jugadorActual.numeroJugadorMinijuego==2) {
 						cantidadDeJ+=0.33;
 					}
-					else if (jugadorActual.numeroJugador==3) {
+					else if (jugadorActual.numeroJugadorMinijuego==3) {
 						cantidadDeJ+=0.25;
 					}
 					
@@ -214,7 +215,7 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 		iniciar.removeMouseListener(null);
 		narrador.setVisible(true);
 		
-		if (jugadorActual.numeroJugador==listaJugadores.length-1) {
+		if (jugadorActual.numeroJugadorMinijuego==listaJugadores.length-1) {
 			this.actualizarDatosMarcador();
 			etiquetaMinijuegoUno.setVisible(false);
 		}

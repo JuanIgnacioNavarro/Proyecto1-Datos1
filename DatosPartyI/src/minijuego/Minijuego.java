@@ -55,6 +55,9 @@ public class Minijuego extends JFrame implements MouseListener{
 	 */
 	public Minijuego(Jugador listaJugadores[]) {
 		this.listaJugadores= listaJugadores;
+		for (int i=0;i<listaJugadores.length; i++) {
+			this.listaJugadores[i].numeroJugadorMinijuego=i;
+		}
 		setTitle("Minijuego");
 		setVisible(true);
 		setSize(900,700);
@@ -177,6 +180,7 @@ public class Minijuego extends JFrame implements MouseListener{
 		}catch(Exception e) {}
 		actualizarDatosMarcador();
 		if (contadorRondas==listaJugadores.length) {
+			running=false;
 			mostrarResultados();
 		}
 		else if (contadorRondas==listaJugadores.length+1) {

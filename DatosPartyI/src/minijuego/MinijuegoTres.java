@@ -44,6 +44,7 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
      * @param jugador
      */
     public void runMinijuego(Jugador jugador) {
+    	running=true;
         jugadorActual=jugador;
         definirComponentes();
     }
@@ -196,7 +197,7 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
 
 
     private void resultados () {
-
+    	running=false;
         iniciar.setText("Puntaje: "+jugadorActual.puntajeMinijuego);
         iniciar.removeMouseListener(null);
         etiquetaPregunta.setVisible(false);

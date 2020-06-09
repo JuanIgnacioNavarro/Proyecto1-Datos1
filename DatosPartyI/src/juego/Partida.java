@@ -218,9 +218,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private void mezclarDados() {
 		numeroDadoUno = (int) Math.floor(Math.random()*6+1);
 		numeroDadoDos = (int) Math.floor(Math.random()*6+1);     
-		numeroDados = numeroDadoUno + numeroDadoDos;
-		
-
+		numeroDados = numeroDadoUno + numeroDadoDos;	
 	}
 	
 	private void agregarEstrella() {
@@ -230,12 +228,27 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	}
 
 	private void activarMinijuego() {
-		new MinijuegoSeis(listaJugadores);
-		System.out.println("El orden de la listade jugadores es el siguiente");
-		int i=0;
-		while (i<4) {
-			System.out.println(listaJugadores[i].nombreJugador);
-			i+=1;
+		//new MinijuegoUno(listaJugadores);
+		int numeroDeMinijuego;
+		Random random = new Random();
+		numeroDeMinijuego= random.nextInt(listaJugadores.length)+1;
+		if (numeroDeMinijuego==1) {
+			new MinijuegoUno(listaJugadores);
+		}
+		else if (numeroDeMinijuego==2) {
+			new MinijuegoDos(listaJugadores);
+		}
+		else if (numeroDeMinijuego==3) {
+			new MinijuegoTres(listaJugadores);
+		}
+		else if (numeroDeMinijuego==4) {
+			new MinijuegoCuatro(listaJugadores);
+		}
+		else if (numeroDeMinijuego==5) {
+			new MinijuegoCinco(listaJugadores);
+		}
+		else {
+			new MinijuegoSeis(listaJugadores);
 		}
 	}
 
@@ -249,11 +262,16 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	}
 
 	private void comprobarEventoDuelo() {
-		for (int i = 0; i < listaJugadores.length - 1; i++) {
-			for (int j = i + 1; j < listaJugadores.length; j++) {
-				if (listaJugadores[i].casillaActual.numeroCasilla == listaJugadores[j].casillaActual.numeroCasilla) {
-//					evento.eventoDuelo(listaJugadores[i], listaJugadores[j]);
-					break;
+		if (this.rondasTerminadas>=2) {
+			for (int i = 0; i < listaJugadores.length -1; i++) {
+				for (int j = i + 1; j < listaJugadores.length; j++) {
+					
+					if (listaJugadores[i].casillaActual.numeroCasilla == listaJugadores[j].casillaActual.numeroCasilla) {
+						Jugador[] listaMismaPosicion= {listaJugadores[i], listaJugadores[j]};
+						pilaEventos.seek(listaJugadores[i], listaMismaPosicion, tablero);
+						pilaEventos.pop();
+						break;
+					}
 				}
 			}
 		}
@@ -283,6 +301,8 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 
 	private void siguienteTurno() {
 		if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
+			//System.out.println("Esoty pasando nates de activar un minujuego");
+			//activarMinijuego();
 			jugadorActual = listaJugadores[0];
 			cantidadRondas -= 1;
 			rondasTerminadas += 1;
@@ -290,7 +310,6 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 				finPartida();
 			}
 			else {
-
 				agregarEstrella();
 			}
 		}
@@ -337,8 +356,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		//Pruebas con el minijuego esta linea de abajo se debe borrar
-		activarMinijuego();
+		//activarMinijuego();
 		if (e.getSource() == etiquetaDados) {
 			if (movimientoJugador == false) {
 				try {

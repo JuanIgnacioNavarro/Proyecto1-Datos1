@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import juego.Inicio;
 import juego.Partida;
 import jugador.Jugador;
+import minijuego.MinijuegoUno;
 
 
 /**
@@ -48,13 +49,23 @@ public class Evento {
 	 */
 	public void ejecutarEvento(Jugador jugadorActual, Jugador[] listaJugadores, Tablero tablero) {
 		if (tipoEvento==1) {
-			JOptionPane.showMessageDialog(null, "Se ha activado el evento de minijuego, hay que a�adir el contenido despu�s", "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+			int randomInt;
+			while (true) {
+				Random random= new Random();
+				randomInt= random.nextInt(listaJugadores.length);
+				if (jugadorActual!=listaJugadores[randomInt]) {
+					break;
+				}
+			}
+			Jugador[] listaMinijuego = {jugadorActual, listaJugadores[randomInt]};
+			JOptionPane.showMessageDialog(null, "Se ha activado el evento de minijuego entre "+jugadorActual.nombreJugador+" y "+listaJugadores[randomInt].nombreJugador, "Evento Activado", JOptionPane.INFORMATION_MESSAGE);
+			new MinijuegoUno(listaMinijuego);
 		}
 		else if (tipoEvento==2){
 			int randomInt;
 			while (true) {
 				Random random= new Random();
-				randomInt= random.nextInt(Inicio.cantidadJugadores);
+				randomInt= random.nextInt(listaJugadores.length);
 				if (jugadorActual.numeroJugador!=randomInt) {
 					break;
 				}
@@ -68,7 +79,7 @@ public class Evento {
 			int randomInt;
 			while (true) {
 				Random random= new Random();
-				randomInt= random.nextInt(Inicio.cantidadJugadores);
+				randomInt= random.nextInt(listaJugadores.length);
 				if (jugadorActual.numeroJugador!=randomInt) {
 					break;
 				}
@@ -87,7 +98,7 @@ public class Evento {
 			int randomInt;
 			while (true) {
 				Random random= new Random();
-				randomInt= random.nextInt(Inicio.cantidadJugadores);
+				randomInt= random.nextInt(listaJugadores.length);
 				if (jugadorActual.numeroJugador!=randomInt) {
 					break;
 				}
@@ -101,7 +112,7 @@ public class Evento {
 			int randomInt;
 			while (true) {
 				Random random= new Random();
-				randomInt= random.nextInt(Inicio.cantidadJugadores);
+				randomInt= random.nextInt(listaJugadores.length);
 				if (jugadorActual.numeroJugador!=randomInt) {
 					break;
 				}
@@ -126,7 +137,7 @@ public class Evento {
 		Random random= new Random();
 		int cantidadARegalar=random.nextInt(cantidadMaxMonedas)+1;
 		jugadorActual.monedasJugador-=cantidadJugadores*cantidadARegalar;
-		int i= Inicio.cantidadJugadores-1;
+		int i= listaJugadores.length-1;
 		while (i!=-1) {
 			if (jugadorActual.numeroJugador==listaJugadores[i].numeroJugador) {
 			}

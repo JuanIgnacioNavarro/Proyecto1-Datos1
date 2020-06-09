@@ -40,6 +40,7 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
      */
 
     public void runMinijuego(Jugador jugador) {
+    	running=true;
         jugadorActual = jugador;
         dado1 = 0; dado2 = 0; dado3 = 0;
         definirComponentes();
@@ -149,6 +150,7 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
      * cuando ya han los jugadores han terminado
      */
     private void resultados () {
+    	running=false;
         etiquetaDados.setVisible(false);
     	narrador.setVisible(true);
          if (jugadorActual.numeroJugador==listaJugadores.length-1) {

@@ -47,6 +47,7 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
      * @param jugador
      */
     public void runMinijuego(Jugador jugador) {
+    	running=true;
         jugadorActual=jugador;
         onGame=false;
         definirComponentes();
@@ -162,6 +163,7 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
      * cuando ya han los jugadores han terminado
      */
     private void resultados () {
+    		running=false;
             listo.removeMouseListener(null);
             numero = 0;
             narrador.setVisible(true);
