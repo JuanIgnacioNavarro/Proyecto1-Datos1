@@ -231,7 +231,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		//new MinijuegoUno(listaJugadores);
 		int numeroDeMinijuego;
 		Random random = new Random();
-		numeroDeMinijuego= random.nextInt(listaJugadores.length)+1;
+		numeroDeMinijuego= random.nextInt(6)+1;
 		if (numeroDeMinijuego==1) {
 			new MinijuegoUno(listaJugadores);
 		}

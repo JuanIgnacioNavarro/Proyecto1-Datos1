@@ -24,7 +24,7 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 	private JLabel iniciar;
 	private boolean onGame = false;
 	private Timer t;
-	private int s=9,cs=99;
+	private int s=6,cs=99;
 	
 	private ActionListener acciones= new ActionListener() {
 		@Override
@@ -68,7 +68,7 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 	public void runMinijuego(Jugador jugador) {
 		running=true;
 		jugadorActual=jugador;
-		s=9;
+		s=5;
 		cs=99;
 		cantidadDeJ=0;
 		onGame=false;
@@ -88,7 +88,7 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 			temporizador.setHorizontalAlignment(SwingConstants.CENTER);
 			temporizador.setForeground(Color.white);
 			temporizador.setFont(fuenteTitulo);
-			temporizador.setText("10:00");
+			temporizador.setText("6:00");
 			etiquetaMinijuegoUno.add(temporizador);
 			
 			contador= new JLabel();
@@ -115,7 +115,7 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 		}
 		else {
 			temporizador.setVisible(true);
-			temporizador.setText("10:00");
+			temporizador.setText("6:00");
 			contador.setVisible(true);
 			contador.setText("Contador: "+cantidadDeJ);
 			iniciar.setBackground(Color.green);

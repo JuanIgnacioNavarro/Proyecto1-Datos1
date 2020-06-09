@@ -66,7 +66,7 @@ public class Evento {
 			while (true) {
 				Random random= new Random();
 				randomInt= random.nextInt(listaJugadores.length);
-				if (jugadorActual.numeroJugador!=randomInt) {
+				if (jugadorActual!=listaJugadores[randomInt]) {
 					break;
 				}
 			}
@@ -80,7 +80,7 @@ public class Evento {
 			while (true) {
 				Random random= new Random();
 				randomInt= random.nextInt(listaJugadores.length);
-				if (jugadorActual.numeroJugador!=randomInt) {
+				if (jugadorActual!=listaJugadores[randomInt]) {
 					break;
 				}
 			}
@@ -99,7 +99,7 @@ public class Evento {
 			while (true) {
 				Random random= new Random();
 				randomInt= random.nextInt(listaJugadores.length);
-				if (jugadorActual.numeroJugador!=randomInt) {
+				if (jugadorActual!=listaJugadores[randomInt]) {
 					break;
 				}
 			}
@@ -113,7 +113,7 @@ public class Evento {
 			while (true) {
 				Random random= new Random();
 				randomInt= random.nextInt(listaJugadores.length);
-				if (jugadorActual.numeroJugador!=randomInt) {
+				if (jugadorActual!=listaJugadores[randomInt]) {
 					break;
 				}
 			}

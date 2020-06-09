@@ -158,11 +158,8 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
      * cuando ya han los jugadores han terminado
      */
     private void resultados () {
-<<<<<<< HEAD
     	running=false;
-=======
         etiquetaDados.removeMouseListener(null);
->>>>>>> 0ece44c250eee162a746fecd96818224ec4a48b4
         etiquetaDados.setVisible(false);
     	narrador.setVisible(true);
          if (jugadorActual.numeroJugador==listaJugadores.length-1) {

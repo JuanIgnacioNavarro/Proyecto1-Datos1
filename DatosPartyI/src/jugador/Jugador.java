@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import juego.Bienvenida;
 import juego.Partida;
@@ -207,10 +208,12 @@ public class Jugador {
 	public void verificarTipoCasilla() {
 		if (casillaActual.tipoCasilla.equals("Verde")) {
 			this.monedasJugador += 300;
+			JOptionPane.showMessageDialog(null,"El "+this.nombreJugador+ " ha ganado 300 monedas", "Accion de casilla", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if (casillaActual.tipoCasilla.equals("Roja")) {
 			if (this.monedasJugador>300) {
 				this.monedasJugador -= 300;
+				JOptionPane.showMessageDialog(null,"El "+this.nombreJugador+  " ha perdido 300 monedas", "Accion de casilla", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		else if (casillaActual.tipoCasilla.equals("Amarilla")) {
@@ -233,7 +236,7 @@ public class Jugador {
 		casillaActual.etiquetaCasilla.repaint();
 		Partida.panelPartida.repaint();
 		try {
-			Thread.sleep(500);
+			Thread.sleep(300);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
