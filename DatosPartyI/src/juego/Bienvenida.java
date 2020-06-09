@@ -51,6 +51,7 @@ public class Bienvenida extends JFrame {
 					setVisible(false);
 					Inicio juego = new Inicio();
 					juego.setVisible(true);
+	
 				}
 			});
 		}

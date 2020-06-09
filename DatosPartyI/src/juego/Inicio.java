@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  */
 public class Inicio extends JFrame {
 	public static int cantidadJugadores = 4;
-	public static int cantidadRondas;
+	public static int cantidadRondas=2;
 	private JButton botonJugar;
 	private JLabel etiquetaCantidadJugadores;
 	private JLabel etiquetaCantidadRondas;
@@ -65,6 +65,7 @@ public class Inicio extends JFrame {
 			cantidadJugadores = cajaCantidadJugadores.getItemAt(cajaCantidadJugadores.getSelectedIndex());
 			cantidadRondas = cajaCantidadRondas.getItemAt(cajaCantidadRondas.getSelectedIndex());
 			Partida partida = new Partida();
+			this.setVisible(false);
 			partida.setVisible(true);
 		});
 	}

@@ -307,6 +307,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 			cantidadRondas -= 1;
 			rondasTerminadas += 1;
 			if (cantidadRondas == 0) {
+				JOptionPane.showMessageDialog(null,"El juego ha terminado, ver resultados?", "Jeugo terminado", JOptionPane.INFORMATION_MESSAGE);
 				finPartida();
 			}
 			else {
@@ -356,7 +357,6 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		//activarMinijuego();
 		if (e.getSource() == etiquetaDados) {
 			if (movimientoJugador == false) {
 				try {
