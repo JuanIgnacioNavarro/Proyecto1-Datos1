@@ -89,9 +89,9 @@ public class Inicio extends JFrame implements ActionListener {
 
 	private void agregarBoton() {
 		botonJugar = new JButton("JUGAR");
-		botonJugar.setSize(100, 50);
+		botonJugar.setSize(150, 50);
 		botonJugar.setLocation((this.getWidth() / 2) - (botonJugar.getWidth() / 2), (this.getHeight() - botonJugar.getHeight() - 50));
-		botonJugar.setFont(fuenteTitulo);
+		botonJugar.setFont(new Font("Comic Sans MS", 1, 19));
 		botonJugar.setLayout(null);
 		botonJugar.addActionListener(this);
 		panelInicio.add(botonJugar);

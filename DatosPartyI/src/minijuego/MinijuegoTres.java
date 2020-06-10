@@ -210,7 +210,17 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
         iniciar.removeMouseListener(null);
         narrador.setVisible(true);
         if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
-            etiquetaMinijuegoTres.setVisible(false);
+        	Thread t2= new Thread (()-> {
+				try {
+					actualizarDatosMarcador();
+					Thread.sleep(2000);
+					etiquetaMinijuegoTres.setVisible(false);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+			});
+			t2.start();
         }
     }
 }

@@ -80,6 +80,7 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
             etiquetaMinijuegoCuatro.add(etiquetaResultado);
 
         }else {
+            etiquetaDados.setIcon((new ImageIcon(dados.getImage().getScaledInstance(etiquetaDados.getWidth(), etiquetaDados.getHeight(), Image.SCALE_SMOOTH))));
             etiquetaResultado.setText("Resultados:");
             etiquetaDados.setVisible(true);
             panelMinijuegos.repaint();
@@ -163,7 +164,18 @@ public class MinijuegoCuatro extends Minijuego implements MouseListener {
         etiquetaDados.setVisible(false);
     	narrador.setVisible(true);
          if (jugadorActual.numeroJugador==listaJugadores.length-1) {
-            etiquetaMinijuegoCuatro.setVisible(false);
+        	 Thread t2= new Thread (()-> {
+					try {
+						actualizarDatosMarcador();
+						Thread.sleep(2000);
+						etiquetaMinijuegoCuatro.setVisible(false);
+					} catch (InterruptedException e) {
+						System.out.println("Estoy en el catch del ultimo jugador");
+						e.printStackTrace();
+					}
+					
+				});
+				t2.start();
         }
     }
     }

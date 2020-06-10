@@ -27,13 +27,14 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
     private int numero;
     private int puntos;
     private int diferencia;
+    private int numeroCorrecto;
     private boolean onGame = false;
 
     public MinijuegoDos(Jugador[] listaJugadores) {
 
         super(listaJugadores);
         this.setTitle("Piensa del 1 al 100!");
-        tituloMinijuego.setText("Piensa en un número del 1 al 100");
+        tituloMinijuego.setText("Piensa en un numero del 1 al 100");
         descripcionMinijuego.setText("Adivina el numero, entre mas cerca estes, mejor");
         descripcionMinijuego.setFont(fuenteTexto);
         panelMinijuegos.repaint();
@@ -100,6 +101,7 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
             etiquetaMinijuegoDos.add(listo);
         }
         else {
+        	etiquetaIngresa.setText("Ingresa el numero que estoy pensando");
             listo.setText("listo");
             listo.setBackground(Color.green);
             panelMinijuegos.repaint();
@@ -118,8 +120,10 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
                 listo.setBackground(Color.red);
                 listo.setFont(fuenteTexto);
                 String guess = adivina.getText();
+                System.out.println("El numero pensado es: "+guess);
                 int numero = parseInt(guess);
                 int correcto = (int) (1+Math.random()*99);
+                numeroCorrecto=correcto;
                 diferencia = correcto-numero;
                 puntos = 100 - Math.abs(diferencia);
                 if (numero <= 100 && numero > 0){
@@ -131,11 +135,13 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
                     }
                     System.out.println(puntos);
                     jugadorActual.puntajeMinijuego = puntos;
+                    resultados();
                 }else{
                     JOptionPane.showMessageDialog(null, "Ingresa un numero permitido", "ERROR", JOptionPane.WARNING_MESSAGE);
 
                 }
                 onGame = true;
+                
             }
             }
 
@@ -146,7 +152,7 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-            resultados();
+            //resultados();
             }
 
             @Override
@@ -168,10 +174,22 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
     private void resultados () {
     		running=false;
             listo.removeMouseListener(null);
+            adivina.setText("");
+            etiquetaIngresa.setText("Estaba pensando en el "+numeroCorrecto);
             numero = 0;
             narrador.setVisible(true);
             if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
-                etiquetaMinijuegoDos.setVisible(false);
+            	Thread t2= new Thread (()-> {
+					try {
+						actualizarDatosMarcador();
+						Thread.sleep(2000);
+						etiquetaMinijuegoDos.setVisible(false);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					
+				});
+				t2.start();
         }
     }
 
