@@ -28,7 +28,7 @@ public class Minijuego extends JFrame implements MouseListener{
 	protected boolean enJuego=false;
 	protected boolean running=false;
 //    ____
-//___/  Atributos de la interfaz gráfica
+//___/  Atributos de la interfaz grï¿½fica
 	protected JPanel panelMinijuegos;
 	protected JLabel listaEtiquetasInfo[];
 	protected JLabel listaEtiquetasPuntaje[];
@@ -42,13 +42,13 @@ public class Minijuego extends JFrame implements MouseListener{
 	protected JLabel narrador;
 	private ImageIcon imagenPlay= new ImageIcon("Imagenes/botonPlay.png");
 //    ____	
-//___/  Atributos de variables usadas varias veces en la interfaz gráficas
+//___/  Atributos de variables usadas varias veces en la interfaz grï¿½ficas
 	protected Font fuenteTexto = new Font("Comic Sans MS", 0, 18);
 	protected Font fuenteTitulo = new Font("Comic Sans MS", 1, 30);
 
 	/**
-	 * Correponde a un constructor que actúa como padre para todos los minijuegos del proyecto
-	 * Se adapta a la cantidad de jugadores (de 2 a 4) y genera toda la interfaz gráfica, también controla
+	 * Correponde a un constructor que actua como padre para todos los minijuegos del proyecto
+	 * Se adapta a la cantidad de jugadores (de 2 a 4) y genera toda la interfaz grafica, tambien controla
 	 * el orden de las instrucciones ya que cada jugador juega por separado.
 	 * 
 	 * @param listaJugadores: una lista de los jugadores que participan en este minijuego
@@ -63,15 +63,15 @@ public class Minijuego extends JFrame implements MouseListener{
 		setSize(900,700);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //Esta instrucción es para que el proyecto no se caiga
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //Esta instruccion es para que el proyecto no se caiga
 		agregarComponentesVentana();
 	}
 	
-	private void agregarComponentesVentana() { //Este método llama a más métodos, esto con el objetivo de ordenar el código
+	private void agregarComponentesVentana() { //Este metodo llama a mas metodos, esto con el objetivo de ordenar el codigo
 		agregarPanel ();//Panel de la interfaz
 		agregarMarcador();//Un marcador que lleva los puntajes del minijuego al tanto
 		this.jugadorActual=this.listaJugadores[0];
-		agregarBoton();//Este botón le permite empezar el juego a cada jugador cuando quiera
+		agregarBoton();//Este botï¿½n le permite empezar el juego a cada jugador cuando quiera
 		componentesVentenaHeredada();//Estos componentes se editan en cada clase hija
 	}
 	
@@ -83,13 +83,13 @@ public class Minijuego extends JFrame implements MouseListener{
 	}
 	
 	/**
-	 * Este método añade los marcadores de cada jugador, donde indica el nombre y el puntaje
+	 * Este metodo agrega los marcadores de cada jugador, donde indica el nombre y el puntaje
 	 */
 	private void agregarMarcador() {
 		listaEtiquetasInfo= new JLabel[listaJugadores.length];
 		listaEtiquetasPuntaje= new JLabel[listaJugadores.length];
 		int i=0;
-		while (i<listaJugadores.length) { //Como el minijuego se debe adaptar a la cantidad de jugadores se debe añadir cada marcador con un while
+		while (i<listaJugadores.length) { //Como el minijuego se debe adaptar a la cantidad de jugadores se debe agregar cada marcador con un while
 			listaEtiquetasInfo[i]= new JLabel();
 			listaEtiquetasInfo[i].setBounds(15, 130*i+20, 150, 120);
 			listaEtiquetasInfo[i].setOpaque(true);
@@ -119,7 +119,7 @@ public class Minijuego extends JFrame implements MouseListener{
 		}
 	}
 	/**
-	 * Este método añade un botón que permite controlar los timepos del minijuego, también incluye un narrador
+	 * Este metodo agrega un boton que permite controlar los timepos del minijuego, tambien incluye un narrador
 	 * El narrador le indica a los usuarios loque deben de hacer
 	 */
 	private void agregarBoton() {
@@ -143,8 +143,8 @@ public class Minijuego extends JFrame implements MouseListener{
 	}
 	
 	/**
-	 * La información en los marcadores y en el narador está cambiando constantemente (depués de cada turno hay un puntaje
-	 * diferente para  el jugador del turno y el narrador muestra otra indicación)
+	 * La informacion en los marcadores y en el narador esta cambiando constantemente (depues de cada turno hay un puntaje
+	 * diferente para  el jugador del turno y el narrador muestra otra indicacion)
 	 */
 	public void actualizarDatosMarcador() {
 		int i=0;
@@ -164,9 +164,9 @@ public class Minijuego extends JFrame implements MouseListener{
 		panelMinijuegos.repaint();
 	}
 	/**
-	 * Este método controla el turno de cada jugador, además se adapta con cada clase hija
-	 * actualiza los datos después de que cada jugador haya terminado su ronda y llama a 
-	 * mostrar los resultados si el juego terminó.
+	 * Este metodo controla el turno de cada jugador, ademas se adapta con cada clase hija
+	 * actualiza los datos despues de que cada jugador haya terminado su ronda y llama a 
+	 * mostrar los resultados si el juego termina.
 	 */
 	public void iniciarMinijuego() {
 		etiquetaTituloMinijuego.setVisible(false);
@@ -198,12 +198,12 @@ public class Minijuego extends JFrame implements MouseListener{
 	public void runMinijuego(Jugador jugador) {
 		
 
-		//Este es el método que perimte hacer el override de la herencia
+		//Este es el metodo que perimte hacer el override de la herencia
 	}
 	
 	/**
-	 * Este método muestra con distintos JLabel los reusltados del minijuego, primero ordena la lista según 
-	 * el puntaje de cada jugador y luego añade los resultados a la interfaz
+	 * Este metodo muestra con distintos JLabel los reusltados del minijuego, primero ordena la lista segun 
+	 * el puntaje de cada jugador y luego pone los resultados a la interfaz
 	 */
 	public void mostrarResultados() {
 		tituloResultados= new JLabel();
@@ -220,11 +220,11 @@ public class Minijuego extends JFrame implements MouseListener{
 		listaEtiquetasResultados= new JLabel[listaJugadores.length];
 		informacionResultados= new JLabel[listaJugadores.length];
 		
-		//En este while se añaden los JLabel de los resultados, se define el texto de cada uno considerando empates 
-		//También se añade la cantidad de monedas que se ganan a cada juagdor
-		//Está un poco desordenado, funciona para todos los casos así que no le pongan tanta atención
+		//En este while se agregan los JLabel de los resultados, se define el texto de cada uno considerando empates 
+		//Tambien se agrega la cantidad de monedas que se ganan a cada juagdor
+		//Esta un poco desordenado, funciona para todos los casos asi que no le pongan tanta atencion
 		while (i<listaJugadores.length) {
-			System.out.println("Añadiendo las etiquetas de resultados ");
+			System.out.println("Agragando las etiquetas de resultados ");
 			listaEtiquetasResultados[i]= new JLabel();
 			listaEtiquetasResultados[i].setBounds(283, 130*i+130, 500, 100);
 			listaEtiquetasResultados[i].setOpaque(true);
@@ -237,11 +237,11 @@ public class Minijuego extends JFrame implements MouseListener{
 			informacionResultados[i].setFont(fuenteTexto);
 			informacionResultados[i].setForeground(Color.white);
 			informacionResultados[i].setHorizontalAlignment(SwingConstants.CENTER);
-			//En esta serie de condicionales considera los posibles empates de los jugadores y añade las monedas a cada uno
+			//En esta serie de condicionales considera los posibles empates de los jugadores y agrega las monedas a cada uno
 			if (i==0) {
 				listaJugadores[listaJugadores.length-1-i].textoResultados= " gana "+(listaJugadores.length+1-i)*100+" monedas!";
 				informacionResultados[i].setText((i+1)+") "+listaJugadores[listaJugadores.length-1-i].nombreJugador.concat(listaJugadores[listaJugadores.length-1-i].textoResultados));
-				listaJugadores[listaJugadores.length-1-i].monedasJugador+=(listaJugadores.length+1-i)*100; //Añade monedas aljugador
+				listaJugadores[listaJugadores.length-1-i].monedasJugador+=(listaJugadores.length+1-i)*100; //Agrega monedas aljugador
 			}
 			else if (listaJugadores[listaJugadores.length-1-i].puntajeMinijuego==listaJugadores[listaJugadores.length-i].puntajeMinijuego){
 				listaJugadores[listaJugadores.length-1-i].textoResultados=listaJugadores[listaJugadores.length-i].textoResultados;
@@ -253,7 +253,7 @@ public class Minijuego extends JFrame implements MouseListener{
 				cantidadEmpates=0;
 				listaJugadores[listaJugadores.length-1-i].textoResultados= " gana "+(listaJugadores.length+1-i)*100+" monedas!";
 				informacionResultados[i].setText((i+1)+") "+listaJugadores[listaJugadores.length-1-i].nombreJugador.concat(listaJugadores[listaJugadores.length-1-i].textoResultados));
-				listaJugadores[listaJugadores.length-1-i].monedasJugador+=(listaJugadores.length+1-i)*100; //Añade monedas aljugador
+				listaJugadores[listaJugadores.length-1-i].monedasJugador+=(listaJugadores.length+1-i)*100; //Aï¿½ade monedas aljugador
 			}
 			listaEtiquetasResultados[i].add(informacionResultados[i]);
 			
@@ -277,7 +277,7 @@ public class Minijuego extends JFrame implements MouseListener{
 		}
 	}
 	/**
-	 * Corresponde un Selction Sort que ordena la lista de jugadores según su puntaje
+	 * Corresponde un Selction Sort que ordena la lista de jugadores segun su puntaje
 	 * Esto facilita mostrar los resultados
 	 */
 	public void ordenarResultados() { 
@@ -333,25 +333,21 @@ public class Minijuego extends JFrame implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

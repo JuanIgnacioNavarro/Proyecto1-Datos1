@@ -63,7 +63,7 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
     		temporizador.setText("10:00");
     		etiquetaMinijuegoCinco.add(temporizador);
     		
-    		resultado= new JLabel(); //En este Label se mostrará el resulatdo para mantener el orden
+    		resultado= new JLabel(); //En este Label se mostrara el resulatdo para mantener el orden
     		resultado.setSize(etiquetaMinijuegoCinco.getWidth(), etiquetaMinijuegoCinco.getHeight()/4);
     		resultado.setLocation(0, etiquetaMinijuegoCinco.getHeight()/4);
     		resultado.setHorizontalAlignment(SwingConstants.CENTER);

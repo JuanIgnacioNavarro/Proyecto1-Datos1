@@ -111,7 +111,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private void agregarDados() {
 		etiquetaDados = new JLabel();
 		etiquetaDados.setSize(120, 120);
-		etiquetaDados.setLocation(20, panelPartida.getHeight() - etiquetaDados.getHeight() - 20);
+		etiquetaDados.setLocation(20, this.getHeight() - etiquetaDados.getHeight() - 40);
 		etiquetaDados.setIcon(new ImageIcon(imagenDados.getImage().getScaledInstance(etiquetaDados.getWidth(), etiquetaDados.getHeight(), Image.SCALE_SMOOTH)));
 		etiquetaDados.addMouseListener(this);
 		panelPartida.add(etiquetaDados);
@@ -130,7 +130,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private void agregarTienda() {
 		etiquetaTienda = new JLabel();
 		etiquetaTienda.setSize(100, 100);
-		etiquetaTienda.setLocation(panelPartida.getWidth() - etiquetaTienda.getWidth() - 20, 20);
+		etiquetaTienda.setLocation(this.getWidth() - etiquetaTienda.getWidth() - 20, 20);
 		etiquetaTienda.setIcon(new ImageIcon(imagenTienda.getImage().getScaledInstance(etiquetaTienda.getWidth(), etiquetaTienda.getHeight(), Image.SCALE_SMOOTH)));
 		etiquetaTienda.addMouseListener(this);
 		panelPartida.add(etiquetaTienda);
@@ -181,7 +181,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 			
 			etiquetaFondoNarrador=new JLabel ();
 			etiquetaFondoNarrador.setSize(205, 100);
-			etiquetaFondoNarrador.setLocation(panelPartida.getWidth() - etiquetaFondoNarrador.getWidth() - 20, panelPartida.getHeight() - etiquetaFondoNarrador.getHeight() - 20);
+			etiquetaFondoNarrador.setLocation(this.getWidth() - etiquetaFondoNarrador.getWidth() - 20, this.getHeight() - etiquetaFondoNarrador.getHeight() - 40);
 			etiquetaFondoNarrador.setOpaque(true);
 			etiquetaFondoNarrador.setBackground(colorResalte);
 			panelPartida.add(etiquetaFondoNarrador);
@@ -429,9 +429,5 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		else if (e.getSource() == etiquetaTienda) {
 			etiquetaTienda.setBackground(Bienvenida.colorVentana);
 		}
-	}
-
-	public static void main(String[] args){
-		Partida p = new Partida();
 	}
 }

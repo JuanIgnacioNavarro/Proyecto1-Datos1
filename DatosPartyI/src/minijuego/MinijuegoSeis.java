@@ -62,7 +62,7 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 		super(listaJugadores);
 		this.setTitle("Memoriza la lista!");
 		tituloMinijuego.setText("Memoriza la lista");
-		descripcionMinijuego.setText("La lista saldrá por 5s, memorizala!");
+		descripcionMinijuego.setText("La lista saldra por 5s, memorizala!");
 		panelMinijuegos.repaint();
 	}
 	@Override
@@ -101,7 +101,7 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 			lista.setBackground(Color.white);
 			lista.setFont(fuenteTexto);
 			lista.setForeground(Color.yellow);
-			anadirTextoLista(); //Este método añade el texto a la lista y crea la lista que se va a usar en el juego
+			anadirTextoLista(); //Este mï¿½todo aï¿½ade el texto a la lista y crea la lista que se va a usar en el juego
 			etiquetaMinijuegoSeis.add(lista);
 			
 			responder= new JLabel();
@@ -122,7 +122,7 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 			responder.setFont(fuenteTitulo);
 			responder.setBackground(Color.green);
 			responder.setText("Empezar!");
-			anadirTextoLista(); //Este método añade el texto a la lista y crea la lista que se va a usar en el juego
+			anadirTextoLista(); //Este metodo agrega el texto a la lista y crea la lista que se va a usar en el juego
 			panelMinijuegos.repaint();
 		}
 		if (jugadorActual.numeroJugador==0) {
@@ -146,7 +146,7 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 							int numeroRespuesta= Integer.parseInt(respuesta.getText());
 							resultados(numeroRespuesta);
 						}catch(Exception l) {
-							JOptionPane.showMessageDialog(null, "La lista solo tiene números enteros, debe ingresar solo uno", "Error al ingresar numero", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "La lista solo tiene numeros enteros, debe ingresar solo uno", "Error al ingresar numero", JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
 				}
@@ -193,7 +193,7 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 		}
 		textoLista=textoLista.concat(listaJuego[this.listaJuego.length-1]+"]");
 		lista.setText(textoLista);
-		lista.setVisible(false);//después de probarlo cmabiarlo por false
+		lista.setVisible(false);//despuï¿½s de probarlo cmabiarlo por false
 		System.out.println(lista.getText());
 	}
 	private void actualizarTempo() {
