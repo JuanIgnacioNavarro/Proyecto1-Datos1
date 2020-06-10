@@ -14,7 +14,6 @@ public class PilaEventos {
 //    __ Se hizo un array con todos los números de los eventos dela pila
 //___/
 	public int[] arrayTiposEventos= {1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,4,4,4,5,5,5,6,7,7,7,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9};
-	//public int[] arrayTiposEventos= {1,1,1,1};
 
 	/**
 	 * Constructor de la PilaEventos
@@ -70,9 +69,7 @@ public class PilaEventos {
 	 */
 	public void imprimirPila () {
 		Evento eventoActual= eventoHead;
-		System.out.println ("Los tipos de eventos en el stack son");
 		while (eventoActual!=null) {
-			System.out.print(eventoActual.tipoEvento+ " ,");
 			eventoActual= eventoActual.next;
 		}
 	}

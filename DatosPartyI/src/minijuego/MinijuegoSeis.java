@@ -156,7 +156,6 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 						t.start();
 					}
 					else {
-						System.out.println("Lo escrito dentro del jtextfield es"+respuesta.getText());
 						try {
 							int numeroRespuesta= Integer.parseInt(respuesta.getText());
 							resultados(numeroRespuesta);
@@ -212,7 +211,6 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 		textoLista=textoLista.concat(listaJuego[this.listaJuego.length-1]+"]");
 		lista.setText(textoLista);
 		lista.setVisible(false);//despu�s de probarlo cmabiarlo por false
-		System.out.println(lista.getText());
 	}
 	/**
 	 * Como el reloj se debe actualizar cada 10ms entonces este metodo actualiza su label de temporizador cada vez que cambia

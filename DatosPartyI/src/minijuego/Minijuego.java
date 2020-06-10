@@ -185,7 +185,6 @@ public class Minijuego extends JFrame implements MouseListener{
 	public void iniciarMinijuego() {
 		etiquetaTituloMinijuego.setVisible(false);
 		narrador.setVisible(false);
-		System.out.println("Acabo de iniciar un minijuego run minijuego");
 		runMinijuego(jugadorActual);
 		
 		
@@ -242,7 +241,6 @@ public class Minijuego extends JFrame implements MouseListener{
 		//En este while se agregan los JLabel de los resultados, se define el texto de cada uno considerando empates 
 		//Tambien se agrega la cantidad de monedas que se ganan a cada juagdor
 		while (i<listaJugadores.length) {
-			System.out.println("Agragando las etiquetas de resultados ");
 			listaEtiquetasResultados[i]= new JLabel();
 			listaEtiquetasResultados[i].setBounds(283, 130*i+130, 500, 100);
 			listaEtiquetasResultados[i].setOpaque(true);
@@ -355,7 +353,6 @@ public class Minijuego extends JFrame implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource()==botonPlay) {
 			if (running==false) {
-			System.out.println("Iniciar Minijuego para "+jugadorActual.nombreJugador);
 			iniciarMinijuego();
 			}
 		}
