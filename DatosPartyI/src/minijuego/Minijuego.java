@@ -18,7 +18,14 @@ import javax.swing.SwingConstants;
 import juego.Bienvenida;
 import jugador.Jugador;
 
-
+/**
+ * Corresponde a la clase Padre de los minijuegos, como estos compartían tantas caracteristicas similares se decidio llevar 
+ * a cabo los minijuegos con herencia
+ * En general esta clase controla la interfaz grafica que utiliza Swing, metodos que controlan los turnos de cada jugador para jugar
+ * y metodos de ordenamiento y muestra de los resultados obtenidos en estos
+ * @author Juan Navarro
+ *
+ */
 public class Minijuego extends JFrame implements MouseListener{
 //    ____
 //___/  Atributos de control de la clase minijuego e hijas
@@ -42,7 +49,7 @@ public class Minijuego extends JFrame implements MouseListener{
 	protected JLabel narrador;
 	private ImageIcon imagenPlay= new ImageIcon("Imagenes/botonPlay.png");
 //    ____	
-//___/  Atributos de variables usadas varias veces en la interfaz grï¿½ficas
+//___/  Atributos de variables usadas varias veces en la interfaz grafica
 	protected Font fuenteTexto = new Font("Comic Sans MS", 0, 18);
 	protected Font fuenteTitulo = new Font("Comic Sans MS", 1, 30);
 
@@ -67,6 +74,9 @@ public class Minijuego extends JFrame implements MouseListener{
 		agregarComponentesVentana();
 	}
 	
+	/**
+	 * Corresponde a un metodo que llama a otros metodos que añaden los componentes de la interfaz grafica
+	 */
 	private void agregarComponentesVentana() { //Este metodo llama a mas metodos, esto con el objetivo de ordenar el codigo
 		agregarPanel ();//Panel de la interfaz
 		agregarMarcador();//Un marcador que lleva los puntajes del minijuego al tanto
@@ -75,6 +85,10 @@ public class Minijuego extends JFrame implements MouseListener{
 		componentesVentenaHeredada();//Estos componentes se editan en cada clase hija
 	}
 	
+	/**
+	 * Como su nombre lo dice añade un panel
+	 * el nombre de este es panelMinijuegos
+	 */
 	private void agregarPanel () {
 		panelMinijuegos=new JPanel();
 		this.getContentPane().add(panelMinijuegos);
@@ -119,7 +133,7 @@ public class Minijuego extends JFrame implements MouseListener{
 		}
 	}
 	/**
-	 * Este metodo agrega un boton que permite controlar los timepos del minijuego, tambien incluye un narrador
+	 * Este metodo agrega un boton que permite controlar los tiempos del minijuego, tambien incluye un narrador
 	 * El narrador le indica a los usuarios loque deben de hacer
 	 */
 	private void agregarBoton() {
@@ -143,7 +157,7 @@ public class Minijuego extends JFrame implements MouseListener{
 	}
 	
 	/**
-	 * La informacion en los marcadores y en el narador esta cambiando constantemente (depues de cada turno hay un puntaje
+	 * La informacion en los marcadores y en el narador esta cambiando constantemente (despues de cada turno hay un puntaje
 	 * diferente para  el jugador del turno y el narrador muestra otra indicacion)
 	 */
 	public void actualizarDatosMarcador() {
@@ -195,6 +209,11 @@ public class Minijuego extends JFrame implements MouseListener{
 		botonPlay.setVisible(true);
 	}
 	
+	/**
+	 * Corresponde al metodo que corre la parte del minijuego en la cula interactua con el usuario
+	 * Cada clase hija usa este metodo pues son diferentes
+	 * @param jugador
+	 */
 	public void runMinijuego(Jugador jugador) {
 		
 
@@ -222,7 +241,6 @@ public class Minijuego extends JFrame implements MouseListener{
 		
 		//En este while se agregan los JLabel de los resultados, se define el texto de cada uno considerando empates 
 		//Tambien se agrega la cantidad de monedas que se ganan a cada juagdor
-		//Esta un poco desordenado, funciona para todos los casos asi que no le pongan tanta atencion
 		while (i<listaJugadores.length) {
 			System.out.println("Agragando las etiquetas de resultados ");
 			listaEtiquetasResultados[i]= new JLabel();
@@ -262,6 +280,11 @@ public class Minijuego extends JFrame implements MouseListener{
 		}
 		ordenarResultadosNum();
 	}
+	
+	/**
+	 * Es un metodo de ayuda que permite ordenar la lista de los jugadores segun su numero de jugador
+	 * corresponde al alforitmo de selection llamado selectionSort
+	 */
 	public void ordenarResultadosNum() {
 		int n= listaJugadores.length;
 		for (int i=0; i<n-1; i++) {
@@ -277,7 +300,7 @@ public class Minijuego extends JFrame implements MouseListener{
 		}
 	}
 	/**
-	 * Corresponde un Selction Sort que ordena la lista de jugadores segun su puntaje
+	 * Corresponde un Selection Sort que ordena la lista de jugadores segun su puntaje
 	 * Esto facilita mostrar los resultados
 	 */
 	public void ordenarResultados() { 
@@ -294,7 +317,11 @@ public class Minijuego extends JFrame implements MouseListener{
 		listaJugadores[i]= jugadorTemporal;
 		}
 	}
-	
+	/**
+	 * La ventana de cada minijuego tiene un nombre y description difernete,
+	 * en estos labels se debe especificar, aunque se crean aqui la informacion
+	 * que traen se añade en cada una de las clases hijas
+	 */
 	protected void componentesVentenaHeredada() {
 		etiquetaTituloMinijuego= new JLabel();
 		etiquetaTituloMinijuego.setBounds(263, 150, 540, 200);
@@ -319,7 +346,11 @@ public class Minijuego extends JFrame implements MouseListener{
 		etiquetaTituloMinijuego.add(descripcionMinijuego);
 		
 	}
-	
+	/**
+	 * El label denominado botonPlay funciona para poder controlar las rondas de los jugadores,
+	 * mientras estos juegan (this.running==true) no se puede usar el boton, pero una vez que terminan
+	 * es lo que permite cambiar de jugadores
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource()==botonPlay) {

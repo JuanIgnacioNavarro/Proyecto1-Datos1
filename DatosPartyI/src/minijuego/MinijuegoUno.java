@@ -13,7 +13,13 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import jugador.Jugador;
-
+/**
+ * Esta es la clase que contiene el codigo del minijuego uno
+ * este trata de que cada jugador en su turno disponga de 6 segundos para presionar la mayor cantidad de veces
+ * que pueda la letra j del teclado, el que logra hacerlo mas veces gana el minijuego
+ * @author Juan Navarro
+ *
+ */
 public class MinijuegoUno extends Minijuego implements  MouseListener{
 	
 	public Jugador jugadorActual;
@@ -26,6 +32,11 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 	private Timer t;
 	private int s=6,cs=99;
 	
+	/**
+	 * El metodo de la libreria Timer necesita una accion implementada con un ActionListener
+	 * aunque este no es un metodo lo que hace es ejecutar una nueva accion cada vez que se utiliza
+	 * a grandes rasgos lo que hace es actualizar la etiqueta de temporizador cada centesima de segundo
+	 */
 	private ActionListener acciones= new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -45,7 +56,11 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 		}
 	};
 
-	
+	/**
+	 * En este contructor se contruye un nuevo minijuego que hereda la interfaz y demas metodo de la
+	 * clase Minijuego
+	 * @param listaJugadores
+	 */
 	public MinijuegoUno(Jugador listaJugadores[]) {
 		super(listaJugadores);
 		this.setTitle("Teclado rapido!");
@@ -53,12 +68,19 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 		descripcionMinijuego.setText("Presiona la tecla j la mayor cantidad de veces que puedas en 10s");
 		panelMinijuegos.repaint();
 	}
+	/**
+	 * Corresponde a un metodo que actualiza el temporizador, cambia el estring que aparece en este 
+	 * cada que vez que se llama
+	 */
 	private void actualizarTempo() {
 		String tiempo= s+ " : "+(cs<=9?"0":"")+cs;
 		temporizador.setText(tiempo);
 		panelMinijuegos.repaint();
 	}
-	
+	/**
+	 * Como este minijuego cuenta la cantidad de teclas j que presiona el jugador entonces se actualiza un label
+	 * que sobreescribe un nuevo dato en la etiqeuta de contador
+	 */
 	private void actualizarContador() {
 		contador.setText("Contador: "+Math.round(cantidadDeJ));
 		panelMinijuegos.repaint();
@@ -74,6 +96,10 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 		onGame=false;
 		definirComponentes();
 	}
+	/**
+	 * Crea o reescirbe las etiquetas que muestran toda las infromacion del minijuego, esto dependiendo
+	 * en que si el jugador es el primero que aparece en la lista de los que estan jugando o es otro
+	 */
 	private void definirComponentes() {
 		if (jugadorActual.numeroJugadorMinijuego==0) {
 			etiquetaMinijuegoUno= new JLabel ();
@@ -204,7 +230,12 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 			}
 		});
 	}
-	
+	/**
+	 * En este metodo se cambia el atributo de cada jugador por un nuevo puntaje obtenido
+	 * Luego con este puntaje se decide el orden de los resultados del minujuego
+	 * Tmabien esconde las etiquetas para evitar problemas con el codigo mientras cambia de jugador, para que el proximo juegue el minijuego
+	 * En caso de ser el ultimo cierra todo
+	 */
 	private void resultados () {
 		running=false;
 		iniciar.setVisible(true);

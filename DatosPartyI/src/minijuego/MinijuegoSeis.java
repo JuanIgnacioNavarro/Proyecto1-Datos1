@@ -15,7 +15,13 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import jugador.Jugador;
-
+/**
+ * Corrsponde a la clase que controla el minijuego 6, este se trata de mostrar una lista por unos segundos 
+ * y busca que el jugador la pueda memorizar, para verificarlo despues pregunta por un elemento random
+ * de la lista que salio
+ * @author Juan Navarro
+ *
+ */
 public class MinijuegoSeis extends Minijuego implements MouseListener{
 	
 //Atributos de las etiquetas del juego
@@ -57,7 +63,10 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 		 
 	 };
     
-	
+	/**
+	 * contructor del minijuego 6, usa el contructor de la clase padre 
+	 * @param listaJugadores
+	 */
 	public MinijuegoSeis(Jugador listaJugadores[]) {
 		super(listaJugadores);
 		this.setTitle("Memoriza la lista!");
@@ -74,7 +83,10 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 		onGame= false; 
 		definirComponentes();
 	}
-	
+	/**
+	 * Crea o reescirbe las etiquetas que muestran toda las infromacion del minijuego, esto dependiendo
+	 * en que si el jugador es el primero que aparece en la lista de los que estan jugando o es otro
+	 */
 	private void definirComponentes () {
 		if (jugadorActual.numeroJugador==0) {
 			etiquetaMinijuegoSeis= new JLabel ();
@@ -127,7 +139,10 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 		}
 		if (jugadorActual.numeroJugador==0) {
 			responder.addMouseListener(new MouseListener() {
-
+				/**
+				 * Comprueba si se presiono el boton de iniciar, y a partir de ahi incia el minijuego
+				 * al hacerlo inicia el temporizador y habilita los labels que solo se pueden ver en ese lapso
+				 */
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					
@@ -179,7 +194,10 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 		}
 		 
 	}
-	
+	/**
+	 * Este metodo anade el texto a la lista que se crea con numero de dos difitos al azar
+	 * Tambien gegnera un texto con toda la informacion que contiene y lo coloca en el label de la lista que se habilito
+	 */
 	private void anadirTextoLista() {
 		for (int i=0; i< this.listaJuego.length ; i++) {
 			int randomInt;
@@ -196,6 +214,9 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 		lista.setVisible(false);//despuï¿½s de probarlo cmabiarlo por false
 		System.out.println(lista.getText());
 	}
+	/**
+	 * Como el reloj se debe actualizar cada 10ms entonces este metodo actualiza su label de temporizador cada vez que cambia
+	 */
 	private void actualizarTempo() {
 		String tiempo=s+ " : "+(cs<=9?"0":"")+cs;
 		temporizador.setText(tiempo);
@@ -206,6 +227,10 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 		}
 		panelMinijuegos.repaint();
 	}
+	/**
+	 * Se atcualiza el panel al añadir un nuevo componente de tipo JTextField que permite
+	 * escirbir texto en el
+	 */
 	private void actualizarBoton() {
 		responder.setVisible(true);
 		lista.setVisible(false);
@@ -226,7 +251,11 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 			panelMinijuegos.repaint();
 		}
 	}
-	
+	/**
+	 * Revisa si la respuesta dada por el jugador es correcta y de serlo le asigan un puntaje establecido
+	 * este puntaje es luego usado por el metodo resultado de su clase padre para poder definir un orden con el que se entregan monedas
+	 * @param numeroRespuesta
+	 */
 	private void resultados(int numeroRespuesta) {
 		running=false;
 		responder.setFont(new Font("Comic Sans MS", 0, 14));

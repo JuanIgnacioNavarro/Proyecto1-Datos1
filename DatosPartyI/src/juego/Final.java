@@ -13,7 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import jugador.Jugador;
-
+/**
+ * Esta corresponde a la clase que ordena los resultados obtenidos en el juego DatosParty
+ * Primer oordena la lista jugadores segun su parametro de puntajeTotal y despues añade 
+ * un resumen de los datos de cada jugador con respecto a estrellas y monedas 
+ * segun el orden obtenido antes 
+ * @author Juan Navarro
+ *
+ */
 public class Final extends JFrame implements MouseListener {
 	private Jugador[] listaJugadores;
 //Atributos del Frame
@@ -32,7 +39,10 @@ public class Final extends JFrame implements MouseListener {
 	private JLabel[] labelEstrellas;
 	private JLabel[] labelPuntajes;
 
-	
+	/**
+	 * Corresponde al contructor de la clase Final, primero ordena la lista segun los resultados y luego llama a un metodo para imprimir los resultados
+	 * @param listaJugadores, pues con cada jugador obtiene toda la informacion que ocupa
+	 */
 	public Final(Jugador listaJugadores[]) {
 		this.listaJugadores= listaJugadores;
 		for (int i=0; i< listaJugadores.length; i++) {
@@ -54,7 +64,9 @@ public class Final extends JFrame implements MouseListener {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		componentesVentana();
 	}
-	
+	/**
+	 * Es un metodo para anadir el panel y cambiar su configuracion
+	 */
 	private void componentesVentana() {
 		panelResultados= new JPanel();
 		this.getContentPane().add(panelResultados);
@@ -62,7 +74,10 @@ public class Final extends JFrame implements MouseListener {
 		panelResultados.setBackground(Color.white);
 		agregarEtiquetas();
 	}
-	
+	/**
+	 * En este metodo se anaden todas las etiquetas como se deben poner las mismas etiqeuatas para cada juagdor
+	 * (consus datos respectivos) se hizo una lista de etiquetas ue contienen informacion similar y se evaluo para cada jugador 
+	 */
 	private void agregarEtiquetas() {
 		agregarEtiquetasUnicas();
 		listaEtiquetasInfo= new JLabel[listaJugadores.length];
@@ -73,22 +88,16 @@ public class Final extends JFrame implements MouseListener {
 		labelEstrellas= new JLabel[listaJugadores.length];
 		labelPuntajes= new JLabel[listaJugadores.length];
 		int altoLabel= 500/listaJugadores.length;
-				
-		/*
-		 * va desde el 90 al 590 es decir hay500
-		 * cada uno medira 500/cantidad de jugadores-10
-		 * posicion en 500/ cantidad de jugadores*(i+1) 
-		 * ancho será el doble 
-		 * 
-		 */
 		
-		for (int i=0; i< listaJugadores.length; i++) {
+		for (int i=0; i< listaJugadores.length; i++) { //Lo recorre para cada jugador de la lista y estos ya se encuentran en orden segun su puntaje
+			//Etiqueta que contiene al resto de las etiqeutas para un respectivo jugador
 			listaEtiquetasInfo[i]= new JLabel();
 			listaEtiquetasInfo[i].setBounds(300-altoLabel ,80+altoLabel*i, altoLabel*2 , altoLabel-20);
 			listaEtiquetasInfo[i].setOpaque(true);
 			listaEtiquetasInfo[i].setBackground(Color.white);
 			panelResultados.add(listaEtiquetasInfo[i]);
 			
+			//Etiqueta que contiene la posicion en la que quedo cada jugador y su nombre
 			labelPosicion[i]= new JLabel ();
 			labelPosicion[i].setSize(listaEtiquetasInfo[i].getWidth(), listaEtiquetasInfo[i].getHeight()/3);
 			labelPosicion[i].setLocation(0, 0);
@@ -98,12 +107,14 @@ public class Final extends JFrame implements MouseListener {
 			labelPosicion[i].setText("Posicion: "+(i+1)+" ,"+ listaJugadores[i].nombreJugador);
 			listaEtiquetasInfo[i].add(labelPosicion[i]);
 			
+			//Etiqueta que contiene la imagen de las monedas
 			labelImagenMonedas[i]= new JLabel();
 			labelImagenMonedas[i].setSize(listaEtiquetasInfo[i].getHeight()/3,listaEtiquetasInfo[i].getHeight()/3);
 			labelImagenMonedas[i].setLocation(0, listaEtiquetasInfo[i].getHeight()/3);
 			labelImagenMonedas[i].setIcon(new ImageIcon(imagenMoneda.getImage().getScaledInstance(labelImagenMonedas[i].getWidth(), labelImagenMonedas[i].getHeight(), Image.SCALE_SMOOTH)));
 			listaEtiquetasInfo[i].add(labelImagenMonedas[i]);
 			
+			//Etiqueta que contiene la informacion de las monedas
 			labelMonedas[i]= new JLabel ();
 			labelMonedas[i].setSize(listaEtiquetasInfo[i].getHeight()/4+30, listaEtiquetasInfo[i].getHeight()/3);
 			labelMonedas[i].setLocation(listaEtiquetasInfo[i].getHeight()/4+10, listaEtiquetasInfo[i].getHeight()/3);
@@ -113,12 +124,14 @@ public class Final extends JFrame implements MouseListener {
 			labelMonedas[i].setText(""+listaJugadores[i].monedasJugador);
 			listaEtiquetasInfo[i].add(labelMonedas[i]);
 			
+			//Etiqueta que contiene la imagen de las estrellas
 			labelImagenEstrellas[i]= new JLabel();
 			labelImagenEstrellas[i].setSize(listaEtiquetasInfo[i].getHeight()/3,listaEtiquetasInfo[i].getHeight()/3);
 			labelImagenEstrellas[i].setLocation(listaEtiquetasInfo[i].getWidth()/2+30, listaEtiquetasInfo[i].getHeight()/3);
 			labelImagenEstrellas[i].setIcon(new ImageIcon(imagenEstrella.getImage().getScaledInstance(labelImagenEstrellas[i].getWidth(), labelImagenEstrellas[i].getHeight(), Image.SCALE_SMOOTH)));
 			listaEtiquetasInfo[i].add(labelImagenEstrellas[i]);
 			
+			//etiqueta que contiene la informacion de las monedas de cada jugador
 			labelEstrellas[i]= new JLabel ();
 			labelEstrellas[i].setSize(listaEtiquetasInfo[i].getHeight()/4+10, listaEtiquetasInfo[i].getHeight()/3);
 			labelEstrellas[i].setLocation(listaEtiquetasInfo[i].getWidth()*3/4+10, listaEtiquetasInfo[i].getHeight()/3);
@@ -128,6 +141,7 @@ public class Final extends JFrame implements MouseListener {
 			labelEstrellas[i].setText(""+listaJugadores[i].estrellasJugador);
 			listaEtiquetasInfo[i].add(labelEstrellas[i]);
 			
+			//etiqueta que contiene los puntajes de cada jugador
 			labelPuntajes[i]= new JLabel ();
 			labelPuntajes[i].setSize(listaEtiquetasInfo[i].getWidth(), listaEtiquetasInfo[i].getHeight()/3);
 			labelPuntajes[i].setLocation(0, listaEtiquetasInfo[i].getHeight()*2/3);
@@ -140,7 +154,11 @@ public class Final extends JFrame implements MouseListener {
 		
 		
 	}
-	
+	/**
+	 * Este metodo anade las etiquetas que no necesitan repeticiones pues son unicas en el la clase
+	 * tambien contiene al boton de finalizar que cierra la ventana para terminar el juego por completo
+	 * el obejtivo de este metodo fu eno sobrecargar tanto el metodo de anadirEtiquetas
+	 */
 	private void agregarEtiquetasUnicas() {
 		labelTitulo= new JLabel();
 		labelTitulo.setBounds(150, 10, 300, 70);

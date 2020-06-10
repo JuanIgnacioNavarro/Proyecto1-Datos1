@@ -12,7 +12,13 @@ import javax.swing.Timer;
 
 
 import jugador.Jugador;
-
+/**
+ * Esta es la clase del minijuego 5, corresponde a un minijuego que reta al jugador a parar un reloj que 
+ * se muestra en los primeros 3 segundos desde el decimo en los tres segundos, de lograr pararlo justo cuando el reloj
+ * marca los 3 segundos se obtendran 70 puntos, si no entre mas se aleje obtendra menos puntos
+ * @author Juan Navarro
+ *
+ */
 public class MinijuegoCinco extends Minijuego implements MouseListener {
 
 // Atributos de las etiquetas del juego
@@ -28,11 +34,16 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
 	private Timer t;
 	private int s=0, cs=99;
 	
+	/**
+	 * Metodo contructor del minijuego, aquí usa el contructor de la clase padre
+	 * que crea la interfaz grafica basica, el resto se desarrolla en esta clase
+	 * @param listaJugadores
+	 */
     public MinijuegoCinco (Jugador listaJugadores[]) {
     	super(listaJugadores);
     	this.setTitle("Reloj Mental!");
     	tituloMinijuego.setText("Reloj Mental");
-    	descripcionMinijuego.setText("Intenta parar el reloj a los 3s, usa tu mente");
+    	descripcionMinijuego.setText("Intenta parar el reloj cuando marque 3s, usa tu mente");
     	panelMinijuegos.repaint();
     }
     
@@ -45,7 +56,10 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
     	onGame= false;
     	definirComponentes();
     }
-    
+    /**
+	 *Crea o reescirbe las etiquetas que muestran toda las infromacion del minijuego, esto dependiendo
+	 * en que si el jugador es el primero que aparece en la lista de los que estan jugando o es otro
+     */
     private void definirComponentes () {
     	if (jugadorActual.numeroJugador==0) {
     		etiquetaMinijuegoCinco= new JLabel ();
@@ -145,13 +159,19 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
 					actualizarTempo();
 				}
 			};
-			
+			/**
+			 * Es un metodo que permite actualizar el temporizador
+			 */
 			private void actualizarTempo() {
 				String tiempo=s+ " : "+(cs<=9?"0":"")+cs;
 				temporizador.setText(tiempo);
 				panelMinijuegos.repaint();
 			}
-			
+			/**
+			 * Define el puntaje obtenido por cada jugador, basado en que tan cercano estuvo
+			 * su resultado de los tres segundos del reloj
+			 * Tambien esconde los label que pueden traer problemas al cambiar de jugador o mostrar los resultados
+			 */
 			private void resultados() {
 				running=false;
 	    		System.out.println("Estoy en resultados");
