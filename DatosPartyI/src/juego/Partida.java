@@ -50,7 +50,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private Casilla casillaAlazar;
 	public PilaEventos pilaEventos = new PilaEventos();
 
-	public static boolean eventoActivado, minijuegoActivado, movimientoJugador, partidaIniciada;
+	public static boolean eventoActivado, minijuegoActivado, movimientoJugador, partidaIniciada, eventoDueloActivado;
 	private int numeroCasillaAlazar, cantidadRondas = Inicio.cantidadRondas, rondasTerminadas = 1, numeroDadoUno, numeroDadoDos, numeroDados;
 	
 	/**
@@ -302,7 +302,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 				//Debe comprobar si las posiciones de los jugadores son las mismas
 				if (listaJugadores[i].casillaActual.numeroCasilla == listaJugadores[j].casillaActual.numeroCasilla && 
 				listaJugadores[i].casillaActual.numeroCasilla != 1 && listaJugadores[j].casillaActual.numeroCasilla != 1) {
-					minijuegoActivado = true; // el minijuego activado es para bloquear el boton de los dados
+					eventoDueloActivado = true; // el minijuego activado es para bloquear el boton de los dados
 					Jugador[] listaMismaPosicion = {listaJugadores[i], listaJugadores[j]}; //Esta es la lista de los jugadores que se encunetran en la misma posicion 
 					activarMinijuego(listaMismaPosicion); //Se activa uno de los minijuegos
 					break;

@@ -266,10 +266,11 @@ public class MinijuegoSeis extends Minijuego {
 		respuesta.setVisible(false);
 		temporizador.setVisible(false);
 		if (jugadorActual.numeroJugadorMinijuego==listaJugadores.length-1) {
-			if (Partida.minijuegoActivado==true) {
+			if (Partida.eventoDueloActivado==true) {
 				eventoDuelo();
-				Partida.minijuegoActivado= false;
+				Partida.eventoDueloActivado= false;
 			}
+			Partida.minijuegoActivado= false;
 			Thread t2= new Thread (()-> {
 				try {
 					actualizarDatosMarcador();

@@ -391,7 +391,7 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 			int correccionCoordenadaX = (listaJugadores[1].casillaActual.etiquetaCasilla.getWidth() / 2) - listaJugadores[1].etiquetaImagen.getWidth()/2;
 			int correccionCoordenadaY = (listaJugadores[1].casillaActual.etiquetaCasilla.getHeight() / 2) - listaJugadores[1].etiquetaImagen.getHeight()/2;
 			listaJugadores[1].etiquetaImagen.setLocation(correccionCoordenadaX , correccionCoordenadaY);
-			listaJugadores[1].casillaActual.etiquetaCasilla.add(listaJugadores[0].etiquetaImagen);
+			listaJugadores[1].casillaActual.etiquetaCasilla.add(listaJugadores[1].etiquetaImagen);
 			listaJugadores[1].casillaActual.etiquetaCasilla.repaint();
 		}
 		Partida.panelPartida.repaint();

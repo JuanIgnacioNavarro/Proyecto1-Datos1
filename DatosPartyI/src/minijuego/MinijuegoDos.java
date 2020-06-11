@@ -106,9 +106,9 @@ public class MinijuegoDos extends Minijuego {
 
         this.addMouseListener(new MouseListener() {
             /**
-             * En este MouseEvent se da la lógica que
+             * En este MouseEvent se da la logica que
              * determina el puntaje del jugador luego
-             * de ingresar el número
+             * de ingresar el numero
              * @param e
              */
             @Override
@@ -172,10 +172,11 @@ public class MinijuegoDos extends Minijuego {
         numero = 0;
         narrador.setVisible(true);
         if (jugadorActual.numeroJugadorMinijuego == listaJugadores.length - 1) {
-        	if (Partida.minijuegoActivado==true) {
+        	if (Partida.eventoDueloActivado==true) {
 				eventoDuelo();
-				Partida.minijuegoActivado= false;
+				Partida.eventoDueloActivado= false;
 			}
+        	Partida.minijuegoActivado= false;
             Thread t2= new Thread (()-> {
                 try {
                     actualizarDatosMarcador();
