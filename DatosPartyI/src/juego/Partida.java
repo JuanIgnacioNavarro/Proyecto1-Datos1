@@ -53,6 +53,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	public static Color colorResalte = new Color(66, 66, 66);
 	public static Color colorNegativo = new Color(222, 66, 80);
 	public static Color colorPositivo = new Color(180, 225, 120);
+	public static boolean eventoDueloActivado=false;
 	public static boolean eventoActivado;
 	public static boolean minijuegoActivado;
 	public static boolean movimientoJugador;
@@ -66,6 +67,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private int rondasTerminadas=1;
 	private Casilla casillaAlazar;
 	public PilaEventos pilaEventos= new PilaEventos();
+	private Minijuego minijuegoDuelo;
 	
 	/**
 	 * Constructor de la clase, el cual genera tanto los componentes de la ventana como los de la partida
@@ -251,7 +253,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private void mezclarDados() {
 		numeroDadoUno = (int) Math.floor(Math.random()*6+1);
 		numeroDadoDos = (int) Math.floor(Math.random()*6+1);     
-		numeroDados = numeroDadoUno + numeroDadoDos;	
+		numeroDados = numeroDadoUno + numeroDadoDos;
 	}
 	
 	/**
@@ -266,29 +268,31 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	/**
 	 * Metodo para escoger aleatriamente un numero del 1 al 6 y activar dicho numero del minujuego
 	 */
-	private void activarMinijuego() {
+	private void activarMinijuego(Jugador [] listaJugadores) {
+		
 		minijuegoActivado = true;
-		int numeroDeMinijuego;
-		Random random = new Random();
-		numeroDeMinijuego= random.nextInt(6)+1;
-		if (numeroDeMinijuego==1) {
-			new MinijuegoUno(listaJugadores);
-		}
-		else if (numeroDeMinijuego==2) {
-			new MinijuegoDos(listaJugadores);
-		}
-		else if (numeroDeMinijuego==3) {
-			new MinijuegoTres(listaJugadores);
-		}
-		else if (numeroDeMinijuego==4) {
-			new MinijuegoCuatro(listaJugadores);
-		}
-		else if (numeroDeMinijuego==5) {
-			new MinijuegoCinco(listaJugadores);
-		}
-		else {
-			new MinijuegoSeis(listaJugadores);
-		}
+		new MinijuegoCinco(listaJugadores);
+//		int numeroDeMinijuego;
+//		Random random = new Random();
+//		numeroDeMinijuego= random.nextInt(6)+1;
+//		if (numeroDeMinijuego==1) {
+//			new MinijuegoUno(listaJugadores);
+//		}
+//		else if (numeroDeMinijuego==2) {
+//			new MinijuegoDos(listaJugadores);
+//		}
+//		else if (numeroDeMinijuego==3) {
+//			new MinijuegoTres(listaJugadores);
+//		}
+//		else if (numeroDeMinijuego==4) {
+//			new MinijuegoCuatro(listaJugadores);
+//		}
+//		else if (numeroDeMinijuego==5) {
+//			new MinijuegoCinco(listaJugadores);
+//		}
+//		else {
+//			new MinijuegoSeis(listaJugadores);
+//		}
 	}
 
 	/**
@@ -305,17 +309,21 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 
 	/**
 	 * Metodo para comprobar si se debe activar el evento del duelo
+	 * @throws InterruptedException 
 	 */
-	private void comprobarEventoDuelo() {
+	private void comprobarEventoDuelo(){
 		for (int i = 0; i <= listaJugadores.length - 2; i++) {
 			for (int j = i + 1; j <= listaJugadores.length - 1; j++) {
 				
 				if (listaJugadores[i].casillaActual.numeroCasilla == listaJugadores[j].casillaActual.numeroCasilla && 
 				listaJugadores[i].casillaActual.numeroCasilla != 1 && listaJugadores[j].casillaActual.numeroCasilla != 1) {
+					System.out.println("Estoy en el metodo de evento duelo activado");
 					minijuegoActivado = true;
 					Jugador[] listaMismaPosicion = {listaJugadores[i], listaJugadores[j]};
-					pilaEventos.seek(listaJugadores[i], listaMismaPosicion, tablero);
-					pilaEventos.pop();
+					Partida.eventoDueloActivado=true;
+					activarMinijuego(listaMismaPosicion);
+					minijuegoActivado= false;
+					
 					break;
 				}
 			}
@@ -390,7 +398,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		jugadorActual.moverJugador(numeroDados);
 		
 		if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
-			activarMinijuego();
+			activarMinijuego(listaJugadores);
 		}
 		comprobarEvento();
 		comprobarEventoDuelo();

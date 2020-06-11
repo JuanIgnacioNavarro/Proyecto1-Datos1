@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
+import juego.Partida;
 import jugador.Jugador;
 /**
  * Esta es la clase que contiene el codigo del minijuego uno
@@ -248,6 +249,10 @@ public class MinijuegoUno extends Minijuego {
 		if (jugadorActual.numeroJugadorMinijuego==listaJugadores.length-1) {
 			this.actualizarDatosMarcador();
 			etiquetaMinijuegoUno.setVisible(false);
+			if (Partida.eventoDueloActivado==true) {
+				eventoDuelo();
+				Partida.eventoDueloActivado= false;
+			}
 		}
 	}
 	

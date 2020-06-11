@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
+import juego.Partida;
 import jugador.Jugador;
 /**
  * Corrsponde a la clase que controla el minijuego 6, este se trata de mostrar una lista por unos segundos 
@@ -88,7 +89,7 @@ public class MinijuegoSeis extends Minijuego {
 	 * en que si el jugador es el primero que aparece en la lista de los que estan jugando o es otro
 	 */
 	private void definirComponentes () {
-		if (jugadorActual.numeroJugador==0) {
+		if (jugadorActual.numeroJugadorMinijuego==0) {
 			etiquetaMinijuegoSeis= new JLabel ();
 			etiquetaMinijuegoSeis.setBounds(263, 150, 540, 200);
 			etiquetaMinijuegoSeis.setOpaque(true);
@@ -137,7 +138,7 @@ public class MinijuegoSeis extends Minijuego {
 			anadirTextoLista(); //Este metodo agrega el texto a la lista y crea la lista que se va a usar en el juego
 			panelMinijuegos.repaint();
 		}
-		if (jugadorActual.numeroJugador==0) {
+		if (jugadorActual.numeroJugadorMinijuego==0) {
 			responder.addMouseListener(new MouseListener() {
 				/**
 				 * Comprueba si se presiono el boton de iniciar, y a partir de ahi incia el minijuego
@@ -232,7 +233,7 @@ public class MinijuegoSeis extends Minijuego {
 	private void actualizarBoton() {
 		responder.setVisible(true);
 		lista.setVisible(false);
-		if (jugadorActual.numeroJugador==0) {
+		if (jugadorActual.numeroJugadorMinijuego==0) {
 			respuesta= new JTextField();
 			respuesta.setSize(etiquetaMinijuegoSeis.getWidth()/3, etiquetaMinijuegoSeis.getHeight()/4);
 			respuesta.setLocation(etiquetaMinijuegoSeis.getWidth()/3, etiquetaMinijuegoSeis.getHeight()/4);
@@ -268,7 +269,11 @@ public class MinijuegoSeis extends Minijuego {
 		narrador.setVisible(true);
 		respuesta.setVisible(false);
 		temporizador.setVisible(false);
-		if (jugadorActual.numeroJugador==listaJugadores.length-1) {
+		if (jugadorActual.numeroJugadorMinijuego==listaJugadores.length-1) {
+			if (Partida.eventoDueloActivado==true) {
+				eventoDuelo();
+				Partida.eventoDueloActivado= false;
+			}
 			Thread t2= new Thread (()-> {
 				try {
 					actualizarDatosMarcador();

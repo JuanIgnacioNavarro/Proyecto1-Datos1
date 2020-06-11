@@ -3,6 +3,9 @@ package minijuego;
 import jugador.Jugador;
 
 import javax.swing.*;
+
+import juego.Partida;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -56,7 +59,7 @@ public class MinijuegoTres extends Minijuego {
      * respondió bien o mal
      */
     private void definirComponentes() {
-        if (jugadorActual.numeroJugador == 0) {
+        if (jugadorActual.numeroJugadorMinijuego == 0) {
             etiquetaMinijuegoTres= new JLabel ();
             etiquetaMinijuegoTres.setBounds(263, 150, 540, 200);
             etiquetaMinijuegoTres.setOpaque(true);
@@ -102,7 +105,7 @@ public class MinijuegoTres extends Minijuego {
             iniciar.setBackground(Color.green);
             panelMinijuegos.repaint();
         }
-        if (jugadorActual.numeroJugador == 0) {
+        if (jugadorActual.numeroJugadorMinijuego == 0) {
             this.addMouseListener(new MouseListener() {
 
 
@@ -110,7 +113,7 @@ public class MinijuegoTres extends Minijuego {
                 public void mouseClicked(MouseEvent e) {
                     if (!onGame) {
                         iniciar.setBackground(Color.red);
-                        if (jugadorActual.numeroJugador == 0) {
+                        if (jugadorActual.numeroJugadorMinijuego == 0) {
                             comparaRespuesta(respuestaTres);
                             jugadorActual.puntajeMinijuego = puntaje;
                             System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
@@ -125,7 +128,7 @@ public class MinijuegoTres extends Minijuego {
                             cajaRespuestas.addItem(respuestaTres2);
                             cajaRespuestas.addItem(respuestaCuatro2);
                             panelMinijuegos.repaint();
-                        } else if (jugadorActual.numeroJugador == 1) {
+                        } else if (jugadorActual.numeroJugadorMinijuego == 1) {
                             comparaRespuesta(respuestaDos2);
                             jugadorActual.puntajeMinijuego = puntaje;
                             System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
@@ -140,7 +143,7 @@ public class MinijuegoTres extends Minijuego {
                             cajaRespuestas.addItem(respuestaTres3);
                             cajaRespuestas.addItem(respuestaCuatro3);
                             panelMinijuegos.repaint();
-                        } else if (jugadorActual.numeroJugador == 2) {
+                        } else if (jugadorActual.numeroJugadorMinijuego == 2) {
 
                             comparaRespuesta(respuestaCuatro3);
                             jugadorActual.puntajeMinijuego = puntaje;
@@ -157,7 +160,7 @@ public class MinijuegoTres extends Minijuego {
                             cajaRespuestas.addItem(respuestaTres4);
                             cajaRespuestas.addItem(respuestaCuatro4);
                             panelMinijuegos.repaint();
-                        } else if (jugadorActual.numeroJugador == 3) {
+                        } else if (jugadorActual.numeroJugadorMinijuego == 3) {
 
                             comparaRespuesta(respuestaUno4);
                             jugadorActual.puntajeMinijuego = puntaje;
@@ -207,7 +210,11 @@ public class MinijuegoTres extends Minijuego {
         cajaRespuestas.setVisible(false);
         iniciar.removeMouseListener(null);
         narrador.setVisible(true);
-        if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
+        if (jugadorActual.numeroJugadorMinijuego == listaJugadores.length - 1) {
+        	if (Partida.eventoDueloActivado==true) {
+				eventoDuelo();
+				Partida.eventoDueloActivado= false;
+			}
         	Thread t2= new Thread (()-> {
 				try {
 					actualizarDatosMarcador();

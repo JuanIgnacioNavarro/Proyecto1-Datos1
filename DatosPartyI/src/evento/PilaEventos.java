@@ -52,7 +52,7 @@ public class PilaEventos {
 		eventoHead= newEvent;
 	}
 	/**
-	 * Este m�todo elimina el m�todo de la cabeza de la pila
+	 * Este metodo elimina el metodo de la cabeza de la pila
 	 */
 	public void pop() {
 		eventoHead= eventoHead.next;
@@ -64,7 +64,7 @@ public class PilaEventos {
 		eventoHead.ejecutarEvento(jugadorActual, listaJugadores, tablero);
 	}
 	/**
-	 * Permite imprimir la pila que se cre�, este m�todo es �til para corroporar que los
+	 * Permite imprimir la pila que se cree, este metodo es util para corroporar que los
 	 * otros m�todos de esta clase funcionan bien.
 	 */
 	public void imprimirPila () {

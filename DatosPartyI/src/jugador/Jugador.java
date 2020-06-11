@@ -223,9 +223,9 @@ public class Jugador {
 		
 	}
 	/**
-	 * Este m�todo ayuda a refacatorizar el m�todo de moverJugador()
+	 * Este metodo ayuda a refacatorizar el metodo de moverJugador()
 	 * en este se ejecuta un movmiento y se detiene el hilo actual
-	 * pare apreciar c�mo se mueve el jugador.
+	 * pare apreciar como se mueve el jugador.
 	 */
 	private void cambiarPosicionJugador()  {
 		etiquetaImagen.setLocation(correccionCoordenadaX, correccionCoordenadaY);

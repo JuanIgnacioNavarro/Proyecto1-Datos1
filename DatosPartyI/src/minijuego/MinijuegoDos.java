@@ -3,6 +3,9 @@ package minijuego;
 import jugador.Jugador;
 
 import javax.swing.*;
+
+import juego.Partida;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -61,7 +64,7 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
      * y la etiqueta para registrarlo
      */
     private void definirComponentes() {
-        if (jugadorActual.numeroJugador == 0) {
+        if (jugadorActual.numeroJugadorMinijuego == 0) {
             etiquetaMinijuegoDos = new JLabel();
             etiquetaMinijuegoDos.setBounds(263, 150, 540, 200);
             etiquetaMinijuegoDos.setOpaque(true);
@@ -176,7 +179,11 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
         etiquetaIngresa.setText("Estaba pensando en el "+numeroCorrecto);
         numero = 0;
         narrador.setVisible(true);
-        if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
+        if (jugadorActual.numeroJugadorMinijuego == listaJugadores.length - 1) {
+        	if (Partida.eventoDueloActivado==true) {
+				eventoDuelo();
+				Partida.eventoDueloActivado= false;
+			}
             Thread t2= new Thread (()-> {
                 try {
                     actualizarDatosMarcador();

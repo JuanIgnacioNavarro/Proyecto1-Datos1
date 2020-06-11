@@ -386,5 +386,25 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 			botonPlay.setBackground(Bienvenida.colorVentana);
 		}
 	}
+	
+	public void eventoDuelo() {
+		if (listaJugadores[0].puntajeMinijuego>= listaJugadores[1].puntajeMinijuego){
+			listaJugadores[0].casillaActual=listaJugadores[0].casillaActual.siguienteCasilla;
+			int correccionCoordenadaX = (listaJugadores[0].casillaActual.etiquetaCasilla.getWidth() / 2) - listaJugadores[0].etiquetaImagen.getWidth()/2;
+			int correccionCoordenadaY = (listaJugadores[0].casillaActual.etiquetaCasilla.getHeight() / 2) - listaJugadores[0].etiquetaImagen.getHeight()/2;
+			listaJugadores[0].etiquetaImagen.setLocation(correccionCoordenadaX , correccionCoordenadaY);
+			listaJugadores[0].casillaActual.etiquetaCasilla.add(listaJugadores[0].etiquetaImagen);
+			listaJugadores[0].casillaActual.etiquetaCasilla.repaint();
+		}
+		else {
+			listaJugadores[1].casillaActual=listaJugadores[1].casillaActual.siguienteCasilla;
+			int correccionCoordenadaX = (listaJugadores[1].casillaActual.etiquetaCasilla.getWidth() / 2) - listaJugadores[1].etiquetaImagen.getWidth()/2;
+			int correccionCoordenadaY = (listaJugadores[1].casillaActual.etiquetaCasilla.getHeight() / 2) - listaJugadores[1].etiquetaImagen.getHeight()/2;
+			listaJugadores[1].etiquetaImagen.setLocation(correccionCoordenadaX , correccionCoordenadaY);
+			listaJugadores[1].casillaActual.etiquetaCasilla.add(listaJugadores[0].etiquetaImagen);
+			listaJugadores[1].casillaActual.etiquetaCasilla.repaint();
+		}
+		Partida.panelPartida.repaint();
+	}
 
 }
