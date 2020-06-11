@@ -14,7 +14,7 @@ import minijuego.MinijuegoUno;
 /**
  * Esta clase se usa como nodo de una pila, por eso uno de sus atributos 
  * es un Evento llamado next.
- * Adem�s es capaz de ejecutar todos los eventos descritos en la descripci�n del proyecto
+ * Ademas es capaz de ejecutar todos los eventos descritos en la descripcion del proyecto
  * @author Juan Navarro
  */
 public class Evento {
@@ -28,11 +28,11 @@ public class Evento {
 		this.tipoEvento= tipoEvento;
 	}
 	/**
-	 * Corresponde al �nico m�todo de los eventos, dado que en las instrucciones se
-	 * detallan varios eventos este m�todo es capaz de ejecutar cualquiera 
-	 * dependiendo del tipo de evento que se defini� al crear la pila
-	 * Este m�todo llama a la respectiva acci�n de la pila 
-	 *No retorna ningpun objeto en espec�fico, pero al usarse este m�todo se
+	 * Corresponde al inico metodo de los eventos, dado que en las instrucciones se
+	 * detallan varios eventos este metodo es capaz de ejecutar cualquiera 
+	 * dependiendo del tipo de evento que se definicion al crear la pila
+	 * Este metodo llama a la respectiva accion de la pila 
+	 *No retorna ningpun objeto en especifico, pero al usarse este metodo se
 	 *va a ejecutar cualquiera de las siguientes acciones, cuando se crean los nodos se 
 	 *a�ade el tipo de evento
 	 *1) Duelo: Se activa un minijuego, donde los jugadores son escogidos de manera aleatoria

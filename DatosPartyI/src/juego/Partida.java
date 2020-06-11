@@ -271,28 +271,27 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private void activarMinijuego(Jugador [] listaJugadores) {
 		
 		minijuegoActivado = true;
-		new MinijuegoCinco(listaJugadores);
-//		int numeroDeMinijuego;
-//		Random random = new Random();
-//		numeroDeMinijuego= random.nextInt(6)+1;
-//		if (numeroDeMinijuego==1) {
-//			new MinijuegoUno(listaJugadores);
-//		}
-//		else if (numeroDeMinijuego==2) {
-//			new MinijuegoDos(listaJugadores);
-//		}
-//		else if (numeroDeMinijuego==3) {
-//			new MinijuegoTres(listaJugadores);
-//		}
-//		else if (numeroDeMinijuego==4) {
-//			new MinijuegoCuatro(listaJugadores);
-//		}
-//		else if (numeroDeMinijuego==5) {
-//			new MinijuegoCinco(listaJugadores);
-//		}
-//		else {
-//			new MinijuegoSeis(listaJugadores);
-//		}
+		int numeroDeMinijuego;
+		Random random = new Random();
+		numeroDeMinijuego= random.nextInt(6)+1;
+		if (numeroDeMinijuego==1) {
+			new MinijuegoUno(listaJugadores);
+		}
+		else if (numeroDeMinijuego==2) {
+			new MinijuegoDos(listaJugadores);
+		}
+		else if (numeroDeMinijuego==3) {
+			new MinijuegoTres(listaJugadores);
+		}
+		else if (numeroDeMinijuego==4) {
+			new MinijuegoCuatro(listaJugadores);
+		}
+		else if (numeroDeMinijuego==5) {
+			new MinijuegoCinco(listaJugadores);
+		}
+		else {
+			new MinijuegoSeis(listaJugadores);
+		}
 	}
 
 	/**
@@ -308,22 +307,22 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	}
 
 	/**
-	 * Metodo para comprobar si se debe activar el evento del duelo
-	 * @throws InterruptedException 
+	 * Metodo para comprobar si se debe activar un minijuego de duelo
+	 * Se usa el metodo de activar minijuego con la lista de los jugadores que se encuentran en la misma posicion
+	 * Luego en los metodos de resultados de cada minijuego se comprueba si el minijuego se dio por un evento duelo
+	 * y se mueve el jugador a la siguiente casilla
 	 */
 	private void comprobarEventoDuelo(){
 		for (int i = 0; i <= listaJugadores.length - 2; i++) {
 			for (int j = i + 1; j <= listaJugadores.length - 1; j++) {
-				
+				//Debe comprobar si las posiciones de los jugadores son las mismas
 				if (listaJugadores[i].casillaActual.numeroCasilla == listaJugadores[j].casillaActual.numeroCasilla && 
 				listaJugadores[i].casillaActual.numeroCasilla != 1 && listaJugadores[j].casillaActual.numeroCasilla != 1) {
-					System.out.println("Estoy en el metodo de evento duelo activado");
-					minijuegoActivado = true;
-					Jugador[] listaMismaPosicion = {listaJugadores[i], listaJugadores[j]};
+					minijuegoActivado = true; // el minijuego activado es para bloquear el boton de los dados
+					Jugador[] listaMismaPosicion = {listaJugadores[i], listaJugadores[j]}; //Esta es la lista de los jugadores que se encunetran en la misma posicion 
 					Partida.eventoDueloActivado=true;
-					activarMinijuego(listaMismaPosicion);
+					activarMinijuego(listaMismaPosicion); //Se activa uno de los minijuegos
 					minijuegoActivado= false;
-					
 					break;
 				}
 			}

@@ -11,7 +11,7 @@ import tablero.Casilla;
 /**
  * Esta clase hace objetos llamados jugadores que representan a cada uno de los 
  * usuarios que deseen jugar el juego.
- * Estos pueden almacenar la informaci�n relacionada a puntajes del juego y 
+ * Estos pueden almacenar la informacion relacionada a puntajes del juego y 
  * controlar los movimeintos de cada jugador en el tablero.
  * @author Juan Navarro
  *
@@ -46,7 +46,7 @@ public class Jugador {
 	/**
 	 * Contructor de la clase, define sus atributos iniciales y coloca su imagen en la casilla inicial
 	 * @param numeroJugador : int corresponde a un identificador de cada jugador, as� como el nombre de cada uno
-	 * @param casillaInicial: Casilla es la posici�n en la que inicia el juego as� que entre como par�metro para que el jugador se pueda ubicar ah�
+	 * @param casillaInicial: Casilla es la posicion en la que inicia el juego as� que entre como parametro para que el jugador se pueda ubicar ahi
 	 */
 	public Jugador(int numeroJugador, Casilla casillaInicial) {
 		casillaActual = casillaInicial;
@@ -88,9 +88,9 @@ public class Jugador {
 	}
 	
 	/**
-	 * Este m�todo analiza la posici�n de cada jugador para determinar si ocupa 
+	 * Este metodo analiza la posici�n de cada jugador para determinar si ocupa 
 	 * moverse hacia alguna de las posiciones especiales del tablero y tambi�n 
-	 * para determinar la direci�n en la que se debe mover.
+	 * para determinar la direcion en la que se debe mover.
 	 */
 	public void verificarDireccion() {
 		if (casillaActual.tipoCasilla.equals("Morada")) {
@@ -126,7 +126,7 @@ public class Jugador {
 	 * en cada instante, todas las casilla poseen el atributo de su posici�n entonces se copia y se le suma un poco
 	 * a la posicion para evitar que los jugadores se superpongan.
 	 * 
-	 *  Este metodo considera los distintos caminos que podr�a tomar el jugador dependiendo de la 
+	 *  Este metodo considera los distintos caminos que podria tomar el jugador dependiendo de la 
 	 *  posicion por la cual se empiece a mover.
 	 *  
 	 * @param numeroDados indica cuantas posiciones se va a mover
@@ -185,7 +185,7 @@ public class Jugador {
 	}
 		
 	/**
-	 * Este m�todo verifica si hay una estrella en cada casilla que recorre
+	 * Este metodo verifica si hay una estrella en cada casilla que recorre
 	 * para poder habilitar la tienda de estrellas por medio de una variable
 	 * est�tica llamada comprarEstrella
 	 */
@@ -197,7 +197,7 @@ public class Jugador {
 	}
 	/**
 	 * Al finalizar el movimiento el jugador debe analizar la casilla en la 
-	 * que se encuentra y aplicar la respectiva instrucci�n de la casilla
+	 * que se encuentra y aplicar la respectiva instruccion de la casilla
 	 * Verdes: te dan monedas
 	 * Rojas: te quitan monedas
 	 * Azules y moradas: no se ejecuta nada

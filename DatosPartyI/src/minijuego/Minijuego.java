@@ -73,7 +73,7 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 	}
 	
 	/**
-	 * Corresponde a un metodo que llama a otros metodos que a�aden los componentes de la interfaz grafica
+	 * Corresponde a un metodo que llama a otros metodos que anaden los componentes de la interfaz grafica
 	 */
 	private void agregarComponentesVentana() { //Este metodo llama a mas metodos, esto con el objetivo de ordenar el codigo
 		agregarPanel ();//Panel de la interfaz
@@ -276,7 +276,7 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 	
 	/**
 	 * Es un metodo de ayuda que permite ordenar la lista de los jugadores segun su numero de jugador
-	 * corresponde al alforitmo de selection llamado selectionSort
+	 * corresponde al algoritmo de selection llamado selectionSort
 	 */
 	public void ordenarResultadosNum() {
 		int n= listaJugadores.length;
