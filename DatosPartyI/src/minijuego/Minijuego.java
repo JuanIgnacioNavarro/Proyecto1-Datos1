@@ -185,8 +185,8 @@ public class Minijuego extends JFrame implements MouseListener{
 	public void iniciarMinijuego() {
 		etiquetaTituloMinijuego.setVisible(false);
 		narrador.setVisible(false);
+		System.out.println("Boton en false");
 		runMinijuego(jugadorActual);
-		
 		
 		try {
 		jugadorActual= listaJugadores[contadorRondas+1];
@@ -205,7 +205,6 @@ public class Minijuego extends JFrame implements MouseListener{
 			this.setVisible(false);
 		}
 		contadorRondas+=1;
-		botonPlay.setVisible(true);
 	}
 	
 	/**
@@ -351,8 +350,12 @@ public class Minijuego extends JFrame implements MouseListener{
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
+
 		if (e.getSource()==botonPlay) {
 			if (running==false) {
+			botonPlay.setOpaque(true);
+			botonPlay.setBackground(new Color(222, 66, 80));
+			panelMinijuegos.repaint();
 			iniciarMinijuego();
 			}
 		}
@@ -371,12 +374,22 @@ public class Minijuego extends JFrame implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		
+		if (e.getSource()==botonPlay) {
+			botonPlay.setOpaque(true);
+			if (running==false) {
+				botonPlay.setBackground(new Color(66, 66, 66));
+			}
+			else {
+				botonPlay.setBackground(new Color(222, 66, 80));
+			}
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		
+		if (e.getSource()==botonPlay) {
+			botonPlay.setBackground(Bienvenida.colorVentana);
+		}
 	}
 
 }
