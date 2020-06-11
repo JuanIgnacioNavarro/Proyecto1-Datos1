@@ -13,13 +13,13 @@ import tablero.Casilla;
 /**
  * Esta clase hace objetos llamados jugadores que representan a cada uno de los 
  * usuarios que deseen jugar el juego.
- * Estos pueden almacenar la información relacionada a puntajes del juego y 
+ * Estos pueden almacenar la informaciï¿½n relacionada a puntajes del juego y 
  * controlar los movimeintos de cada jugador en el tablero.
  * @author Juan Navarro
  *
  */
 public class Jugador {
-//    __Atributos de las características más importantes de cada jugador
+//    __Atributos de las caracterï¿½sticas mï¿½s importantes de cada jugador
 //___/
 	public String nombreJugador;
 	public int monedasJugador = 1000;
@@ -30,7 +30,7 @@ public class Jugador {
 	public int numeroJugadorMinijuego;
 	public int puntajeTotal;
 	public String textoResultados;
-//	  __Atributos que controlan los movimientos que debe realizar el jugador depesndiendo de su ubicación actual
+//	  __Atributos que controlan los movimientos que debe realizar el jugador depesndiendo de su ubicaciï¿½n actual
 //___/
 	private boolean direccionInversa;
 	private boolean direccionAuxiliar;
@@ -38,7 +38,7 @@ public class Jugador {
 	public boolean comprarEstrella;
 	private boolean seguirMovimiento;
 	
-//     __ Atributos que contralan la posicion del jugador en la interfaz (Se colocan en el panel estático de Partida)
+//     __ Atributos que contralan la posicion del jugador en la interfaz (Se colocan en el panel estï¿½tico de Partida)
 //____/
 
 	public JLabel etiquetaImagen;
@@ -48,8 +48,8 @@ public class Jugador {
 	
 	/**
 	 * Contructor de la clase, define sus atributos iniciales y coloca su imagen en la casilla inicial
-	 * @param numeroJugador : int corresponde a un identificador de cada jugador, así como el nombre de cada uno
-	 * @param casillaInicial: Casilla es la posición en la que inicia el juego así que entre como parámetro para que el jugador se pueda ubicar ahí
+	 * @param numeroJugador : int corresponde a un identificador de cada jugador, asï¿½ como el nombre de cada uno
+	 * @param casillaInicial: Casilla es la posiciï¿½n en la que inicia el juego asï¿½ que entre como parï¿½metro para que el jugador se pueda ubicar ahï¿½
 	 */
 	public Jugador(int numeroJugador, Casilla casillaInicial) {
 		casillaActual = casillaInicial;
@@ -91,9 +91,9 @@ public class Jugador {
 	}
 	
 	/**
-	 * Este método analiza la posición de cada jugador para determinar si ocupa 
-	 * moverse hacia alguna de las posiciones especiales del tablero y también 
-	 * para determinar la direción en la que se debe mover.
+	 * Este mï¿½todo analiza la posiciï¿½n de cada jugador para determinar si ocupa 
+	 * moverse hacia alguna de las posiciones especiales del tablero y tambiï¿½n 
+	 * para determinar la direciï¿½n en la que se debe mover.
 	 */
 	public void verificarDireccion() {
 		if (casillaActual.tipoCasilla.equals("Morada")) {
@@ -122,17 +122,17 @@ public class Jugador {
 	}
 	
 	/**
-	 * Este método permite que el jugador se mueva a lo largo del tablero dependiendo del 
-	 * número obtenido en los dados.
+	 * Este metodo permite que el jugador se mueva a lo largo del tablero dependiendo del 
+	 * numero obtenido en los dados.
 	 * Para poder ubicar a el jugador en las casillas correspondientes hay un atributo del objeto
 	 * llamado casillaActual, el cual representa a la casilla en la cual se encuentra cada jugador
-	 * en cada instante, todas las casilla poseen el atributo de su posición entonces se copia y se le suma un poco
-	 * a la posición para evitar que los jugadores se superpongan.
+	 * en cada instante, todas las casilla poseen el atributo de su posiciï¿½n entonces se copia y se le suma un poco
+	 * a la posicion para evitar que los jugadores se superpongan.
 	 * 
-	 *  Este método considera los distintos caminos que podría tomar el jugador dependiendo de la 
-	 *  posición por la cuál se empiece a mover.
+	 *  Este metodo considera los distintos caminos que podrï¿½a tomar el jugador dependiendo de la 
+	 *  posicion por la cual se empiece a mover.
 	 *  
-	 * @param numeroDados indica cuántas posiciones se va a mover
+	 * @param numeroDados indica cuantas posiciones se va a mover
 	 * @throws InterruptedException 
 	 */
 	public void moverJugador(int numeroDados) {
@@ -188,9 +188,9 @@ public class Jugador {
 	}
 		
 	/**
-	 * Este método verifica si hay una estrella en cada casilla que recorre
+	 * Este mï¿½todo verifica si hay una estrella en cada casilla que recorre
 	 * para poder habilitar la tienda de estrellas por medio de una variable
-	 * estática llamada comprarEstrella
+	 * estï¿½tica llamada comprarEstrella
 	 */
 	public void verificarEstrella() {
 		if (casillaActual.estrellaEncima == true) {
@@ -200,7 +200,7 @@ public class Jugador {
 	}
 	/**
 	 * Al finalizar el movimiento el jugador debe analizar la casilla en la 
-	 * que se encuentra y aplicar la respectiva instrucción de la casilla
+	 * que se encuentra y aplicar la respectiva instrucciï¿½n de la casilla
 	 * Verdes: te dan monedas
 	 * Rojas: te quitan monedas
 	 * Azules y moradas: no se ejecuta nada
@@ -223,9 +223,9 @@ public class Jugador {
 		
 	}
 	/**
-	 * Este método ayuda a refacatorizar el método de moverJugador()
+	 * Este mï¿½todo ayuda a refacatorizar el mï¿½todo de moverJugador()
 	 * en este se ejecuta un movmiento y se detiene el hilo actual
-	 * pare apreciar cómo se mueve el jugador.
+	 * pare apreciar cï¿½mo se mueve el jugador.
 	 */
 	private void cambiarPosicionJugador()  {
 		etiquetaImagen.setLocation(correccionCoordenadaX, correccionCoordenadaY);

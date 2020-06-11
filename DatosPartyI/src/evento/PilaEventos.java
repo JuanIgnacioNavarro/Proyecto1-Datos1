@@ -11,13 +11,13 @@ import jugador.*;
  */
 public class PilaEventos {
 	public Evento eventoHead= null;
-//    __ Se hizo un array con todos los números de los eventos dela pila
+//    __ Se hizo un array con todos los numeros de los eventos dela pila
 //___/
 	public int[] arrayTiposEventos= {1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,4,4,4,5,5,5,6,7,7,7,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9};
 
 	/**
 	 * Constructor de la PilaEventos
-	 * toma el array de los atributos y lo desordena para luego añadir todos sus elementos en una pila
+	 * toma el array de los atributos y lo desordena para luego aï¿½adir todos sus elementos en una pila
 	 */
 	public PilaEventos() {
 		barajarArray(arrayTiposEventos);
@@ -42,9 +42,9 @@ public class PilaEventos {
 	
 	
 	/**
-	 * Este método añade un nodo de primero (cada nodo es un evento)
+	 * Este mï¿½todo aï¿½ade un nodo de primero (cada nodo es un evento)
 	 * @param int tipo, corresponde al tipo de evento que se quiere crear
-	 * La lista de tipo de evento se encuentra en el método ejecutarTipo()
+	 * La lista de tipo de evento se encuentra en el mï¿½todo ejecutarTipo()
 	 */
 	public void push(int tipo) {
 		Evento newEvent = new Evento(tipo);
@@ -52,7 +52,7 @@ public class PilaEventos {
 		eventoHead= newEvent;
 	}
 	/**
-	 * Este método elimina el método de la cabeza de la pila
+	 * Este mï¿½todo elimina el mï¿½todo de la cabeza de la pila
 	 */
 	public void pop() {
 		eventoHead= eventoHead.next;
@@ -64,8 +64,8 @@ public class PilaEventos {
 		eventoHead.ejecutarEvento(jugadorActual, listaJugadores, tablero);
 	}
 	/**
-	 * Permite imprimir la pila que se creó, este método es útil para corroporar que los
-	 * otros métodos de esta clase funcionan bien.
+	 * Permite imprimir la pila que se creï¿½, este mï¿½todo es ï¿½til para corroporar que los
+	 * otros mï¿½todos de esta clase funcionan bien.
 	 */
 	public void imprimirPila () {
 		Evento eventoActual= eventoHead;
