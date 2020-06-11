@@ -34,7 +34,7 @@ public class Evento {
 	 * Este metodo llama a la respectiva accion de la pila 
 	 *No retorna ningpun objeto en especifico, pero al usarse este metodo se
 	 *va a ejecutar cualquiera de las siguientes acciones, cuando se crean los nodos se 
-	 *a�ade el tipo de evento
+	 *anade el tipo de evento
 	 *1) Duelo: Se activa un minijuego, donde los jugadores son escogidos de manera aleatoria
 	 *se enfrentan en un minijuego 1 vs 1
 	 *2)Robar monedas: El jugador que obtiene el evento tiene derecho de robarle una cantidad 
