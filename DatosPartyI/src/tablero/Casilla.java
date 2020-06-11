@@ -1,12 +1,15 @@
 package tablero;
 
-import java.awt.Color;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import juego.Partida;
 
+/**
+ * Clase donde se se crean los nodos en forma de casilla
+ * @author Andres Martinez Vargas
+ */
 public class Casilla {
 	private ImageIcon imagenCasilla;
 	private ImageIcon imagenEstrella = new ImageIcon("Imagenes/Estrella.png");
@@ -24,6 +27,12 @@ public class Casilla {
 	public int coordenadaCasillaY;
 	public boolean estrellaEncima;
 	
+	/**
+	 * Contructor de la clase, define sus atributos iniciales y la imagen corerspondiente al tipo de casilla
+	 * @param tipoCasilla : String que define el tipo de casila (Azul, roja, verde, Amarilla o Morada)
+	 * @param coordenadaCasillaX: int coordenada en x en la que se ubica la casilla
+	 * @param coordenadaCasillaY: int coordenada en y en la que se ubica la casilla
+	 */
 	public Casilla(String tipoCasilla, int coordenadaCasillaX, int coordenadaCasillaY) {
 		this.tipoCasilla = tipoCasilla;
 		this.coordenadaCasillaX = coordenadaCasillaX;
@@ -36,6 +45,11 @@ public class Casilla {
 		crearEstrella();
 
 	}	
+
+	/**
+	 * Metodo para crear la casilla
+	 * @param tipoCasilla : String que define el tipo de casila (Azul, roja, verde, Amarilla o Morada)
+	 */
 	public void crearCasilla(String tipoCasilla) {
 		etiquetaCasilla = new JLabel();
 		etiquetaCasilla.setLocation(coordenadaCasillaX, coordenadaCasillaY);
@@ -49,6 +63,9 @@ public class Casilla {
 		Partida.panelPartida.add(etiquetaCasilla);	
 	}
 	
+	/**
+	 * Metodo para crear la estrella de la casilla
+	 */
 	public void crearEstrella() {
 		etiquetaEstrella = new JLabel();
 		etiquetaEstrella.setIcon(imagenEstrella);
@@ -61,12 +78,18 @@ public class Casilla {
 		Partida.panelPartida.repaint();
 	}
 	
+	/**
+	 * Metodo para poner una estrelle en una casilla
+	 */
 	public void ponerEstrella() {
 		etiquetaEstrella.setVisible(true);
 		estrellaEncima = true;
 		
 	}
 	
+	/**
+	 * Metodo para eliminar una estrelle en una casilla
+	 */
 	public void eliminarEstrella() {
 		etiquetaEstrella.setVisible(false);
 		estrellaEncima = false;

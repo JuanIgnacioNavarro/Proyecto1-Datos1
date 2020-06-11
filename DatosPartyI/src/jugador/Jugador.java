@@ -1,13 +1,11 @@
 package jugador;
 
 import java.awt.Image;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import juego.Bienvenida;
 import juego.Partida;
 import tablero.Casilla;
 /**
@@ -36,7 +34,6 @@ public class Jugador {
 	private boolean direccionAuxiliar;
 	private boolean direccionTeletransporte;
 	public boolean comprarEstrella;
-	private boolean seguirMovimiento;
 	
 //     __ Atributos que contralan la posicion del jugador en la interfaz (Se colocan en el panel est�tico de Partida)
 //____/

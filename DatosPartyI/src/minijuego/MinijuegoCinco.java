@@ -179,7 +179,7 @@ public class MinijuegoCinco extends Minijuego {
 					int difSegundos;
 					int centesimasRestantes;
 					if (s>3) {
-						difSegundos=s-4;
+						difSegundos=s-3;
 						centesimasRestantes=cs;
 					}
 					else if(s==3)  {

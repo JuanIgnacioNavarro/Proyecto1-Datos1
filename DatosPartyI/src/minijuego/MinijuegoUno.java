@@ -230,6 +230,7 @@ public class MinijuegoUno extends Minijuego {
 			}
 		});
 	}
+	
 	/**
 	 * En este metodo se cambia el atributo de cada jugador por un nuevo puntaje obtenido
 	 * Luego con este puntaje se decide el orden de los resultados del minujuego
