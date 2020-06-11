@@ -174,7 +174,6 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 	public void iniciarMinijuego() {
 		etiquetaTituloMinijuego.setVisible(false);
 		narrador.setVisible(false);
-		System.out.println("Boton en false");
 		runMinijuego(jugadorActual);
 		
 		try {

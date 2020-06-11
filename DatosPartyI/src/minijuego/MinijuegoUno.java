@@ -246,9 +246,9 @@ public class MinijuegoUno extends Minijuego {
 		if (jugadorActual.numeroJugadorMinijuego==listaJugadores.length-1) {
 			this.actualizarDatosMarcador();
 			etiquetaMinijuegoUno.setVisible(false);
-			if (Partida.eventoDueloActivado==true) {
+			if (Partida.minijuegoActivado==true) {
 				eventoDuelo();
-				Partida.eventoDueloActivado= false;
+				Partida.minijuegoActivado= false;
 			}
 		}
 	}

@@ -161,9 +161,9 @@ public class MinijuegoCuatro extends Minijuego {
         etiquetaDados.setVisible(false);
     	narrador.setVisible(true);
          if (jugadorActual.numeroJugadorMinijuego==listaJugadores.length-1) {
-        	 if (Partida.eventoDueloActivado==true) {
+        	 if (Partida.minijuegoActivado==true) {
  				eventoDuelo();
- 				Partida.eventoDueloActivado= false;
+ 				Partida.minijuegoActivado = false;
  			}
         	 Thread t2= new Thread (()-> {
 					try {

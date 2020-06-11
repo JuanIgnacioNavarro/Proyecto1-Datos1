@@ -135,7 +135,6 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		etiquetaNumeroDados.setForeground(Color.WHITE);
 		etiquetaNumeroDados.setVisible(false);
 		panelPartida.add(etiquetaNumeroDados);
-
 	}
 
 	/**
@@ -247,7 +246,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private void mezclarDados() {
 		numeroDadoUno = (int) Math.floor(Math.random()*6+1);
 		numeroDadoDos = (int) Math.floor(Math.random()*6+1);     
-		numeroDados = numeroDadoUno + numeroDadoDos;
+		numeroDados = 5; //numeroDadoUno + numeroDadoDos;
 	}
 
 	/**
@@ -305,9 +304,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 				listaJugadores[i].casillaActual.numeroCasilla != 1 && listaJugadores[j].casillaActual.numeroCasilla != 1) {
 					minijuegoActivado = true; // el minijuego activado es para bloquear el boton de los dados
 					Jugador[] listaMismaPosicion = {listaJugadores[i], listaJugadores[j]}; //Esta es la lista de los jugadores que se encunetran en la misma posicion 
-					Partida.eventoDueloActivado=true;
 					activarMinijuego(listaMismaPosicion); //Se activa uno de los minijuegos
-					minijuegoActivado= false;
 					break;
 				}
 			}
@@ -381,11 +378,13 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	public void run() {
 		jugadorActual.moverJugador(numeroDados);
 		
-		if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
+		if (jugadorActual.numeroJugador != listaJugadores.length - 1) {
+			comprobarEventoDuelo();
+		}
+		else {
 			activarMinijuego(listaJugadores);
 		}
 		comprobarEvento();
-		comprobarEventoDuelo();
 		actualizarInfoJugadorActual();
 		
 		movimientoJugador = false;
