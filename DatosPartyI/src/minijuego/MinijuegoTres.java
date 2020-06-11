@@ -14,7 +14,7 @@ import java.awt.event.MouseListener;
  * Gana 10 puntos si acierta, 0 si falla
  * @author Juan Pena
  */
-public class MinijuegoTres extends Minijuego implements MouseListener {
+public class MinijuegoTres extends Minijuego {
     public Jugador jugadorActual;
     private JLabel etiquetaMinijuegoTres;
     private JLabel etiquetaPregunta;
@@ -23,7 +23,6 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
     private String respuestaUno2, respuestaDos2, respuestaTres2, respuestaCuatro2;
     private String respuestaUno3, respuestaDos3, respuestaTres3, respuestaCuatro3;
     private String respuestaUno4, respuestaDos4, respuestaTres4, respuestaCuatro4;
-    private String[] respuestas;
     private boolean onGame;
     private JComboBox<String> cajaRespuestas = new JComboBox<>();
     private int puntaje;
@@ -171,7 +170,6 @@ public class MinijuegoTres extends Minijuego implements MouseListener {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    // TODO Auto-generated method stub
 
                 }
 

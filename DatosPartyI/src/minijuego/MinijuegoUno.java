@@ -20,7 +20,7 @@ import jugador.Jugador;
  * @author Juan Navarro
  *
  */
-public class MinijuegoUno extends Minijuego implements  MouseListener{
+public class MinijuegoUno extends Minijuego {
 	
 	public Jugador jugadorActual;
 	private float cantidadDeJ=0;
@@ -210,7 +210,6 @@ public class MinijuegoUno extends Minijuego implements  MouseListener{
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 

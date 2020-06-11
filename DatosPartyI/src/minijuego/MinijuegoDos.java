@@ -147,12 +147,10 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                // TODO Auto-generated method stub
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-            //resultados();
             }
 
             @Override
@@ -172,24 +170,24 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
      * cuando ya han los jugadores han terminado
      */
     private void resultados () {
-    		running=false;
-            listo.removeMouseListener(null);
-            adivina.setText("");
-            etiquetaIngresa.setText("Estaba pensando en el "+numeroCorrecto);
-            numero = 0;
-            narrador.setVisible(true);
-            if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
-            	Thread t2= new Thread (()-> {
-					try {
-						actualizarDatosMarcador();
-						Thread.sleep(2000);
-						etiquetaMinijuegoDos.setVisible(false);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					
-				});
-				t2.start();
+    	running=false;
+        listo.removeMouseListener(null);
+        adivina.setText("");
+        etiquetaIngresa.setText("Estaba pensando en el "+numeroCorrecto);
+        numero = 0;
+        narrador.setVisible(true);
+        if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
+            Thread t2= new Thread (()-> {
+                try {
+                    actualizarDatosMarcador();
+                    Thread.sleep(2000);
+                    etiquetaMinijuegoDos.setVisible(false);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                
+            });
+            t2.start();
         }
     }
 

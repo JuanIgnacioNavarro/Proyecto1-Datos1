@@ -15,12 +15,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import evento.Evento;
 import evento.PilaEventos;
 import jugador.Jugador;
 import tablero.Tablero;
 import tablero.Casilla;
 
+/**
+ * Clase donde se reunen todos los componentes del juego
+ * @author Andres Martinez Vargas
+ * 
+ */
 public class Partida extends JFrame implements MouseListener, Runnable {
 	public static JPanel panelPartida;
 	private ImageIcon imagenDados = new ImageIcon("Imagenes/Dados.png");
@@ -46,11 +50,12 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 25);
 	private Font fuenteTexto = new Font("Comic Sans MS", 0, 16);
 	private Font fuenteTexto2 = new Font("Comic Sans MS", 0, 14);
-	private Color colorResalte = new Color(66, 66, 66);
-	private Color colorNegativo = new Color(222, 66, 80);
-	private Color colorPositivo = new Color(180, 225, 120);
-	public static boolean eventoActivado = false;
-	public static boolean movimientoJugador = false;
+	public static Color colorResalte = new Color(66, 66, 66);
+	public static Color colorNegativo = new Color(222, 66, 80);
+	public static Color colorPositivo = new Color(180, 225, 120);
+	public static boolean eventoActivado;
+	public static boolean minijuegoActivado;
+	public static boolean movimientoJugador;
 	private boolean partidaIniciada;
 	private int cantidadRondas = Inicio.cantidadRondas;
 	private Jugador listaJugadores[] = new Jugador[Inicio.cantidadJugadores];
@@ -60,9 +65,11 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private int numeroCasillaAlazar;
 	private int rondasTerminadas=1;
 	private Casilla casillaAlazar;
-	private Evento evento;
 	public PilaEventos pilaEventos= new PilaEventos();
 	
+	/**
+	 * Constructor de la clase, el cual genera tanto los componentes de la ventana como los de la partida
+	 */
 	public Partida() {
 		setTitle("Datos Party I");
 		setVisible(true);
@@ -74,11 +81,16 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		componentesVentana();
 		componentesPartida();
 	}
-
+	/**
+	 * Metodo pora agragar los componentes de la ventana
+	 */
 	private void componentesVentana() {
 		agregarPanel();
 	}
 
+	/**
+	 * Metodo pora agragar los componentes de la partida
+	 */
 	private void componentesPartida() {
 		agregarTablero();
 		agregarJugadores();
@@ -89,6 +101,9 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		panelPartida.repaint();
 	}
 
+	/**
+	 * Metodo para instanciar un panel dentro de la ventana
+	 */
 	private void agregarPanel() {
 		panelPartida = new JPanel();
 		this.getContentPane().add(panelPartida);
@@ -96,10 +111,16 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		panelPartida.setBackground(Bienvenida.colorVentana);
 	}
 
+	/**
+	 * Metodo para instanciar el tablero de la partida
+	 */
 	private void agregarTablero() {
 		tablero = new Tablero();
 	}
 
+	/**
+	 * Metodo para instanciar los jugadores de la partida
+	 */
 	private void agregarJugadores() {
 		for (int i = 0; i < Inicio.cantidadJugadores; i++) {
 			listaJugadores[i] = new Jugador(i, tablero.caminoPrincipal.primeraCasilla);
@@ -108,6 +129,9 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		jugadorActual = listaJugadores[0];
 	}
 
+	/**
+	 * Metodo para agregar los dados del juego, asi como la etiqueta del resultado al tirarlos
+	 */
 	private void agregarDados() {
 		etiquetaDados = new JLabel();
 		etiquetaDados.setSize(120, 120);
@@ -127,6 +151,9 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 
 	}
 
+	/**
+	 * Metodo para agregar la tienda que permite comprar estrellas en la partida
+	 */
 	private void agregarTienda() {
 		etiquetaTienda = new JLabel();
 		etiquetaTienda.setSize(100, 100);
@@ -137,6 +164,9 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 
 	}
 
+	/**
+	 * Metodo para colocar los datos que tiene el jugador que va tirando
+	 */
 	private void actualizarInfoJugadorActual() {
 		if (etiquetaFondoInfoJugadorActual == null) {
 
@@ -215,19 +245,29 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		etiquetaEstrellasJugadorActual.setText(": " + String.valueOf(jugadorActual.estrellasJugador));
 	}
 
+	/**
+	 * Metodo para simular el resultado que daria sumar las caras superiores de dos dados al tirarlos
+	 */
 	private void mezclarDados() {
 		numeroDadoUno = (int) Math.floor(Math.random()*6+1);
 		numeroDadoDos = (int) Math.floor(Math.random()*6+1);     
 		numeroDados = numeroDadoUno + numeroDadoDos;	
 	}
 	
+	/**
+	 * Metodo para escoger aleatriamente un numero del 3 al 69 y ponerle a la casilla en dicha posicion una estrella
+	 */
 	private void agregarEstrella() {
 		numeroCasillaAlazar = (int) Math.floor(Math.random()*66 + 3);
 		casillaAlazar = tablero.encontrarCasilla(numeroCasillaAlazar);
 		casillaAlazar.ponerEstrella();
 	}
 
+	/**
+	 * Metodo para escoger aleatriamente un numero del 1 al 6 y activar dicho numero del minujuego
+	 */
 	private void activarMinijuego() {
+		minijuegoActivado = true;
 		int numeroDeMinijuego;
 		Random random = new Random();
 		numeroDeMinijuego= random.nextInt(6)+1;
@@ -251,6 +291,9 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		}
 	}
 
+	/**
+	 * Metodo para comprobar si se debe activar un evento
+	 */
 	private void comprobarEvento() {
 		if (eventoActivado == true) {
 			eventoActivado = false;
@@ -260,22 +303,31 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		}
 	}
 
+	/**
+	 * Metodo para comprobar si se debe activar el evento del duelo
+	 */
 	private void comprobarEventoDuelo() {
-		if (this.rondasTerminadas>=2) {
-			for (int i = 0; i < listaJugadores.length -1; i++) {
-				for (int j = i + 1; j < listaJugadores.length; j++) {
-					
-					if (listaJugadores[i].casillaActual.numeroCasilla == listaJugadores[j].casillaActual.numeroCasilla) {
-						Jugador[] listaMismaPosicion= {listaJugadores[i], listaJugadores[j]};
-						pilaEventos.seek(listaJugadores[i], listaMismaPosicion, tablero);
-						pilaEventos.pop();
-						break;
-					}
+		for (int i = 0; i <= listaJugadores.length - 2; i++) {
+			for (int j = i + 1; j <= listaJugadores.length - 1; j++) {
+				
+				if (listaJugadores[i].casillaActual.numeroCasilla == listaJugadores[j].casillaActual.numeroCasilla && 
+				listaJugadores[i].casillaActual.numeroCasilla != 1 && listaJugadores[j].casillaActual.numeroCasilla != 1) {
+					minijuegoActivado = true;
+					Jugador[] listaMismaPosicion = {listaJugadores[i], listaJugadores[j]};
+					pilaEventos.seek(listaJugadores[i], listaMismaPosicion, tablero);
+					pilaEventos.pop();
+					break;
 				}
 			}
 		}
 	}
-	
+
+	/**
+	 * Metodo que da inicio al turno de un jugador, este actuailza la informacion del nuevo jugador, 
+	 * desactiva poder tirar nuevamente los dados, mezcla los dados y dice el resultado, actualiza al narrador y
+	 * activa un Thread para observar el movimiento del jugador
+	 * @throws El metodo puede manejar excepciones de tipo InterruptedException
+	 */
 	private void tirarDados() throws InterruptedException {
 		if (partidaIniciada == false) {
 			partidaIniciada = true;
@@ -284,24 +336,26 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 			siguienteTurno();
 			actualizarInfoJugadorActual();
 		}
-		movimientoJugador = true;
-		etiquetaDados.setBackground(colorNegativo);
-		
-		mezclarDados();
-		etiquetaNumeroDados.setText(String.valueOf(numeroDados));
-		etiquetaNumeroDados.setVisible(true);
-
-		etiquetaNarrador.setVisible(false);
-		etiquetaSilbato.setVisible(false);
-
-	    new Thread(this).start();
-	    
+		if (cantidadRondas != 0) {
+			movimientoJugador = true;
+			etiquetaDados.setBackground(colorNegativo);
+			
+			mezclarDados();
+			etiquetaNumeroDados.setText(String.valueOf(numeroDados));
+			etiquetaNumeroDados.setVisible(true);
+	
+			etiquetaNarrador.setVisible(false);
+			etiquetaSilbato.setVisible(false);
+	
+			new Thread(this).start();
+		}
 	}
 
+	/**
+	 * Metodo para cambiar al siguiente jugador, agregar una estrella al comenzar una ronda y verificar si el juego termina
+	 */
 	private void siguienteTurno() {
 		if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
-			//System.out.println("Esoty pasando nates de activar un minujuego");
-			//activarMinijuego();
 			jugadorActual = listaJugadores[0];
 			cantidadRondas -= 1;
 			rondasTerminadas += 1;
@@ -318,17 +372,28 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		}
 	}
 
+	/**
+	 * Metodo quitar la ventana de partida y poner la ventana final
+	 */
 	private void finPartida() {
 		this.setVisible(false);
 		Final f = new Final(listaJugadores);
 
 	}
 
+	/**
+	 * Metodo para mover al jugador actual por el tablero por medio de un Thread, 
+	 * comprobar al finalizar del recorrido si debe aparecer un evento y actualizar la informacion del narrador
+	 */
 	@Override
 	public void run() {
 		jugadorActual.moverJugador(numeroDados);
 		
+		if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
+			activarMinijuego();
+		}
 		comprobarEvento();
+		comprobarEventoDuelo();
 		actualizarInfoJugadorActual();
 		
 		movimientoJugador = false;
@@ -337,27 +402,27 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 
 		if (jugadorActual.numeroJugador + 2 > listaJugadores.length) {
 			etiquetaNarrador.setText("Jugador 1 tira los dados!");
-	    }
-	    else {
+		}
+		else {
 			int numeroJugadorSiguiente = jugadorActual.numeroJugador + 2;
 			etiquetaNarrador.setText("Jugador " + numeroJugadorSiguiente + " tira los dados!");
 		}
-		
-		comprobarEventoDuelo();		
-	    if (jugadorActual.numeroJugador==Inicio.cantidadJugadores-1) {
-	    	activarMinijuego();
-	    }
-		
 		
 		etiquetaNarrador.setVisible(true);
 		etiquetaSilbato.setVisible(true);
 
 	}
 	
+	/**
+	 * Metodo para saber cuando se le hace click a los dados o en la tienda, 
+	 * El de los dados solo servira si no hay algun jugador miviendose por el tablero y si no hay un minijuego en curso
+	 * El de la tienda solo servir si no hay un minijuego en curso
+	 * @param e - tipo: MouseEvent
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == etiquetaDados) {
-			if (movimientoJugador == false) {
+			if (movimientoJugador == false && minijuegoActivado == false) {
 				try {
 					tirarDados();
 				} catch (InterruptedException e1) {
@@ -367,21 +432,23 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		}
 
 		else if (e.getSource() == etiquetaTienda) {
-			if (jugadorActual.comprarEstrella == false) {
-				JOptionPane.showMessageDialog(null, "No has pasado por una casilla con estrella", "ERROR", JOptionPane.WARNING_MESSAGE);
-			}
-
-			else {
-				if (jugadorActual.monedasJugador < 500) {
-					JOptionPane.showMessageDialog(null, "No tienes suficiente dinero", "ERROR", JOptionPane.WARNING_MESSAGE);
+			if (minijuegoActivado == false) {
+				if (jugadorActual.comprarEstrella == false) {
+					JOptionPane.showMessageDialog(null, "No has pasado por una casilla con estrella", "ERROR", JOptionPane.WARNING_MESSAGE);
 				}
-
+	
 				else {
-					jugadorActual.monedasJugador -= 500;
-					jugadorActual.estrellasJugador += 1;
-					jugadorActual.comprarEstrella = false;
-					actualizarInfoJugadorActual();
-					JOptionPane.showMessageDialog(null, "Has comprado una estrella!", "NUEVA ESTRELLA", JOptionPane.INFORMATION_MESSAGE);
+					if (jugadorActual.monedasJugador < 500) {
+						JOptionPane.showMessageDialog(null, "No tienes suficiente dinero", "ERROR", JOptionPane.WARNING_MESSAGE);
+					}
+	
+					else {
+						jugadorActual.monedasJugador -= 500;
+						jugadorActual.estrellasJugador += 1;
+						jugadorActual.comprarEstrella = false;
+						actualizarInfoJugadorActual();
+						JOptionPane.showMessageDialog(null, "Has comprado una estrella!", "NUEVA ESTRELLA", JOptionPane.INFORMATION_MESSAGE);
+					}
 				}
 			}
 		}
@@ -397,11 +464,19 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 
 	}
 
+	/**
+	 * Metodo para saber cuando el mouse entra al espacio de los dados o en la tienda, 
+	 * De ser los dados: se pondra color rojo si hay algun jugador miviendose por el tablero o 
+	 * si hay un minijuego en curso y gris oscuro en caso de no cumplirse alguna de estas condiciones mencionadas
+	 * De ser la tienda: se pondra rojo si un jugador no ha pasado por una casilla con estrella o 
+	 * no tiene suficiente dinero para comprarla o hay algun minijuego en curso y gris oscuro en caso de no cumplirse todas estas condiciones mencionadas
+	 * @param e - tipo: MouseEvent
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource() == etiquetaDados) {
 			etiquetaDados.setOpaque(true);
-			if (movimientoJugador == false) {
+			if (movimientoJugador == false && minijuegoActivado == false) {
 				etiquetaDados.setBackground(colorResalte);
 			}
 			else {
@@ -410,7 +485,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		}
 		else if (e.getSource() == etiquetaTienda) {
 			etiquetaTienda.setOpaque(true);
-			if (jugadorActual.comprarEstrella == false || jugadorActual.monedasJugador < 500) {
+			if (jugadorActual.comprarEstrella == false || jugadorActual.monedasJugador < 500 || minijuegoActivado == true) {
 				etiquetaTienda.setBackground(colorNegativo);
 			}
 			else {
@@ -419,6 +494,10 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		}
 	}
 
+	/**
+	 * Metodo para saber cuando el mouse sale al espacio de los dados o en la tienda, 
+	 * en cualquier caso se pondra del color de la ventana
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == etiquetaDados) {

@@ -22,7 +22,7 @@ import jugador.Jugador;
  * @author Juan Navarro
  *
  */
-public class MinijuegoSeis extends Minijuego implements MouseListener{
+public class MinijuegoSeis extends Minijuego {
 	
 //Atributos de las etiquetas del juego
 	public Jugador jugadorActual;
@@ -226,7 +226,7 @@ public class MinijuegoSeis extends Minijuego implements MouseListener{
 		panelMinijuegos.repaint();
 	}
 	/**
-	 * Se atcualiza el panel al añadir un nuevo componente de tipo JTextField que permite
+	 * Se atcualiza el panel al aï¿½adir un nuevo componente de tipo JTextField que permite
 	 * escirbir texto en el
 	 */
 	private void actualizarBoton() {

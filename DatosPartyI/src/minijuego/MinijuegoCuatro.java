@@ -13,7 +13,7 @@ import java.awt.event.MouseListener;
  * @author Juan Pena
  */
 
-public class MinijuegoCuatro extends Minijuego implements MouseListener {
+public class MinijuegoCuatro extends Minijuego {
     public Jugador jugadorActual;
     private JLabel etiquetaMinijuegoCuatro;
     private JLabel etiquetaDados;

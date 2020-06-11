@@ -19,7 +19,7 @@ import jugador.Jugador;
  * @author Juan Navarro
  *
  */
-public class MinijuegoCinco extends Minijuego implements MouseListener {
+public class MinijuegoCinco extends Minijuego {
 
 // Atributos de las etiquetas del juego
 	public Jugador jugadorActual;
@@ -35,7 +35,7 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
 	private int s=0, cs=99;
 	
 	/**
-	 * Metodo contructor del minijuego, aquí usa el contructor de la clase padre
+	 * Metodo contructor del minijuego, aquï¿½ usa el contructor de la clase padre
 	 * que crea la interfaz grafica basica, el resto se desarrolla en esta clase
 	 * @param listaJugadores
 	 */
@@ -111,139 +111,136 @@ public class MinijuegoCinco extends Minijuego implements MouseListener {
     	}
     	
     	if (jugadorActual.numeroJugador==0) {
-    	iniciar.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				//if (e.getSource()==iniciar) {
-					iniciar.setBackground(Color.red);
-					if (onGame==false) {
-						iniciar.setText("Pausar!");
-						onGame=true;
-						Thread t1= new Thread (()-> {
-							t= new Timer (10, acciones);
-							t.start();
-						});
-						t1.start();
-						allowResults=true;
-					}
-					else if (allowResults==true) {
-						t.stop();
-						temporizador.setVisible(true);
-						resultados ();
-					}
-				//}
-			}
-			
-			private ActionListener acciones=new ActionListener () {
+			iniciar.addMouseListener(new MouseListener() {
 
 				@Override
-				public void actionPerformed(ActionEvent e) {
-					cs--;
-					if (cs==0) {
-						if (s==7) {
-							temporizador.setVisible(false);
+				public void mouseClicked(MouseEvent e) {
+					if (e.getSource()==iniciar) {
+						iniciar.setBackground(Color.red);
+						if (onGame==false) {
+							iniciar.setText("Pausar!");
+							onGame=true;
+							Thread t1= new Thread (()-> {
+								t= new Timer (10, acciones);
+								t.start();
+							});
+							t1.start();
+							allowResults=true;
 						}
-						if (s==0) {
-							
-							temporizador.setVisible(true);
-							onGame=false;
-							resultados();
+						else if (allowResults==true) {
 							t.stop();
-						}
-						else {
-							cs=99;
-							s--;
+							temporizador.setVisible(true);
+							resultados ();
 						}
 					}
-					actualizarTempo();
 				}
-			};
-			/**
-			 * Es un metodo que permite actualizar el temporizador
-			 */
-			private void actualizarTempo() {
-				String tiempo=s+ " : "+(cs<=9?"0":"")+cs;
-				temporizador.setText(tiempo);
-				panelMinijuegos.repaint();
-			}
-			/**
-			 * Define el puntaje obtenido por cada jugador, basado en que tan cercano estuvo
-			 * su resultado de los tres segundos del reloj
-			 * Tambien esconde los label que pueden traer problemas al cambiar de jugador o mostrar los resultados
-			 */
-			private void resultados() {
-				running=false;
-	    		System.out.println("Estoy en resultados");
-				int difSegundos;
-				int centesimasRestantes;
-				if (s>3) {
-					difSegundos=s-4;
-					centesimasRestantes=cs;
-				}
-				else if(s==3)  {
-					difSegundos=0;
-					centesimasRestantes=cs;
-				}
-				else {
-					difSegundos=2-s;
-					centesimasRestantes=100-cs;
-				}
-				resultado.setText("La diferencia es de "+difSegundos+" : "+(centesimasRestantes<=9?"0":"")+centesimasRestantes);
-				int difMaxima= 700;
-				int difEnCentesimas= difSegundos*100+centesimasRestantes;
-				int puntaje= (difMaxima-difEnCentesimas)/10;
-				jugadorActual.puntajeMinijuego=puntaje;
-				iniciar.setText("Puntaje: "+puntaje);
-				iniciar.removeMouseListener(null);
-				panelMinijuegos.repaint();
-				//onGame=false;
 				
-				//Ocultar para el mostrar resultados
-				narrador.setVisible(true);
-				if (jugadorActual.numeroJugador==listaJugadores.length-1) {
-					Thread t2= new Thread (()-> {
-						try {
-							actualizarDatosMarcador();
-							Thread.sleep(2000);
-							etiquetaMinijuegoCinco.setVisible(false);
-						} catch (InterruptedException e) {
-							System.out.println("Estoy en el catch del ultimo jugador");
-							e.printStackTrace();
+				private ActionListener acciones=new ActionListener () {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						cs--;
+						if (cs==0) {
+							if (s==7) {
+								temporizador.setVisible(false);
+							}
+							if (s==0) {
+								
+								temporizador.setVisible(true);
+								onGame=false;
+								resultados();
+								t.stop();
+							}
+							else {
+								cs=99;
+								s--;
+							}
 						}
+						actualizarTempo();
+					}
+				};
+				
+				/**
+				 * Es un metodo que permite actualizar el temporizador
+				 */
+				private void actualizarTempo() {
+					String tiempo=s+ " : "+(cs<=9?"0":"")+cs;
+					temporizador.setText(tiempo);
+					panelMinijuegos.repaint();
+				}
+				/**
+				 * Define el puntaje obtenido por cada jugador, basado en que tan cercano estuvo
+				 * su resultado de los tres segundos del reloj
+				 * Tambien esconde los label que pueden traer problemas al cambiar de jugador o mostrar los resultados
+				 */
+				private void resultados() {
+					running=false;
+					System.out.println("Estoy en resultados");
+					int difSegundos;
+					int centesimasRestantes;
+					if (s>3) {
+						difSegundos=s-4;
+						centesimasRestantes=cs;
+					}
+					else if(s==3)  {
+						difSegundos=0;
+						centesimasRestantes=cs;
+					}
+					else {
+						difSegundos=2-s;
+						centesimasRestantes=100-cs;
+					}
+					resultado.setText("La diferencia es de "+difSegundos+" : "+(centesimasRestantes<=9?"0":"")+centesimasRestantes);
+					int difMaxima= 700;
+					int difEnCentesimas= difSegundos*100+centesimasRestantes;
+					int puntaje= (difMaxima-difEnCentesimas)/10;
+					jugadorActual.puntajeMinijuego=puntaje;
+					iniciar.setText("Puntaje: "+puntaje);
+					iniciar.removeMouseListener(null);
+					panelMinijuegos.repaint();
+					//onGame=false;
+					
+					//Ocultar para el mostrar resultados
+					narrador.setVisible(true);
+					if (jugadorActual.numeroJugador==listaJugadores.length-1) {
+						Thread t2= new Thread (()-> {
+							try {
+								actualizarDatosMarcador();
+								Thread.sleep(2000);
+								etiquetaMinijuegoCinco.setVisible(false);
+							} catch (InterruptedException e) {
+								System.out.println("Estoy en el catch del ultimo jugador");
+								e.printStackTrace();
+							}
+							
+						});
+						t2.start();
 						
-					});
-					t2.start();
+					}
+					
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
 					
 				}
 				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-    		
-    	});
+			});
     	}
     }
 }
