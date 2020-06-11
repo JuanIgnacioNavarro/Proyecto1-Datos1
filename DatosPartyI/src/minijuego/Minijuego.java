@@ -130,6 +130,7 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 			i+=1;
 		}
 	}
+	
 	/**
 	 * Este metodo agrega un boton que permite controlar los tiempos del minijuego, tambien incluye un narrador
 	 * El narrador le indica a los usuarios loque deben de hacer

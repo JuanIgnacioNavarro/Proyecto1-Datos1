@@ -36,7 +36,6 @@ public class MinijuegoSeis extends Minijuego {
 	
 //Atributos que controlan el reloj
 	private boolean onGame=false;
-	private boolean allowResults= false;
 	private Timer t;
 	private int s=0, cs=99;
 

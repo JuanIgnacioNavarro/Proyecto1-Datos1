@@ -1,5 +1,9 @@
 package tablero;
 
+/**
+ * Clase donde conectan los nodos, formando una lista (tablero)
+ * @author Andres Martinez Vargas
+ */
 public class Tablero {
 	public Casilla primeraCasilla;
 	public Casilla ultimaCasilla;
@@ -15,6 +19,9 @@ public class Tablero {
 	private int N = 1, NE = 2, E = 3, SE = 4, S = 5, SO = 6, O = 7, NO = 8;
 	private static Casilla casilla12, casilla17, casilla34, casilla35;
 		
+	/**
+	 * Contructor de la clase, define sus atributos iniciales y la imagen corerspondiente al tipo de casilla
+	 */
 	public Tablero() {
 		caminoPrincipal = new Tablero(0);
 		
@@ -33,6 +40,11 @@ public class Tablero {
 		ensamblarCaminos();
 		
 	}
+
+	/**
+	 * Contructor 2 de la clase, que dependiendo del numero que sea se crea un subcamino diferente
+	 * @param i: int que define el numero de subcamino
+	 */
 	public Tablero(int i) {
 		if (i == 0) {
 			agregarCaminoPrincipal();			
@@ -51,6 +63,11 @@ public class Tablero {
 		}
 	}
 	
+	/**
+	 * Metodo que determina la cantidad de pixeles que se necesitan para que una casilla se conecte 
+	 * hacia el norte, noreste, este, sureste, sur, suroeste, oeste o noroeste
+	 * @param direccion: int que define 
+	 */
 	private void direccionCasilla(int direccion) {
 		if (direccion == 1) {
 			posicionCasillaY -= 57;
@@ -82,6 +99,9 @@ public class Tablero {
 		}
 	}
 	
+	/**
+	 * Metodo que hacer el camino principal del tablero
+	 */
 	private void agregarCaminoPrincipal() {
 		posicionCasillaX = 215;
 		posicionCasillaY = 635;
@@ -164,6 +184,9 @@ public class Tablero {
 
 	}
 	
+	/**
+	 * Metodo que hacer el subcamino uno del tablero
+	 */
 	private void agregarSubCaminoUno() {
 		posicionCasillaX = Tablero.casilla35.coordenadaCasillaX;
 		posicionCasillaY = Tablero.casilla35.coordenadaCasillaY;
@@ -184,6 +207,10 @@ public class Tablero {
 		nuevaCasilla("Amarilla", posicionCasillaX,posicionCasillaY);
 	
 	}
+
+	/**
+	 * Metodo que hacer el subcamino dos del tablero
+	 */
 	private void agregarSubCaminoDos() {
 		posicionCasillaX = Tablero.casilla12.coordenadaCasillaX;
 		posicionCasillaY = Tablero.casilla12.coordenadaCasillaY;
@@ -206,6 +233,10 @@ public class Tablero {
 		nuevaCasilla("Azul", posicionCasillaX,posicionCasillaY);
 	
 	}
+
+	/**
+	 * Metodo que hacer el subcamino tres del tablero
+	 */
 	private void agregarSubCaminoTres() {
 		posicionCasillaX = Tablero.casilla17.coordenadaCasillaX;
 		posicionCasillaY = Tablero.casilla17.coordenadaCasillaY;
@@ -226,6 +257,9 @@ public class Tablero {
 		nuevaCasilla("Amarilla", posicionCasillaX,posicionCasillaY);
 	}
 	
+	/**
+	 * Metodo que hacer el subcamino cuatro del tablero
+	 */
 	private void agregarSubCaminoCuatro() {
 		posicionCasillaX = Tablero.casilla34.coordenadaCasillaX - 200;
 		posicionCasillaY = Tablero.casilla34.coordenadaCasillaY + 50;
@@ -246,6 +280,9 @@ public class Tablero {
 		nuevaCasilla("Amarilla", posicionCasillaX,posicionCasillaY);
 	}
 	
+	/**
+	 * Metodo para hacer las conexiones entre los caminos del tablero
+	 */
 	private void ensamblarCaminos() {
 		Casilla casilla3 = encontrarCasilla(3);
 		caminoPrincipal.ultimaCasilla.siguienteCasilla = casilla3;	
@@ -275,6 +312,10 @@ public class Tablero {
 		
 	}
 	
+	/**
+	 * Metodo para encontrar una determinado camino
+	 * @param numeroCasilla: int que define la posicion de la casilla que se desea encontrar
+	 */
 	public Casilla encontrarCasilla(int numeroCasilla){
 		if (numeroCasilla <= caminoPrincipal.ultimaCasilla.numeroCasilla) {
 			return encontrarCasillaAux(caminoPrincipal, numeroCasilla);
@@ -300,6 +341,11 @@ public class Tablero {
 		}
 	}
 
+	/**
+	 * Metodo para encontrar una determinada casilla
+	 * @param camino: Tablero especifico donde se encuentra la casilla a encontrar
+	 * @param numeroCasilla: int que define la posicion de la casilla que se desea encontrar
+	 */
 	public Casilla encontrarCasillaAux(Tablero camino, int numeroCasilla) {
 		Casilla casilla = camino.primeraCasilla;
 		while (casilla.numeroCasilla != numeroCasilla) {
@@ -308,7 +354,10 @@ public class Tablero {
 		return casilla;
 	}
 	
-	public void nuevaCasilla(String tipoCasilla, int coordenadaCasillaX, int coordenadaCasillaY) {
+	/**
+	 * Metodo para agregar una nueva casilla a un tablero, la casilla anterior tendra una referencia a la nueva casilla
+	 */
+	private void nuevaCasilla(String tipoCasilla, int coordenadaCasillaX, int coordenadaCasillaY) {
 		cantidadCasillas += 1;
 		if (primeraCasilla == null) {
 			primeraCasilla = new Casilla(tipoCasilla, coordenadaCasillaX, coordenadaCasillaY);

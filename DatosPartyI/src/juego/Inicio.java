@@ -16,12 +16,11 @@ public class Inicio extends JFrame implements ActionListener {
 	public static int cantidadRondas=2;
 	private JPanel panelInicio;
 	private JButton botonJugar;
-	private JLabel etiquetaCantidadJugadores, etiquetaCantidadRondas, etiquetaDatos;
+	private JLabel etiquetaCantidadJugadores, etiquetaCantidadRondas;
 	private Integer numJugadores[] = {2, 3, 4};
 	private Integer numRondas[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 	private JComboBox<Integer> cajaCantidadJugadores;
 	private JComboBox<Integer> cajaCantidadRondas;
-	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 25);
 	private Font fuenteTexto = new Font("Comic Sans MS", 0, 16);
 
 
