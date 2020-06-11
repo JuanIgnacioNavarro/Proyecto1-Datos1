@@ -247,13 +247,14 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private void mezclarDados() {
 		numeroDadoUno = (int) Math.floor(Math.random()*6+1);
 		numeroDadoDos = (int) Math.floor(Math.random()*6+1);     
-		numeroDados = numeroDadoUno + numeroDadoDos;	
+		numeroDados = numeroDadoUno + numeroDadoDos;
 	}
 
 	/**
 	 * Metodo para escoger aleatriamente un numero del 1 al 6 y activar dicho numero del minujuego
 	 */
-	private void activarMinijuego() {
+	private void activarMinijuego(Jugador [] listaJugadores) {
+		
 		minijuegoActivado = true;
 		int numeroDeMinijuego;
 		Random random = new Random();
@@ -291,18 +292,22 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	}
 
 	/**
-	 * Metodo para comprobar si se debe activar el evento del duelo
+	 * Metodo para comprobar si se debe activar un minijuego de duelo
+	 * Se usa el metodo de activar minijuego con la lista de los jugadores que se encuentran en la misma posicion
+	 * Luego en los metodos de resultados de cada minijuego se comprueba si el minijuego se dio por un evento duelo
+	 * y se mueve el jugador a la siguiente casilla
 	 */
-	private void comprobarEventoDuelo() {
+	private void comprobarEventoDuelo(){
 		for (int i = 0; i <= listaJugadores.length - 2; i++) {
 			for (int j = i + 1; j <= listaJugadores.length - 1; j++) {
-				
+				//Debe comprobar si las posiciones de los jugadores son las mismas
 				if (listaJugadores[i].casillaActual.numeroCasilla == listaJugadores[j].casillaActual.numeroCasilla && 
 				listaJugadores[i].casillaActual.numeroCasilla != 1 && listaJugadores[j].casillaActual.numeroCasilla != 1) {
-					minijuegoActivado = true;
-					Jugador[] listaMismaPosicion = {listaJugadores[i], listaJugadores[j]};
-					pilaEventos.seek(listaJugadores[i], listaMismaPosicion, tablero);
-					pilaEventos.pop();
+					minijuegoActivado = true; // el minijuego activado es para bloquear el boton de los dados
+					Jugador[] listaMismaPosicion = {listaJugadores[i], listaJugadores[j]}; //Esta es la lista de los jugadores que se encunetran en la misma posicion 
+					Partida.eventoDueloActivado=true;
+					activarMinijuego(listaMismaPosicion); //Se activa uno de los minijuegos
+					minijuegoActivado= false;
 					break;
 				}
 			}
@@ -377,7 +382,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		jugadorActual.moverJugador(numeroDados);
 		
 		if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
-			activarMinijuego();
+			activarMinijuego(listaJugadores);
 		}
 		comprobarEvento();
 		comprobarEventoDuelo();

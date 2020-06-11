@@ -3,6 +3,9 @@ package minijuego;
 import jugador.Jugador;
 
 import javax.swing.*;
+
+import juego.Partida;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -49,7 +52,7 @@ public class MinijuegoCuatro extends Minijuego {
      * y la de resultados
      */
     private void definirComponentes() {
-        if (jugadorActual.numeroJugador == 0) {
+        if (jugadorActual.numeroJugadorMinijuego == 0) {
             etiquetaMinijuegoCuatro = new JLabel();
             etiquetaMinijuegoCuatro.setBounds(263, 150, 540, 400);
             etiquetaMinijuegoCuatro.setOpaque(true);
@@ -157,7 +160,11 @@ public class MinijuegoCuatro extends Minijuego {
         etiquetaDados.removeMouseListener(null);
         etiquetaDados.setVisible(false);
     	narrador.setVisible(true);
-         if (jugadorActual.numeroJugador==listaJugadores.length-1) {
+         if (jugadorActual.numeroJugadorMinijuego==listaJugadores.length-1) {
+        	 if (Partida.eventoDueloActivado==true) {
+ 				eventoDuelo();
+ 				Partida.eventoDueloActivado= false;
+ 			}
         	 Thread t2= new Thread (()-> {
 					try {
 						actualizarDatosMarcador();

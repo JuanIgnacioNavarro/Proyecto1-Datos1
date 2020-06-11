@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
-
+import juego.Partida;
 import jugador.Jugador;
 /**
  * Esta es la clase del minijuego 5, corresponde a un minijuego que reta al jugador a parar un reloj que 
@@ -57,7 +57,7 @@ public class MinijuegoCinco extends Minijuego {
 	 * en que si el jugador es el primero que aparece en la lista de los que estan jugando o es otro
      */
     private void definirComponentes () {
-    	if (jugadorActual.numeroJugador==0) {
+    	if (jugadorActual.numeroJugadorMinijuego==0) {
     		etiquetaMinijuegoCinco= new JLabel ();
     		etiquetaMinijuegoCinco.setBounds(263, 150, 540, 200);
     		etiquetaMinijuegoCinco.setOpaque(true);
@@ -106,7 +106,7 @@ public class MinijuegoCinco extends Minijuego {
     		panelMinijuegos.repaint();
     	}
     	
-    	if (jugadorActual.numeroJugador==0) {
+    	if (jugadorActual.numeroJugadorMinijuego==0) {
 			iniciar.addMouseListener(new MouseListener() {
 
 				@Override
@@ -197,7 +197,11 @@ public class MinijuegoCinco extends Minijuego {
 					
 					//Ocultar para el mostrar resultados
 					narrador.setVisible(true);
-					if (jugadorActual.numeroJugador==listaJugadores.length-1) {
+					if (jugadorActual.numeroJugadorMinijuego==listaJugadores.length-1) {
+						if (Partida.eventoDueloActivado==true) {
+							eventoDuelo();
+							Partida.eventoDueloActivado= false;
+						}
 						Thread t2= new Thread (()-> {
 							try {
 								actualizarDatosMarcador();

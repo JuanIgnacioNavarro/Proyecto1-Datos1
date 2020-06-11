@@ -63,7 +63,7 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 	}
 	
 	/**
-	 * Corresponde a un metodo que llama a otros metodos que a�aden los componentes de la interfaz grafica
+	 * Corresponde a un metodo que llama a otros metodos que anaden los componentes de la interfaz grafica
 	 */
 	private void agregarComponentesVentana() { //Este metodo llama a mas metodos, esto con el objetivo de ordenar el codigo
 		agregarPanel ();//Panel de la interfaz
@@ -174,8 +174,8 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 	public void iniciarMinijuego() {
 		etiquetaTituloMinijuego.setVisible(false);
 		narrador.setVisible(false);
+		System.out.println("Boton en false");
 		runMinijuego(jugadorActual);
-		
 		
 		try {
 		jugadorActual= listaJugadores[contadorRondas+1];
@@ -195,7 +195,6 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 			this.setVisible(false);
 		}
 		contadorRondas+=1;
-		botonPlay.setVisible(true);
 	}
 	
 	/**
@@ -267,7 +266,7 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 	
 	/**
 	 * Es un metodo de ayuda que permite ordenar la lista de los jugadores segun su numero de jugador
-	 * corresponde al alforitmo de selection llamado selectionSort
+	 * corresponde al algoritmo de selection llamado selectionSort
 	 */
 	public void ordenarResultadosNum() {
 		int n= listaJugadores.length;
@@ -337,8 +336,12 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
+
 		if (e.getSource()==botonPlay) {
 			if (running==false) {
+			botonPlay.setOpaque(true);
+			botonPlay.setBackground(new Color(222, 66, 80));
+			panelMinijuegos.repaint();
 			iniciarMinijuego();
 			}
 		}
@@ -357,12 +360,42 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		
+		if (e.getSource()==botonPlay) {
+			botonPlay.setOpaque(true);
+			if (running==false) {
+				botonPlay.setBackground(new Color(66, 66, 66));
+			}
+			else {
+				botonPlay.setBackground(new Color(222, 66, 80));
+			}
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		
+		if (e.getSource()==botonPlay) {
+			botonPlay.setBackground(Bienvenida.colorVentana);
+		}
+	}
+	
+	public void eventoDuelo() {
+		if (listaJugadores[0].puntajeMinijuego>= listaJugadores[1].puntajeMinijuego){
+			listaJugadores[0].casillaActual=listaJugadores[0].casillaActual.siguienteCasilla;
+			int correccionCoordenadaX = (listaJugadores[0].casillaActual.etiquetaCasilla.getWidth() / 2) - listaJugadores[0].etiquetaImagen.getWidth()/2;
+			int correccionCoordenadaY = (listaJugadores[0].casillaActual.etiquetaCasilla.getHeight() / 2) - listaJugadores[0].etiquetaImagen.getHeight()/2;
+			listaJugadores[0].etiquetaImagen.setLocation(correccionCoordenadaX , correccionCoordenadaY);
+			listaJugadores[0].casillaActual.etiquetaCasilla.add(listaJugadores[0].etiquetaImagen);
+			listaJugadores[0].casillaActual.etiquetaCasilla.repaint();
+		}
+		else {
+			listaJugadores[1].casillaActual=listaJugadores[1].casillaActual.siguienteCasilla;
+			int correccionCoordenadaX = (listaJugadores[1].casillaActual.etiquetaCasilla.getWidth() / 2) - listaJugadores[1].etiquetaImagen.getWidth()/2;
+			int correccionCoordenadaY = (listaJugadores[1].casillaActual.etiquetaCasilla.getHeight() / 2) - listaJugadores[1].etiquetaImagen.getHeight()/2;
+			listaJugadores[1].etiquetaImagen.setLocation(correccionCoordenadaX , correccionCoordenadaY);
+			listaJugadores[1].casillaActual.etiquetaCasilla.add(listaJugadores[0].etiquetaImagen);
+			listaJugadores[1].casillaActual.etiquetaCasilla.repaint();
+		}
+		Partida.panelPartida.repaint();
 	}
 
 }
