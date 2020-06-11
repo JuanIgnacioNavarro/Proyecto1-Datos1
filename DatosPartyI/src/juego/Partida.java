@@ -246,7 +246,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private void mezclarDados() {
 		numeroDadoUno = (int) Math.floor(Math.random()*6+1);
 		numeroDadoDos = (int) Math.floor(Math.random()*6+1);     
-		numeroDados = 5; //numeroDadoUno + numeroDadoDos;
+		numeroDados = numeroDadoUno + numeroDadoDos;
 	}
 
 	/**
