@@ -18,9 +18,7 @@ import java.awt.event.MouseListener;
 
 public class MinijuegoCuatro extends Minijuego {
     public Jugador jugadorActual;
-    private JLabel etiquetaMinijuegoCuatro;
-    private JLabel etiquetaDados;
-    private JLabel etiquetaResultado;
+    private JLabel etiquetaMinijuegoCuatro, etiquetaDados, etiquetaResultado;
     private int dado1, dado2, dado3, puntaje;
     private boolean onGame;
     private ImageIcon dados = new ImageIcon("Imagenes/Dados.png");
@@ -33,7 +31,6 @@ public class MinijuegoCuatro extends Minijuego {
         descripcionMinijuego.setText("El puntaje total es la suma de los dados");
         descripcionMinijuego.setFont(fuenteTexto);
         panelMinijuegos.repaint();
-        System.out.println("prueba");
     }
     /**
      * Metodo heredado donde se corren los
@@ -82,7 +79,8 @@ public class MinijuegoCuatro extends Minijuego {
             etiquetaResultado.setFont(fuenteTitulo);
             etiquetaMinijuegoCuatro.add(etiquetaResultado);
 
-        }else {
+        }
+        else {
             etiquetaDados.setIcon((new ImageIcon(dados.getImage().getScaledInstance(etiquetaDados.getWidth(), etiquetaDados.getHeight(), Image.SCALE_SMOOTH))));
             etiquetaResultado.setText("Resultados:");
             etiquetaDados.setVisible(true);
@@ -108,19 +106,15 @@ public class MinijuegoCuatro extends Minijuego {
 
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    // TODO Auto-generated method stub
                 }
 
                 @Override
                 public void mouseReleased(MouseEvent e) {
-
                     resultados();
-
                 }
 
                 @Override
                 public void mouseEntered(MouseEvent e) {
-
                 }
 
                 @Override
@@ -167,9 +161,9 @@ public class MinijuegoCuatro extends Minijuego {
         etiquetaDados.setVisible(false);
     	narrador.setVisible(true);
          if (jugadorActual.numeroJugadorMinijuego==listaJugadores.length-1) {
-        	 if (Partida.eventoDueloActivado==true) {
+        	 if (Partida.minijuegoActivado==true) {
  				eventoDuelo();
- 				Partida.eventoDueloActivado= false;
+ 				Partida.minijuegoActivado = false;
  			}
         	 Thread t2= new Thread (()-> {
 					try {
@@ -177,7 +171,6 @@ public class MinijuegoCuatro extends Minijuego {
 						Thread.sleep(2000);
 						etiquetaMinijuegoCuatro.setVisible(false);
 					} catch (InterruptedException e) {
-						System.out.println("Estoy en el catch del ultimo jugador");
 						e.printStackTrace();
 					}
 					

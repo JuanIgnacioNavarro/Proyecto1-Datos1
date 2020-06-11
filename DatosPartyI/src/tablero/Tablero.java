@@ -5,15 +5,10 @@ package tablero;
  * @author Andres Martinez Vargas
  */
 public class Tablero {
-	public Casilla primeraCasilla;
-	public Casilla ultimaCasilla;
+	public Casilla primeraCasilla, ultimaCasilla;
 	public static int cantidadCasillas = 0;
 	
-	public Tablero caminoPrincipal;
-	public Tablero subCaminoUno;
-	public Tablero subCaminoDos;
-	public Tablero subCaminoTres;
-	public Tablero subCaminoCuatro;
+	public Tablero caminoPrincipal, subCaminoUno, subCaminoDos, subCaminoTres, subCaminoCuatro;
 	
 	private int posicionCasillaX, posicionCasillaY;
 	private int N = 1, NE = 2, E = 3, SE = 4, S = 5, SO = 6, O = 7, NO = 8;

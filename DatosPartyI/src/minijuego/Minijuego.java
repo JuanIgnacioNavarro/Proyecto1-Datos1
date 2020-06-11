@@ -27,24 +27,14 @@ import juego.Partida;
 public abstract class Minijuego extends JFrame implements MouseListener {
 //    ____
 //___/  Atributos de control de la clase minijuego e hijas
-	protected Jugador listaJugadores[]; 
-	protected Jugador jugadorActual;
+	protected Jugador listaJugadores[], jugadorActual;
 	protected int contadorRondas;
-	protected boolean enJuego;
-	protected boolean running;
+	protected boolean enJuego, running;
 //    ____
 //___/  Atributos de la interfaz grafica
 	protected JPanel panelMinijuegos;
-	protected JLabel listaEtiquetasInfo[];
-	protected JLabel listaEtiquetasPuntaje[];
-	protected JLabel listaEtiquetasResultados[];
-	protected JLabel informacionResultados[];
-	protected JLabel tituloResultados;
-	protected JLabel etiquetaTituloMinijuego;
-	protected  JLabel tituloMinijuego;
-	protected JLabel descripcionMinijuego;
-	protected JLabel botonPlay;
-	protected JLabel narrador;
+	protected JLabel listaEtiquetasInfo[], listaEtiquetasPuntaje[], listaEtiquetasResultados[], informacionResultados[], 
+	tituloResultados, etiquetaTituloMinijuego, tituloMinijuego, descripcionMinijuego, botonPlay, narrador;
 	private ImageIcon imagenPlay= new ImageIcon("Imagenes/botonPlay.png");
 //    ____	
 //___/  Atributos de variables usadas varias veces en la interfaz grafica
@@ -130,7 +120,7 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 			i+=1;
 		}
 	}
-	
+
 	/**
 	 * Este metodo agrega un boton que permite controlar los tiempos del minijuego, tambien incluye un narrador
 	 * El narrador le indica a los usuarios loque deben de hacer
@@ -184,7 +174,6 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 	public void iniciarMinijuego() {
 		etiquetaTituloMinijuego.setVisible(false);
 		narrador.setVisible(false);
-		System.out.println("Boton en false");
 		runMinijuego(jugadorActual);
 		
 		try {

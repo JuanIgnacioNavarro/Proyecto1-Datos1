@@ -49,6 +49,7 @@ public class Evento {
 	 */
 	public void ejecutarEvento(Jugador jugadorActual, Jugador[] listaJugadores, Tablero tablero) {
 		if (tipoEvento==1) {
+			Partida.minijuegoActivado = true;
 			int randomInt;
 			while (true) {
 				Random random= new Random();

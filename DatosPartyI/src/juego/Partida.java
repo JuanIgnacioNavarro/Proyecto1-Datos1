@@ -32,42 +32,26 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private ImageIcon imagenMoneda = new ImageIcon("Imagenes/Moneda.png");
 	private ImageIcon imagenEstrella = new ImageIcon("Imagenes/Estrella.png");
 	private ImageIcon imagenSilbato= new ImageIcon ("Imagenes/silbato.png");
-	private JLabel etiquetaDados;
-	private JLabel etiquetaNumeroDados;
-	private JLabel etiquetaTienda;
-	private JLabel etiquetaMoneda;
-	private JLabel etiquetaEstrella;
-	private JLabel etiquetaFondoInfoJugadorActual;
-	private JLabel etiquetaNombreJugadorActual;
-	private JLabel etiquetaMonedasJugadorActual;
-	private JLabel etiquetaEstrellasJugadorActual;
-	private JLabel etiquetaRondas;
-	private JLabel etiquetaNarrador;
-	private JLabel etiquetaSilbato;
-	
-	private JLabel etiquetaFondoNarrador;
 
 	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 25);
 	private Font fuenteTexto = new Font("Comic Sans MS", 0, 16);
 	private Font fuenteTexto2 = new Font("Comic Sans MS", 0, 14);
-	public static Color colorResalte = new Color(66, 66, 66);
-	public static Color colorNegativo = new Color(222, 66, 80);
-	public static Color colorPositivo = new Color(180, 225, 120);
-	public static boolean eventoDueloActivado=false;
-	public static boolean eventoActivado;
-	public static boolean minijuegoActivado;
-	public static boolean movimientoJugador;
-	private boolean partidaIniciada;
-	private int cantidadRondas = Inicio.cantidadRondas;
-	private Jugador listaJugadores[] = new Jugador[Inicio.cantidadJugadores];
-	public Jugador jugadorActual;
+
+	private Color colorResalte = new Color(66, 66, 66);
+	private Color colorNegativo = new Color(222, 66, 80);
+	private Color colorPositivo = new Color(180, 225, 120);
+
+	private JLabel etiquetaDados, etiquetaNumeroDados, etiquetaTienda, etiquetaMoneda, etiquetaEstrella, 
+	etiquetaFondoInfoJugadorActual, etiquetaNombreJugadorActual, etiquetaMonedasJugadorActual, 
+	etiquetaEstrellasJugadorActual, etiquetaRondas, etiquetaNarrador, etiquetaSilbato, etiquetaFondoNarrador;
+
+	private Jugador listaJugadores[] = new Jugador[Inicio.cantidadJugadores], jugadorActual;
 	private Tablero tablero;
-	private int numeroDadoUno, numeroDadoDos, numeroDados;
-	private int numeroCasillaAlazar;
-	private int rondasTerminadas=1;
 	private Casilla casillaAlazar;
-	public PilaEventos pilaEventos= new PilaEventos();
-	private Minijuego minijuegoDuelo;
+	public PilaEventos pilaEventos = new PilaEventos();
+
+	public static boolean eventoActivado, minijuegoActivado, movimientoJugador, partidaIniciada;
+	private int numeroCasillaAlazar, cantidadRondas = Inicio.cantidadRondas, rondasTerminadas = 1, numeroDadoUno, numeroDadoDos, numeroDados;
 	
 	/**
 	 * Constructor de la clase, el cual genera tanto los componentes de la ventana como los de la partida
@@ -83,6 +67,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		componentesVentana();
 		componentesPartida();
 	}
+
 	/**
 	 * Metodo pora agragar los componentes de la ventana
 	 */
@@ -150,7 +135,6 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		etiquetaNumeroDados.setForeground(Color.WHITE);
 		etiquetaNumeroDados.setVisible(false);
 		panelPartida.add(etiquetaNumeroDados);
-
 	}
 
 	/**
@@ -164,6 +148,15 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		etiquetaTienda.addMouseListener(this);
 		panelPartida.add(etiquetaTienda);
 
+	}
+
+	/**
+	 * Metodo para escoger aleatriamente un numero del 3 al 69 y ponerle a la casilla en dicha posicion una estrella
+	 */
+	private void agregarEstrella() {
+		numeroCasillaAlazar = (int) Math.floor(Math.random()*66 + 3);
+		casillaAlazar = tablero.encontrarCasilla(numeroCasillaAlazar);
+		casillaAlazar.ponerEstrella();
 	}
 
 	/**
@@ -255,15 +248,6 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		numeroDadoDos = (int) Math.floor(Math.random()*6+1);     
 		numeroDados = numeroDadoUno + numeroDadoDos;
 	}
-	
-	/**
-	 * Metodo para escoger aleatriamente un numero del 3 al 69 y ponerle a la casilla en dicha posicion una estrella
-	 */
-	private void agregarEstrella() {
-		numeroCasillaAlazar = (int) Math.floor(Math.random()*66 + 3);
-		casillaAlazar = tablero.encontrarCasilla(numeroCasillaAlazar);
-		casillaAlazar.ponerEstrella();
-	}
 
 	/**
 	 * Metodo para escoger aleatriamente un numero del 1 al 6 y activar dicho numero del minujuego
@@ -320,9 +304,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 				listaJugadores[i].casillaActual.numeroCasilla != 1 && listaJugadores[j].casillaActual.numeroCasilla != 1) {
 					minijuegoActivado = true; // el minijuego activado es para bloquear el boton de los dados
 					Jugador[] listaMismaPosicion = {listaJugadores[i], listaJugadores[j]}; //Esta es la lista de los jugadores que se encunetran en la misma posicion 
-					Partida.eventoDueloActivado=true;
 					activarMinijuego(listaMismaPosicion); //Se activa uno de los minijuegos
-					minijuegoActivado= false;
 					break;
 				}
 			}
@@ -396,11 +378,13 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	public void run() {
 		jugadorActual.moverJugador(numeroDados);
 		
-		if (jugadorActual.numeroJugador == listaJugadores.length - 1) {
+		if (jugadorActual.numeroJugador != listaJugadores.length - 1) {
+			comprobarEventoDuelo();
+		}
+		else {
 			activarMinijuego(listaJugadores);
 		}
 		comprobarEvento();
-		comprobarEventoDuelo();
 		actualizarInfoJugadorActual();
 		
 		movimientoJugador = false;
@@ -463,12 +447,10 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-
 	}
 
 	/**

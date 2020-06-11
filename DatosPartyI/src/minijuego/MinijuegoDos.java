@@ -21,17 +21,12 @@ import static java.lang.Integer.parseInt;
  * donde 100 es el puntaje maximo
  * @author Juan Pena
  */
-public class MinijuegoDos extends Minijuego implements MouseListener {
+public class MinijuegoDos extends Minijuego {
     public Jugador jugadorActual;
-    private JLabel etiquetaMinijuegoDos;
-    private JLabel listo;
+    private JLabel etiquetaMinijuegoDos, listo, etiquetaIngresa;
     private JTextField adivina;
-    private JLabel etiquetaIngresa;
-    private int numero;
-    private int puntos;
-    private int diferencia;
-    private int numeroCorrecto;
-    private boolean onGame = false;
+    private int numero, puntos, diferencia, numeroCorrecto;
+    private boolean onGame;
 
     public MinijuegoDos(Jugador[] listaJugadores) {
 
@@ -41,7 +36,6 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
         descripcionMinijuego.setText("Adivina el numero, entre mas cerca estes, mejor");
         descripcionMinijuego.setFont(fuenteTexto);
         panelMinijuegos.repaint();
-        System.out.println("prueba");
     }
 
     /**
@@ -123,7 +117,6 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
                 listo.setBackground(Color.red);
                 listo.setFont(fuenteTexto);
                 String guess = adivina.getText();
-                System.out.println("El numero pensado es: "+guess);
                 int numero = parseInt(guess);
                 int correcto = (int) (1+Math.random()*99);
                 numeroCorrecto=correcto;
@@ -136,7 +129,6 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
                         listo.setBackground(Color.green);
                         listo.setText("Felicidades! Acerto");
                     }
-                    System.out.println(puntos);
                     jugadorActual.puntajeMinijuego = puntos;
                     resultados();
                 }else{
@@ -180,9 +172,9 @@ public class MinijuegoDos extends Minijuego implements MouseListener {
         numero = 0;
         narrador.setVisible(true);
         if (jugadorActual.numeroJugadorMinijuego == listaJugadores.length - 1) {
-        	if (Partida.eventoDueloActivado==true) {
+        	if (Partida.minijuegoActivado==true) {
 				eventoDuelo();
-				Partida.eventoDueloActivado= false;
+				Partida.minijuegoActivado= false;
 			}
             Thread t2= new Thread (()-> {
                 try {

@@ -13,31 +13,23 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import jugador.Jugador;
+
 /**
  * Esta corresponde a la clase que ordena los resultados obtenidos en el juego DatosParty
- * Primer oordena la lista jugadores segun su parametro de puntajeTotal y despues añade 
+ * Primero ordena la lista jugadores segun su parametro de puntajeTotal y despues agrega
  * un resumen de los datos de cada jugador con respecto a estrellas y monedas 
  * segun el orden obtenido antes 
  * @author Juan Navarro
- *
  */
 public class Final extends JFrame implements MouseListener {
-	private Jugador[] listaJugadores;
-//Atributos del Frame
 	private ImageIcon imagenMoneda = new ImageIcon("Imagenes/Moneda.png");
 	private ImageIcon imagenEstrella = new ImageIcon("Imagenes/Estrella.png");
 	private Font fuenteTitulo = new Font("Comic Sans MS", 1, 25);
 	private Font fuenteTexto = new Font("Comic Sans MS", 0, 16);
 	private JPanel panelResultados;
-	private JLabel botonFin;
-	private JLabel labelTitulo;
-	private JLabel[] listaEtiquetasInfo;
-	private JLabel[] labelPosicion;
-	private JLabel[] labelImagenMonedas;
-	private JLabel[] labelMonedas;
-	private JLabel[] labelImagenEstrellas;
-	private JLabel[] labelEstrellas;
-	private JLabel[] labelPuntajes;
+	private JLabel botonFin, labelTitulo;
+	private JLabel[] listaEtiquetasInfo, labelPosicion, labelImagenMonedas, labelMonedas, labelImagenEstrellas, labelEstrellas, labelPuntajes;
+	private Jugador[] listaJugadores;
 
 	/**
 	 * Corresponde al contructor de la clase Final, primero ordena la lista segun los resultados y luego llama a un metodo para imprimir los resultados
@@ -64,6 +56,7 @@ public class Final extends JFrame implements MouseListener {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		componentesVentana();
 	}
+
 	/**
 	 * Es un metodo para anadir el panel y cambiar su configuracion
 	 */
@@ -74,6 +67,7 @@ public class Final extends JFrame implements MouseListener {
 		panelResultados.setBackground(Color.white);
 		agregarEtiquetas();
 	}
+
 	/**
 	 * En este metodo se anaden todas las etiquetas como se deben poner las mismas etiqeuatas para cada juagdor
 	 * (consus datos respectivos) se hizo una lista de etiquetas ue contienen informacion similar y se evaluo para cada jugador 
@@ -214,7 +208,6 @@ public class Final extends JFrame implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
