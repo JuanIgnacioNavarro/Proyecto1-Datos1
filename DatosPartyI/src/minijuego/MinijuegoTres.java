@@ -16,9 +16,7 @@ import java.awt.event.MouseListener;
  */
 public class MinijuegoTres extends Minijuego {
     public Jugador jugadorActual;
-    private JLabel etiquetaMinijuegoTres;
-    private JLabel etiquetaPregunta;
-    private JLabel iniciar;
+    private JLabel etiquetaMinijuegoTres, etiquetaPregunta, iniciar;
     private String respuestaUno, respuestaDos, respuestaTres, respuestaCuatro;
     private String respuestaUno2, respuestaDos2, respuestaTres2, respuestaCuatro2;
     private String respuestaUno3, respuestaDos3, respuestaTres3, respuestaCuatro3;
@@ -35,7 +33,6 @@ public class MinijuegoTres extends Minijuego {
         descripcionMinijuego.setText("Responde a la siguiente pregunta de cultura general");
         descripcionMinijuego.setFont(fuenteTexto);
         panelMinijuegos.repaint();
-        System.out.println("prueba");
     }
     /**
      * Metodo heredado donde se corren los
@@ -113,7 +110,6 @@ public class MinijuegoTres extends Minijuego {
                         if (jugadorActual.numeroJugador == 0) {
                             comparaRespuesta(respuestaTres);
                             jugadorActual.puntajeMinijuego = puntaje;
-                            System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
                             etiquetaPregunta.setText("Cual es el oceano mas grande?");
                             cajaRespuestas.removeAllItems();
                             respuestaUno2 = "Atlantico";
@@ -128,7 +124,6 @@ public class MinijuegoTres extends Minijuego {
                         } else if (jugadorActual.numeroJugador == 1) {
                             comparaRespuesta(respuestaDos2);
                             jugadorActual.puntajeMinijuego = puntaje;
-                            System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
                             etiquetaPregunta.setText("Quien escribio La Odisea?");
                             cajaRespuestas.removeAllItems();
                             respuestaUno3 = "Esquilo";
@@ -145,7 +140,6 @@ public class MinijuegoTres extends Minijuego {
                             comparaRespuesta(respuestaCuatro3);
                             jugadorActual.puntajeMinijuego = puntaje;
 
-                            System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
                             etiquetaPregunta.setText("Si 50 es el 100 porciento, cuanto es el 90?");
                             cajaRespuestas.removeAllItems();
                             respuestaUno4 = "45";
@@ -161,7 +155,6 @@ public class MinijuegoTres extends Minijuego {
 
                             comparaRespuesta(respuestaUno4);
                             jugadorActual.puntajeMinijuego = puntaje;
-                            System.out.println(cajaRespuestas.getItemAt(cajaRespuestas.getSelectedIndex()));
                         }
                         onGame = true;
                         resultados();
@@ -199,7 +192,7 @@ public class MinijuegoTres extends Minijuego {
     }
 
 
-    private void resultados () {
+    private void resultados() {
     	running=false;
         iniciar.setText("Puntaje: "+jugadorActual.puntajeMinijuego);
         iniciar.removeMouseListener(null);

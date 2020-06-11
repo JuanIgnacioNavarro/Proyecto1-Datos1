@@ -14,17 +14,11 @@ public class Casilla {
 	private ImageIcon imagenCasilla;
 	private ImageIcon imagenEstrella = new ImageIcon("Imagenes/Estrella.png");
 
-	public JLabel etiquetaCasilla;
-	public JLabel etiquetaEstrella;
+	public JLabel etiquetaCasilla, etiquetaEstrella;
 
 	public String tipoCasilla;
-	public int numeroCasilla;
-	public Casilla siguienteCasilla;
-	public Casilla siguienteCasillaAux;
-	public Casilla anteriorCasilla;
-	public Casilla teletransporteCasilla;
-	public int coordenadaCasillaX;
-	public int coordenadaCasillaY;
+	public int numeroCasilla, coordenadaCasillaX, coordenadaCasillaY;
+	public Casilla siguienteCasilla, siguienteCasillaAux, anteriorCasilla, teletransporteCasilla;
 	public boolean estrellaEncima;
 	
 	/**

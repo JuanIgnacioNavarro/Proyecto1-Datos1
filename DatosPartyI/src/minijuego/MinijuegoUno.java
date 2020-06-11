@@ -24,13 +24,10 @@ public class MinijuegoUno extends Minijuego {
 	
 	public Jugador jugadorActual;
 	private float cantidadDeJ=0;
-	private JLabel etiquetaMinijuegoUno;
-	private JLabel temporizador;
-	private JLabel contador;
-	private JLabel iniciar;
-	private boolean onGame = false;
+	private JLabel etiquetaMinijuegoUno, temporizador, contador, iniciar;
+	private boolean onGame;
 	private Timer t;
-	private int s=6,cs=99;
+	private int s = 6,cs = 99;
 	
 	/**
 	 * El metodo de la libreria Timer necesita una accion implementada con un ActionListener
@@ -159,7 +156,6 @@ public class MinijuegoUno extends Minijuego {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
@@ -229,7 +225,7 @@ public class MinijuegoUno extends Minijuego {
 			}
 		});
 	}
-	
+
 	/**
 	 * En este metodo se cambia el atributo de cada jugador por un nuevo puntaje obtenido
 	 * Luego con este puntaje se decide el orden de los resultados del minujuego

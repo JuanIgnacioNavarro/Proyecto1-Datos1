@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import juego.Partida;
 import tablero.Casilla;
+
 /**
  * Esta clase hace objetos llamados jugadores que representan a cada uno de los 
  * usuarios que deseen jugar el juego.
@@ -19,25 +20,16 @@ import tablero.Casilla;
 public class Jugador {
 //    __Atributos de las caracter�sticas m�s importantes de cada jugador
 //___/
-	public String nombreJugador;
-	public int monedasJugador = 1000;
-	public int estrellasJugador = 2;
-	public int numeroJugador;
-	int guardadoCorreccionX, guardadoCorreccionY;
-	public int puntajeMinijuego;
-	public int numeroJugadorMinijuego;
-	public int puntajeTotal;
-	public String textoResultados;
+	public String nombreJugador, textoResultados;
+	public int monedasJugador = 600, estrellasJugador = 1, numeroJugador, guardadoCorreccionX, guardadoCorreccionY, puntajeMinijuego, numeroJugadorMinijuego, puntajeTotal;
+
 //	  __Atributos que controlan los movimientos que debe realizar el jugador depesndiendo de su ubicaci�n actual
 //___/
-	private boolean direccionInversa;
-	private boolean direccionAuxiliar;
-	private boolean direccionTeletransporte;
+	private boolean direccionInversa, direccionAuxiliar, direccionTeletransporte;
 	public boolean comprarEstrella;
 	
 //     __ Atributos que contralan la posicion del jugador en la interfaz (Se colocan en el panel est�tico de Partida)
 //____/
-
 	public JLabel etiquetaImagen;
 	private ImageIcon imagenJugador;
 	protected int correccionCoordenadaX, correccionCoordenadaY;
@@ -45,8 +37,8 @@ public class Jugador {
 	
 	/**
 	 * Contructor de la clase, define sus atributos iniciales y coloca su imagen en la casilla inicial
-	 * @param numeroJugador : int corresponde a un identificador de cada jugador, as� como el nombre de cada uno
-	 * @param casillaInicial: Casilla es la posici�n en la que inicia el juego as� que entre como par�metro para que el jugador se pueda ubicar ah�
+	 * @param numeroJugador : int corresponde a un identificador de cada jugador, asi como el nombre de cada uno
+	 * @param casillaInicial: Casilla es la posici�n en la que inicia el juego asi que entre como par�metro para que el jugador se pueda ubicar ah�
 	 */
 	public Jugador(int numeroJugador, Casilla casillaInicial) {
 		casillaActual = casillaInicial;
@@ -219,6 +211,7 @@ public class Jugador {
 		}
 		
 	}
+	
 	/**
 	 * Este m�todo ayuda a refacatorizar el m�todo de moverJugador()
 	 * en este se ejecuta un movmiento y se detiene el hilo actual

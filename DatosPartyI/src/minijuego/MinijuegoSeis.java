@@ -26,16 +26,12 @@ public class MinijuegoSeis extends Minijuego {
 	
 //Atributos de las etiquetas del juego
 	public Jugador jugadorActual;
-	private JLabel etiquetaMinijuegoSeis;
-	private JLabel temporizador;
-	private JLabel lista;
+	private JLabel etiquetaMinijuegoSeis, temporizador, lista, responder;
 	private JTextField respuesta;
-	private JLabel responder;
-	private int[] listaJuego= new int[5];
-	private int elementoPregunta;
+	private int listaJuego[] = new int[5], elementoPregunta;
 	
 //Atributos que controlan el reloj
-	private boolean onGame=false;
+	private boolean onGame;
 	private Timer t;
 	private int s=0, cs=99;
 
@@ -209,8 +205,9 @@ public class MinijuegoSeis extends Minijuego {
 		}
 		textoLista=textoLista.concat(listaJuego[this.listaJuego.length-1]+"]");
 		lista.setText(textoLista);
-		lista.setVisible(false);//despu�s de probarlo cmabiarlo por false
+		lista.setVisible(false);//despues de probarlo cmabiarlo por false
 	}
+
 	/**
 	 * Como el reloj se debe actualizar cada 10ms entonces este metodo actualiza su label de temporizador cada vez que cambia
 	 */
@@ -274,7 +271,6 @@ public class MinijuegoSeis extends Minijuego {
 					Thread.sleep(2000);
 					etiquetaMinijuegoSeis.setVisible(false);
 				} catch (InterruptedException e) {
-					System.out.println("Estoy en el catch del ultimo jugador");
 					e.printStackTrace();
 				}
 				
