@@ -24,7 +24,7 @@ public class Bienvenida extends JFrame implements ActionListener {
     private JPanel panelBienvenida;
     private JButton botonInicio;
     private JLabel etiquetaBienvenida;
-    private ImageIcon imagenEstrella = new ImageIcon("Imagenes/Estrella.png");
+    private ImageIcon imagenEstrella = new ImageIcon("Imagenes/Moneda.png");
     private Font fuenteTitulo = new Font("Comic Sans MS", 1, 25);
 
     /**
