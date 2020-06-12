@@ -28,6 +28,7 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 //    ____
 //___/  Atributos de control de la clase minijuego e hijas
 	protected Jugador listaJugadores[], jugadorActual;
+	private Jugador jugadorActualPartida = Partida.jugadorActual;
 	protected int contadorRondas;
 	protected boolean enJuego, running;
 //    ____
@@ -191,6 +192,8 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 				i+=1;
 			}
 			Partida.minijuegoActivado = false;
+			Partida.etiquetaMonedasJugadorActual.setText(": " + String.valueOf(jugadorActualPartida.monedasJugador));
+			Partida.etiquetaEstrellasJugadorActual.setText(": " + String.valueOf(jugadorActualPartida.estrellasJugador));
 			this.setVisible(false);
 		}
 		contadorRondas+=1;
@@ -242,6 +245,7 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 				listaJugadores[listaJugadores.length-1-i].textoResultados= " gana "+(listaJugadores.length+1-i)*100+" monedas!";
 				informacionResultados[i].setText((i+1)+") "+listaJugadores[listaJugadores.length-1-i].nombreJugador.concat(listaJugadores[listaJugadores.length-1-i].textoResultados));
 				listaJugadores[listaJugadores.length-1-i].monedasJugador+=(listaJugadores.length+1-i)*100; //Agrega monedas aljugador
+
 			}
 			else if (listaJugadores[listaJugadores.length-1-i].puntajeMinijuego==listaJugadores[listaJugadores.length-i].puntajeMinijuego){
 				listaJugadores[listaJugadores.length-1-i].textoResultados=listaJugadores[listaJugadores.length-i].textoResultados;
@@ -261,6 +265,7 @@ public abstract class Minijuego extends JFrame implements MouseListener {
 			i+=1;
 		}
 		ordenarResultadosNum();
+
 	}
 	
 	/**

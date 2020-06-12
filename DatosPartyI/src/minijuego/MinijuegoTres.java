@@ -29,7 +29,6 @@ public class MinijuegoTres extends Minijuego {
     private int puntaje;
 
     public MinijuegoTres(Jugador[] listaJugadores) {
-
         super(listaJugadores);
         this.setTitle("Cultura General");
         tituloMinijuego.setText("Cultura General");

@@ -98,7 +98,7 @@ public class Final extends JFrame implements MouseListener {
 			labelPosicion[i].setHorizontalAlignment(SwingConstants.CENTER);
 			labelPosicion[i].setFont( new Font("Comic Sans MS", 1, 20));
 			labelPosicion[i].setForeground(Color.red);
-			labelPosicion[i].setText("Posicion: "+(i+1)+" ,"+ listaJugadores[i].nombreJugador);
+			labelPosicion[i].setText("Posicion: "+(i+1)+", "+ listaJugadores[i].nombreJugador);
 			listaEtiquetasInfo[i].add(labelPosicion[i]);
 			
 			//Etiqueta que contiene la imagen de las monedas

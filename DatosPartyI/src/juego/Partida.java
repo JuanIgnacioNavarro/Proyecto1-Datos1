@@ -42,10 +42,11 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	private Color colorPositivo = new Color(180, 225, 120);
 
 	private JLabel etiquetaDados, etiquetaNumeroDados, etiquetaTienda, etiquetaMoneda, etiquetaEstrella, 
-	etiquetaFondoInfoJugadorActual, etiquetaNombreJugadorActual, etiquetaMonedasJugadorActual, 
-	etiquetaEstrellasJugadorActual, etiquetaRondas, etiquetaNarrador, etiquetaSilbato, etiquetaFondoNarrador;
+	etiquetaFondoInfoJugadorActual, etiquetaNombreJugadorActual, etiquetaRondas, etiquetaNarrador, etiquetaSilbato, etiquetaFondoNarrador;
+	public static JLabel etiquetaMonedasJugadorActual, etiquetaEstrellasJugadorActual;
 
-	private Jugador listaJugadores[] = new Jugador[Inicio.cantidadJugadores], jugadorActual;
+	private Jugador listaJugadores[] = new Jugador[Inicio.cantidadJugadores];
+	public static Jugador jugadorActual;
 	private Tablero tablero;
 	private Casilla casillaAlazar;
 	public PilaEventos pilaEventos = new PilaEventos();
@@ -83,7 +84,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		agregarJugadores();
 		agregarDados();
 		agregarTienda();
-		actualizarInfoJugadorActual();
+		agregarInfoJugadorActual();
 
 		panelPartida.repaint();
 	}
@@ -160,80 +161,84 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	}
 
 	/**
-	 * Metodo para colocar los datos que tiene el jugador que va tirando
+	 * Metodo para colocar los datos que tiene el primer jugador que tira
 	 */
-	private void actualizarInfoJugadorActual() {
-		if (etiquetaFondoInfoJugadorActual == null) {
+	public void agregarInfoJugadorActual() {
+		etiquetaFondoInfoJugadorActual = new JLabel();
+		etiquetaFondoInfoJugadorActual.setBounds(20, 20, 150, 150);
+		etiquetaFondoInfoJugadorActual.setOpaque(true);
+		etiquetaFondoInfoJugadorActual.setBackground(colorResalte);
+		panelPartida.add(etiquetaFondoInfoJugadorActual);
 
-			etiquetaFondoInfoJugadorActual = new JLabel();
-			etiquetaFondoInfoJugadorActual.setBounds(20, 20, 150, 150);
-			etiquetaFondoInfoJugadorActual.setOpaque(true);
-			etiquetaFondoInfoJugadorActual.setBackground(colorResalte);
-			panelPartida.add(etiquetaFondoInfoJugadorActual);
+		etiquetaNombreJugadorActual = new JLabel();
+		etiquetaNombreJugadorActual.setBounds(0, 0, etiquetaFondoInfoJugadorActual.getWidth(), 40);
+		etiquetaNombreJugadorActual.setHorizontalAlignment(SwingConstants.CENTER);
+		etiquetaNombreJugadorActual.setFont(fuenteTitulo);
+		etiquetaNombreJugadorActual.setForeground(Color.white);
+		etiquetaFondoInfoJugadorActual.add(etiquetaNombreJugadorActual);
 
-			etiquetaNombreJugadorActual = new JLabel();
-			etiquetaNombreJugadorActual.setBounds(0, 0, etiquetaFondoInfoJugadorActual.getWidth(), 40);
-			etiquetaNombreJugadorActual.setHorizontalAlignment(SwingConstants.CENTER);
-			etiquetaNombreJugadorActual.setFont(fuenteTitulo);
-			etiquetaNombreJugadorActual.setForeground(Color.white);
-			etiquetaFondoInfoJugadorActual.add(etiquetaNombreJugadorActual);
+		etiquetaMonedasJugadorActual = new JLabel();
+		etiquetaMonedasJugadorActual.setSize(75, 30);
+		etiquetaMonedasJugadorActual.setLocation((etiquetaFondoInfoJugadorActual.getWidth() / 2), (etiquetaFondoInfoJugadorActual.getHeight() / 2) - (etiquetaMonedasJugadorActual.getHeight() / 2));
+		etiquetaMonedasJugadorActual.setFont(fuenteTexto);
+		etiquetaMonedasJugadorActual.setForeground(Color.white);
+		etiquetaFondoInfoJugadorActual.add(etiquetaMonedasJugadorActual);
 
-			etiquetaMonedasJugadorActual = new JLabel();
-			etiquetaMonedasJugadorActual.setSize(75, 30);
-			etiquetaMonedasJugadorActual.setLocation((etiquetaFondoInfoJugadorActual.getWidth() / 2), (etiquetaFondoInfoJugadorActual.getHeight() / 2) - (etiquetaMonedasJugadorActual.getHeight() / 2));
-			etiquetaMonedasJugadorActual.setFont(fuenteTexto);
-			etiquetaMonedasJugadorActual.setForeground(Color.white);
-			etiquetaFondoInfoJugadorActual.add(etiquetaMonedasJugadorActual);
+		etiquetaMoneda = new JLabel();
+		etiquetaMoneda.setSize(30, 30);
+		etiquetaMoneda.setLocation(etiquetaMonedasJugadorActual.getX() - etiquetaMoneda.getWidth(), etiquetaMonedasJugadorActual.getY());
+		etiquetaMoneda.setIcon(new ImageIcon(imagenMoneda.getImage().getScaledInstance(etiquetaMoneda.getWidth(), etiquetaMoneda.getHeight(), Image.SCALE_SMOOTH)));
+		etiquetaMoneda.addMouseListener(this);
+		etiquetaFondoInfoJugadorActual.add(etiquetaMoneda);
 
-			etiquetaMoneda = new JLabel();
-			etiquetaMoneda.setSize(30, 30);
-			etiquetaMoneda.setLocation(etiquetaMonedasJugadorActual.getX() - etiquetaMoneda.getWidth(), etiquetaMonedasJugadorActual.getY());
-			etiquetaMoneda.setIcon(new ImageIcon(imagenMoneda.getImage().getScaledInstance(etiquetaMoneda.getWidth(), etiquetaMoneda.getHeight(), Image.SCALE_SMOOTH)));
-			etiquetaMoneda.addMouseListener(this);
-			etiquetaFondoInfoJugadorActual.add(etiquetaMoneda);
+		etiquetaEstrellasJugadorActual = new JLabel();
+		etiquetaEstrellasJugadorActual.setBounds(etiquetaMonedasJugadorActual.getX(), etiquetaMonedasJugadorActual.getY() + etiquetaMonedasJugadorActual.getHeight(), 75, 30);
+		etiquetaEstrellasJugadorActual.setFont(fuenteTexto);
+		etiquetaEstrellasJugadorActual.setForeground(Color.white);
+		etiquetaFondoInfoJugadorActual.add(etiquetaEstrellasJugadorActual);
 
-			etiquetaEstrellasJugadorActual = new JLabel();
-			etiquetaEstrellasJugadorActual.setBounds(etiquetaMonedasJugadorActual.getX(), etiquetaMonedasJugadorActual.getY() + etiquetaMonedasJugadorActual.getHeight(), 75, 30);
-			etiquetaEstrellasJugadorActual.setFont(fuenteTexto);
-			etiquetaEstrellasJugadorActual.setForeground(Color.white);
-			etiquetaFondoInfoJugadorActual.add(etiquetaEstrellasJugadorActual);
+		etiquetaEstrella = new JLabel();
+		etiquetaEstrella.setBounds(etiquetaMoneda.getX(), etiquetaMoneda.getY() + etiquetaMoneda.getHeight(), 30, 30);
+		etiquetaEstrella.setIcon(new ImageIcon(imagenEstrella.getImage().getScaledInstance(etiquetaEstrella.getWidth(), etiquetaEstrella.getHeight(), Image.SCALE_SMOOTH)));
+		etiquetaEstrella.addMouseListener(this);
+		etiquetaFondoInfoJugadorActual.add(etiquetaEstrella);
+		
+		etiquetaFondoNarrador=new JLabel ();
+		etiquetaFondoNarrador.setSize(205, 100);
+		etiquetaFondoNarrador.setLocation(this.getWidth() - etiquetaFondoNarrador.getWidth() - 20, this.getHeight() - etiquetaFondoNarrador.getHeight() - 40);
+		etiquetaFondoNarrador.setOpaque(true);
+		etiquetaFondoNarrador.setBackground(colorResalte);
+		panelPartida.add(etiquetaFondoNarrador);
+		
+		etiquetaRondas= new JLabel();
+		etiquetaRondas.setBounds(0, 0, etiquetaFondoNarrador.getWidth(), 35);
+		etiquetaRondas.setHorizontalAlignment(SwingConstants.CENTER);
+		etiquetaRondas.setFont(fuenteTitulo);
+		etiquetaRondas.setForeground(Color.white);
+		etiquetaFondoNarrador.add(etiquetaRondas);
+		
+		etiquetaNarrador= new JLabel ();
+		etiquetaNarrador.setSize(etiquetaFondoNarrador.getWidth(), 35);
+		etiquetaNarrador.setLocation(0, etiquetaFondoNarrador.getHeight() - etiquetaNarrador.getHeight());
+		etiquetaNarrador.setHorizontalAlignment(SwingConstants.CENTER);
+		etiquetaNarrador.setFont(fuenteTexto2);
+		etiquetaNarrador.setForeground(Color.yellow);
+		etiquetaFondoNarrador.add(etiquetaNarrador);
+		etiquetaNarrador.setText(jugadorActual.nombreJugador+" tira los dados!");
+		
+		etiquetaSilbato= new JLabel();
+		etiquetaSilbato.setSize(30, 30);
+		etiquetaSilbato.setLocation(etiquetaFondoNarrador.getWidth() / 2 - etiquetaSilbato.getWidth() / 2 , etiquetaFondoNarrador.getHeight() / 2 - etiquetaSilbato.getHeight() / 2);
+		etiquetaSilbato.setIcon(new ImageIcon(imagenSilbato.getImage().getScaledInstance(etiquetaSilbato.getWidth(), etiquetaSilbato.getHeight(), Image.SCALE_SMOOTH)));
+		etiquetaFondoNarrador.add(etiquetaSilbato);
 
-			etiquetaEstrella = new JLabel();
-			etiquetaEstrella.setBounds(etiquetaMoneda.getX(), etiquetaMoneda.getY() + etiquetaMoneda.getHeight(), 30, 30);
-			etiquetaEstrella.setIcon(new ImageIcon(imagenEstrella.getImage().getScaledInstance(etiquetaEstrella.getWidth(), etiquetaEstrella.getHeight(), Image.SCALE_SMOOTH)));
-			etiquetaEstrella.addMouseListener(this);
-			etiquetaFondoInfoJugadorActual.add(etiquetaEstrella);
-			
-			etiquetaFondoNarrador=new JLabel ();
-			etiquetaFondoNarrador.setSize(205, 100);
-			etiquetaFondoNarrador.setLocation(this.getWidth() - etiquetaFondoNarrador.getWidth() - 20, this.getHeight() - etiquetaFondoNarrador.getHeight() - 40);
-			etiquetaFondoNarrador.setOpaque(true);
-			etiquetaFondoNarrador.setBackground(colorResalte);
-			panelPartida.add(etiquetaFondoNarrador);
-			
-			etiquetaRondas= new JLabel();
-			etiquetaRondas.setBounds(0, 0, etiquetaFondoNarrador.getWidth(), 35);
-			etiquetaRondas.setHorizontalAlignment(SwingConstants.CENTER);
-			etiquetaRondas.setFont(fuenteTitulo);
-			etiquetaRondas.setForeground(Color.white);
-			etiquetaFondoNarrador.add(etiquetaRondas);
-			
-			etiquetaNarrador= new JLabel ();
-			etiquetaNarrador.setSize(etiquetaFondoNarrador.getWidth(), 35);
-			etiquetaNarrador.setLocation(0, etiquetaFondoNarrador.getHeight() - etiquetaNarrador.getHeight());
-			etiquetaNarrador.setHorizontalAlignment(SwingConstants.CENTER);
-			etiquetaNarrador.setFont(fuenteTexto2);
-			etiquetaNarrador.setForeground(Color.yellow);
-			etiquetaFondoNarrador.add(etiquetaNarrador);
-			etiquetaNarrador.setText(jugadorActual.nombreJugador+" tira los dados!");
-			
-			etiquetaSilbato= new JLabel();
-			etiquetaSilbato.setSize(30, 30);
-			etiquetaSilbato.setLocation(etiquetaFondoNarrador.getWidth() / 2 - etiquetaSilbato.getWidth() / 2 , etiquetaFondoNarrador.getHeight() / 2 - etiquetaSilbato.getHeight() / 2);
-			etiquetaSilbato.setIcon(new ImageIcon(imagenSilbato.getImage().getScaledInstance(etiquetaSilbato.getWidth(), etiquetaSilbato.getHeight(), Image.SCALE_SMOOTH)));
-			etiquetaFondoNarrador.add(etiquetaSilbato);
-			
-		}	
+		actualizarInfoJugadorActual();
+	}
+
+	/**
+	 * Metodo para colocar los datos que tiene el jugador que tira
+	 */
+	public void actualizarInfoJugadorActual() {	
 		etiquetaRondas.setText("Ronda " + rondasTerminadas + " de " + Inicio.cantidadRondas);
 		etiquetaNombreJugadorActual.setText(jugadorActual.nombreJugador);
 		etiquetaMonedasJugadorActual.setText(": " + String.valueOf(jugadorActual.monedasJugador));
@@ -276,6 +281,7 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 		else {
 			new MinijuegoSeis(listaJugadores);
 		}
+
 	}
 
 	/**
@@ -378,13 +384,11 @@ public class Partida extends JFrame implements MouseListener, Runnable {
 	public void run() {
 		jugadorActual.moverJugador(numeroDados);
 		
-		if (jugadorActual.numeroJugador != listaJugadores.length - 1) {
-			comprobarEventoDuelo();
-		}
-		else {
+		comprobarEvento();
+		comprobarEventoDuelo();
+		if (minijuegoActivado == false && jugadorActual.numeroJugador == listaJugadores.length - 1) {
 			activarMinijuego(listaJugadores);
 		}
-		comprobarEvento();
 		actualizarInfoJugadorActual();
 		
 		movimientoJugador = false;

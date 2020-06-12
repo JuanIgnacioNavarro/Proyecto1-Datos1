@@ -24,7 +24,6 @@ public class MinijuegoCuatro extends Minijuego {
     private ImageIcon dados = new ImageIcon("Imagenes/Dados.png");
 
     public MinijuegoCuatro(Jugador[] listaJugadores) {
-
         super(listaJugadores);
         this.setTitle("Tira 3 dados");
         tituloMinijuego.setText("Tira 3 dados");

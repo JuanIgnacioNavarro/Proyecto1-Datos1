@@ -18,7 +18,7 @@ public class Inicio extends JFrame implements ActionListener {
 	private JButton botonJugar;
 	private JLabel etiquetaCantidadJugadores, etiquetaCantidadRondas;
 	private Integer numJugadores[] = {2, 3, 4};
-	private Integer numRondas[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	private Integer numRondas[] = {5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
 	private JComboBox<Integer> cajaCantidadJugadores;
 	private JComboBox<Integer> cajaCantidadRondas;
 	private Font fuenteTexto = new Font("Comic Sans MS", 0, 16);
